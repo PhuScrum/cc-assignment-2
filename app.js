@@ -1,11 +1,7 @@
-const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
 var bodyParser = require('body-parser')
-const cors = require('cors')
 const path = require('path')
-
-app.use(cors())
 
 app.route('/hello')
     .get(function(req, res){
