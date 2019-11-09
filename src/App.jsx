@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      Hello world AWS Beanstalk.
+      Hello world AWS Beanstalk by Reactjs.
     </div>
   );
 }
