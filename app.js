@@ -33,7 +33,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
  fName: {type: String},
  lName: {type: String},
- email: {type: String},
+ email: {type: String, unique: true},
 //  password: {type: String},
  gender: {type: String},
  type: {type: String},
@@ -65,7 +65,7 @@ app.route('/register')
         
         userModel.create(req.body, function(err, doc){
             if(!err){
-                res.json('register success')
+                // res.json('register success')
             } else{
                 res.json('error')
             }

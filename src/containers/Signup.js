@@ -3,7 +3,10 @@ import { HelpBlock, FormGroup, FormControl, ControlLabel } from 'react-bootstrap
 import LoaderButton from '../components/LoaderButton';
 import { Auth } from 'aws-amplify';
 
+
 import './Signup.css';
+
+const urlRegister = 'http://localhost:8080/register'
 
 export default class Signup extends Component {
 	constructor(props) {
@@ -20,6 +23,29 @@ export default class Signup extends Component {
 			confirmationCode: '',
 			newUser: null
 		};
+
+		this.signUp = this.signUp.bind(this)
+	}
+
+	signUp(){
+		fetch(urlRegister, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+				// add more values
+			   "email": this.state.email,
+			   "fname": this.state.fname,
+			   "lname": this.state.lname,
+			   "gender": this.state.gender,
+            }
+            )
+        })
+            .then(resp => resp.json())
+
 	}
 
 	validateForm() {
@@ -106,7 +132,7 @@ export default class Signup extends Component {
 					<FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
 				</FormGroup>
 				
-				<FormGroup controlId="fame" bsSize="large">
+				<FormGroup controlId="fname" bsSize="large">
 						<ControlLabel>First Name</ControlLabel>
 						<FormControl value={this.state.fname} onChange={this.handleChange} type="fname" />
 					</FormGroup>
@@ -118,6 +144,7 @@ export default class Signup extends Component {
 						<ControlLabel>Gender</ControlLabel>
 						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
 					</FormGroup>
+					
 					<FormGroup controlId="password" bsSize="large">
 					<ControlLabel>Password</ControlLabel>
 					<FormControl value={this.state.password} onChange={this.handleChange} type="password" />
@@ -126,7 +153,7 @@ export default class Signup extends Component {
 					<ControlLabel>Confirm Password</ControlLabel>
 					<FormControl value={this.state.confirmPassword} onChange={this.handleChange} type="password" />
 				</FormGroup>
-				<LoaderButton
+				<LoaderButton onClick={this.signUp()}
 				
 					block
 					bsSize="large"
