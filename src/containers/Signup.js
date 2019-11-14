@@ -13,6 +13,9 @@ export default class Signup extends Component {
 			isLoading: false,
 			email: '',
 			password: '',
+			fname:'',
+			lname:'',
+			gender:'',
 			confirmPassword: '',
 			confirmationCode: '',
 			newUser: null
@@ -102,7 +105,20 @@ export default class Signup extends Component {
 					<ControlLabel>Email</ControlLabel>
 					<FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
 				</FormGroup>
-				<FormGroup controlId="password" bsSize="large">
+				
+				<FormGroup controlId="fame" bsSize="large">
+						<ControlLabel>First Name</ControlLabel>
+						<FormControl value={this.state.fname} onChange={this.handleChange} type="fname" />
+					</FormGroup>
+					<FormGroup controlId="lname" bsSize="large">
+						<ControlLabel>Last Name</ControlLabel>
+						<FormControl value={this.state.lname} onChange={this.handleChange} type="lname" />
+					</FormGroup>
+					<FormGroup controlId="gender" bsSize="large">
+						<ControlLabel>Gender</ControlLabel>
+						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+					</FormGroup>
+					<FormGroup controlId="password" bsSize="large">
 					<ControlLabel>Password</ControlLabel>
 					<FormControl value={this.state.password} onChange={this.handleChange} type="password" />
 				</FormGroup>
@@ -111,6 +127,7 @@ export default class Signup extends Component {
 					<FormControl value={this.state.confirmPassword} onChange={this.handleChange} type="password" />
 				</FormGroup>
 				<LoaderButton
+				
 					block
 					bsSize="large"
 					disabled={!this.validateForm()}
