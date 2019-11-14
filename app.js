@@ -18,7 +18,7 @@ function connectDB (){
     const MongoClient = require('mongodb').MongoClient;
     const uri = "mongodb+srv://admin:123@cluster0-ym27l.mongodb.net/cc-assignment?retryWrites=true";
 
-    const client = new MongoClient(uri, { useNewUrlParser: true });
+    const client = new MongoClient(uri, {useUnifiedTopology: true, useNewUrlParser: true });
     mongoose.connect(uri, { useNewUrlParser: true })
 
     const Schema = mongoose.Schema;
@@ -56,16 +56,16 @@ const locationModel = mongoose.model('location', locationSchema)
 
 app.route('/register')
     .post(function(req, res){
-        const {email, fName, lName, age, gender} = req.body
-        userModel.find({email: email}, function(err, doc){
-            if(!err){
-                res.json('user exists')
-            }
-        })
+        console.log(req.body)
+        // userModel.find({email: email}, function(err, doc){
+        //     if(!err){
+        //         res.json('user exists')
+        //     }
+        // })
         
         userModel.create(req.body, function(err, doc){
             if(!err){
-                // res.json('register success')
+                res.json('register success')
             } else{
                 res.json('error')
             }

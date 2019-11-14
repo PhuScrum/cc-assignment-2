@@ -18,7 +18,6 @@ export default class Signup extends Component {
 			password: '',
 			fname:'',
 			lname:'',
-			gender:'',
 			confirmPassword: '',
 			confirmationCode: '',
 			newUser: null
@@ -28,6 +27,8 @@ export default class Signup extends Component {
 	}
 
 	signUp(){
+		const {email, fname, lname} = this.state
+		console.log(email, fname, lname)
 		fetch(urlRegister, {
             headers: {
                 'Accept': 'application/json',
@@ -38,9 +39,8 @@ export default class Signup extends Component {
             body: JSON.stringify({
 				// add more values
 			   "email": this.state.email,
-			   "fname": this.state.fname,
-			   "lname": this.state.lname,
-			   "gender": this.state.gender,
+			   "fName": this.state.fname,
+			   "lName": this.state.lname
             }
             )
         })
@@ -68,6 +68,7 @@ export default class Signup extends Component {
 
 	handleSubmit = async event => {
 		event.preventDefault();
+		this.signUp()
 
 		this.setState({ isLoading: true });
 
@@ -140,11 +141,7 @@ export default class Signup extends Component {
 						<ControlLabel>Last Name</ControlLabel>
 						<FormControl value={this.state.lname} onChange={this.handleChange} type="lname" />
 					</FormGroup>
-					<FormGroup controlId="gender" bsSize="large">
-						<ControlLabel>Gender</ControlLabel>
-						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
-					</FormGroup>
-					
+			
 					<FormGroup controlId="password" bsSize="large">
 					<ControlLabel>Password</ControlLabel>
 					<FormControl value={this.state.password} onChange={this.handleChange} type="password" />
@@ -153,7 +150,7 @@ export default class Signup extends Component {
 					<ControlLabel>Confirm Password</ControlLabel>
 					<FormControl value={this.state.confirmPassword} onChange={this.handleChange} type="password" />
 				</FormGroup>
-				<LoaderButton onClick={this.signUp()}
+				<LoaderButton 
 				
 					block
 					bsSize="large"
