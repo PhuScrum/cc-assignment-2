@@ -12,8 +12,8 @@ app.use(express.static(path.join(__dirname, '/build')))
 app.use(bodyParser.json({limit: '10mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
 
-// connect database
-
+// connect database Mongodb
+// ATLAS DB
 function connectDB (){
     const MongoClient = require('mongodb').MongoClient;
     const uri = "mongodb+srv://admin:123@cluster0-ym27l.mongodb.net/cc-assignment?retryWrites=true";
