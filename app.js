@@ -47,6 +47,7 @@ const locationSchema = new Schema({
  time: {type: String},
  input: {type: Object},
  member: {type: Array},
+ locationOwner: {type: String},
  dateCreated: {type: Date, default: Date.now}
 })
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import './Home.css';
-import Map from './Map.js';
+
+import Map from './createLocation.js';
 
 export default class Home2 extends Component {
 	constructor(props) {
