@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
-
+import Popup from "reactjs-popup";
 import Map from "./Map"
 
 Geocode.setApiKey( "AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw" );
@@ -184,6 +184,11 @@ export default class createLocation extends Component {
 			},
 		})
 	};
+	 togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+	});
+};
 
 	render(){
 		
@@ -268,7 +273,10 @@ export default class createLocation extends Component {
 <br/>
 <br/>
 				<div className="form-group">
-						<input type="submit" value="Register Location" className="btn btn-primary"/>
+						
+						<Popup trigger={<button type="submit" className="btn btn-primary" >Register Location</button>} position="right center">
+    <div>Location Successfully Registered</div>
+  </Popup>
 					</div>
 					</form>
 

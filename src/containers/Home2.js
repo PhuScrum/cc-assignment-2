@@ -39,7 +39,7 @@ export default class Home2 extends Component {
 	renderTest() {
 		return (
 			<div className="test">
-				<PageHeader>Test API call</PageHeader>
+				<PageHeader>Create a CleanUp Site!</PageHeader>
 				<ListGroup>{!this.state.isLoading && this.renderTestAPI(this.state.testApiCall)}</ListGroup>
 				<Map
 					google={this.props.google}
