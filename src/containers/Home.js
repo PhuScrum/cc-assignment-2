@@ -43,6 +43,7 @@ export default class Home extends Component {
 			<div className="lander">
 				<h1>Test web app</h1>
 				<p>A simple react test app</p>
+
 			</div>
 		);
 	}
@@ -50,14 +51,10 @@ export default class Home extends Component {
 	renderTest() {
 		return (
 			<div className="test">
-				<PageHeader>Test API call</PageHeader>
+				<PageHeader>Welcome to the Clean Up Page</PageHeader>
+				
 				<ListGroup>{!this.state.isLoading && this.renderTestAPI(this.state.testApiCall)}</ListGroup>
-				<Map
-					google={this.props.google}
-					center={{lat: 10.8231, lng: 106.6297}}
-					height='300px'
-					zoom={15}
-				/>
+				
 			</div>
 		);
 	}

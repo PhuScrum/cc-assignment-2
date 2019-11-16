@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
-import Map from '../containers/Map.js';
 import { Link} from 'react-router-dom';
 
 export default class Facebook extends Component {

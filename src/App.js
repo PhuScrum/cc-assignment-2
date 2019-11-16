@@ -43,6 +43,9 @@ class App extends Component {
 		this.userHasAuthenticated(false);
 		this.props.history.push('/login');
 	};
+
+	
+
 	render() {
 		const childProps = {
 			isAuthenticated: this.state.isAuthenticated,
@@ -60,12 +63,15 @@ class App extends Component {
 					<Navbar.Collapse>
 						<Nav pullRight>
 							{this.state.isAuthenticated ? (
+								<Fragment>
+								<NavItem ><Link to="/home2">Create Location</Link></NavItem>
 								<NavItem onClick={this.handleLogout}>Logout</NavItem>
+								</Fragment>
 							) : (
 								<Fragment>
-									<LinkContainer to="/home2">
-										<NavItem>Create Location</NavItem>
-									</LinkContainer>
+									{/* <LinkContainer to="/home2">
+										<NavItem>create location</NavItem>
+									</LinkContainer> */}
 									<LinkContainer to="/signup">
 										<NavItem>Signup</NavItem>
 									</LinkContainer>

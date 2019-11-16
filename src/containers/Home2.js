@@ -32,6 +32,7 @@ export default class Home2 extends Component {
 				<h1>Test web app</h1>
 				<p>A simple react test app</p>
 			</div>
+			
 		);
 	}
 
@@ -51,6 +52,6 @@ export default class Home2 extends Component {
 	}
 
 	render() {
-		return <div className="Home">{!this.props.isAuthenticated ? this.renderTest() : this.renderLander()}</div>;
+		return <div className="Home">{!this.props.isAuthenticated ? this.renderTest() : this.renderTest()}</div>;
 	}
 }

@@ -12,7 +12,7 @@ Geocode.enableDebug();
 
 const urlLocation = 'http://localhost:8080/location'
 
-export default class Create extends Component {
+export default class createLocation extends Component {
   constructor(props) {
 	  super(props);
 	  this.onChangeName = this.onChangeName.bind(this);
@@ -186,6 +186,7 @@ export default class Create extends Component {
 	};
 
 	render(){
+		
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (

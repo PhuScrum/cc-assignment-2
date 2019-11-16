@@ -9,6 +9,7 @@ import Signup from './containers/Signup';
 import LoginWFacebook from './containers/LoginWFacebook';
 
 import Home2 from './containers/Home2';
+import createLocation from './containers/createLocation';
 
 export default ({ childProps }) => (
 	<Switch>
@@ -17,6 +18,7 @@ export default ({ childProps }) => (
 		<AppliedRoute path="/signup" exact component={Signup} props={childProps} />
 		<AppliedRoute path="/loginWFacebook" exact component={LoginWFacebook} props={childProps} />
 		<AppliedRoute path="/Home2" exact component={Home2} props={childProps} />
+		<AppliedRoute path="/createLocation" exact component={createLocation} props={childProps} />
 		{/* Finally, catch all unmatched routes */}
 		<Route component={NotFound} />
 	</Switch>
