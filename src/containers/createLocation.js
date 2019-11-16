@@ -2,84 +2,75 @@ import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
+
+import Map from "./Map"
+
 Geocode.setApiKey( "AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw" );
 Geocode.enableDebug();
 
+
+
 const urlLocation = 'http://localhost:8080/location'
 
-class Map extends React.Component{
-	constructor( props ){
-		super( props );
-		this.state = {
-            District: '',
-            state: '',
+export default class Create extends Component {
+  constructor(props) {
+	  super(props);
+	  this.onChangeName = this.onChangeName.bind(this);
+      this.onChangeTime = this.onChangeTime.bind(this);
+      this.onChangeGstNumber = this.onChangeGstNumber.bind(this);
+      this.onSubmit = this.onSubmit.bind(this);
 
-            name:'',
-            address: '',
-            time: 'abcef',
+      this.state = {
+		  mapPosition: {
+			lat: this.props.center.lat,
+			lng: this.props.center.lng
+		},
+		markerPosition: {
+			lat: this.props.center.lat,
+			lng: this.props.center.lng
+		}
+      }
+  }
+  onChangeName(e) {
+    this.setState({
+      name: e.target.value
+    });
+  }
+  onChangeTime(e) {
+    this.setState({
+      time: e.target.value
+    })  
+  }
+  onChangeGstNumber(e) {
+    this.setState({
+      business_gst_number: e.target.value
+    })
+  }
 
-			mapPosition: {
-				lat: this.props.center.lat,
-				lng: this.props.center.lng
-			},
-			markerPosition: {
-				lat: this.props.center.lat,
-				lng: this.props.center.lng
-			}
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.onChange = this.onChange.bind(this)
-
-        this.test = this.test.bind(this)
-
-    }
-    
-    fetchLocation(){
-		const {address, District, state} = this.state
-		console.log(address, District, state)
-		fetch(urlLocation, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
- 
-            },
-            method: 'POST',
-            body: JSON.stringify({
-				// add more values
-			   "address": this.state.email,
-			   "District": this.state.fname,
-			   "state": this.state.lname
-            }
-            )
-        })
-            .then(resp => resp.json())
-
-	}
-	/**
-	 * Get the current address from the default map position and set those values in the state
-	 */
-	componentDidMount() {
-		Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
-			response => {
-				const address = response.results[0].formatted_address,
-				      addressArray =  response.results[0].address_components,
-				      District = this.getDistrict( addressArray ),
-				      state = this.getState( addressArray );
-
-				console.log( 'District', District, state );
-
-				this.setState( {
-					address: ( address ) ? address : '',
-					District: ( District ) ? District : '',
-					state: ( state ) ? state : '',
-				} )
-			},
-			error => {
-				console.error( error );
-			}
-		);
-	};
-	/**
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(`The values are ${this.state.name}, ${this.state.time}, ${this.state.address}`)
+    this.setState({
+      name: '',
+      time: ''
+    })
+  }
+ ///map 
+ componentDidMount() {
+	Geocode.fromLatLng( this.state.mapPosition.lat , this.state.mapPosition.lng ).then(
+		response => {
+			const address = response.results[0].formatted_address;
+			this.setState( {
+				address: ( address ) ? address : '',
+			} )
+		},
+		error => {
+			console.error( error );
+		}
+	);
+};
+/// 2nd phase
+/**
 	 * Component should only update ( meaning re-render ), when the user selects the address, or drags the pin
 	 *
 	 * @param nextProps
@@ -89,31 +80,15 @@ class Map extends React.Component{
 	shouldComponentUpdate( nextProps, nextState ){
 		if (
 			this.state.markerPosition.lat !== this.props.center.lat ||
-			this.state.address !== nextState.address ||
-			this.state.District !== nextState.District ||
-			this.state.state !== nextState.state
+			this.state.address !== nextState.address
 		) {
 			return true
 		} else if ( this.props.center.lat === nextProps.center.lat ){
 			return false
 		}
 	}
-	/**
-	 * Get the District and set the District input value to the one selected
-	 *
-	 * @param addressArray
-	 * @return {string}
-	 */
-	getDistrict = ( addressArray ) => {
-		let District = '';
-		for( let i = 0; i < addressArray.length; i++ ) {
-			if ( addressArray[ i ].types[0] && 'administrative_area_level_2' === addressArray[ i ].types[0] ) {
-				District = addressArray[ i ].long_name;
-				return District;
-			}
-		}
-	};
-	/**
+//phase 3
+/**
 	 * Get the area and set the area input value to the one selected
 	 *
 	 * @param addressArray
@@ -167,13 +142,9 @@ class Map extends React.Component{
 		Geocode.fromLatLng( newLat , newLng ).then(
 			response => {
 				const address = response.results[0].formatted_address,
-				      addressArray =  response.results[0].address_components,
-				      District = this.getDistrict( addressArray ),
-				      state = this.getState( addressArray );
+				      addressArray =  response.results[0].address_components;
 				this.setState( {
 					address: ( address ) ? address : '',
-					District: ( District ) ? District : '',
-					state: ( state ) ? state : '',
 					markerPosition: {
 						lat: newLat,
 						lng: newLng
@@ -198,15 +169,11 @@ class Map extends React.Component{
 		console.log( 'plc', place );
 		const address = place.formatted_address,
 		      addressArray =  place.address_components,
-		      District = this.getDistrict( addressArray ),
-		      state = this.getState( addressArray ),
 		      latValue = place.geometry.location.lat(),
 		      lngValue = place.geometry.location.lng();
 		// Set these values in the state.
 		this.setState({
 			address: ( address ) ? address : '',
-			District: ( District ) ? District : '',
-			state: ( state ) ? state : '',
 			markerPosition: {
 				lat: latValue,
 				lng: lngValue
@@ -216,25 +183,7 @@ class Map extends React.Component{
 				lng: lngValue
 			},
 		})
-    };
-    
-    handleChange = (event) => {
-        // console.log(event.target.name, event.target.value)
-        const {name, value} = event.target
-        // this.setState({
-        //     'time': '123'
-        // })
-
-        this.setState({[event.target.name]: event.target.value}, function () {
-            console.log('result', this.state.time);
-            this.setState({'time': '123'})
-        });
-       
 	};
-    test(event){
-        console.log('test function')
-        this.setState({'time': '123'})
-    }
 
 	render(){
 		const AsyncMap = withScriptjs(
@@ -280,14 +229,29 @@ class Map extends React.Component{
 		let map;
 		if( this.props.center.lat !== undefined ) {
 			map = <div>
-                <form>
-                        <label>Time </label>
-                        <input type="text" name="time" onChange={this.handleChange} value={this.state.time}/>
-                        <input onChange={this.handleChange} value={this.state.time} name='time'></input>
-                        {this.state.time}
-                    </form> 
-				<div>
-                <AsyncMap
+				
+				<form onSubmit={this.onSubmit}>
+				<div className="form-group">
+				<label>Name: </label>
+	 						<input type="text" 
+							  className="form-control"
+							  value={this.state.name}
+							  onChange={this.onChangeName}
+							  /></div>
+	 						<label>Time: </label>
+	 						<input type="text" 
+							  className="form-control"
+							  value={this.state.time}
+							  onChange={this.onChangeTime}
+							  />
+							  <div>
+								  <br/>
+					<div className="form-group">
+						<label htmlFor="">Address</label>
+						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
+					</div>
+				</div>
+				<AsyncMap
 					googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
 					loadingElement={
 						<div style={{ height: `100%` }} />
@@ -298,42 +262,75 @@ class Map extends React.Component{
 					mapElement={
 						<div style={{ height: `100%` }} />
 					}
-				/> 
-                <br/>
-                <br/> 
-                <br/>
-                <br/>
-
-					<div className="form-group">
-						<label htmlFor="">Address</label>
-						<input type="text" name="address" className="form-control" onChange={ this.onChange } readOnly="readOnly" value={ this.state.address }/>
+				/>
+				<br/>
+<br/>
+<br/>
+				<div className="form-group">
+						<input type="submit" value="Register Location" className="btn btn-primary"/>
 					</div>
+					</form>
 
-                    <div className="form-group">
-						<label htmlFor="">Name</label>
-						<input type="text" name="name" className="form-control" onChange={this.handleChange} value={ this.state.name }/>
-					</div>
-                    <div className="form-group">
-                        <label>Time </label>
-                        <input type="text" name= "time"  onChange={this.handleChange} value={ this.state.time }/>
-                    </div> 
-                    <div className="form-group">
-                        <input type="submit" value="Register Location" className="btn btn-primary"/>
-                    </div>
-				</div>
+				
+
+
+
+
 			</div>
-            
 		} else {
 			map = <div style={{height: this.props.height}} />
 		}
-		return( 
-            <div>
-                        <label>Time </label>
-                        <input type="text" name="time" onChange={this.handleChange} value={this.state.time}/>
-                        <input onChange={this.test} value={this.state.time} name='time'></input>
-                        {this.state.time}
-            </div>
-         )
+		return( map )
 	}
+
+
+
+
+	
+	// render(){
+	
+	// 		return (
+	// 			<div>
+	// 			<div style={{ marginTop: 10 }}>
+	// 				<h3>Add New Business</h3>
+	// 				<form onSubmit={this.onSubmit}>
+	// 					<div className="form-group">
+	// 						<label>Person Name:  </label>
+	// 						<input 
+	// 						  type="text" 
+	// 						  className="form-control" 
+	// 						  value={this.state.person_name}
+	// 						  onChange={this.onChangePersonName}
+	// 						  />
+	// 					</div>
+	// 					<div className="form-group">
+	// 						<label>Business Name: </label>
+	// 						<input type="text" 
+	// 						  className="form-control"
+	// 						  value={this.state.business_name}
+	// 						  onChange={this.onChangeBusinessName}
+	// 						  />
+	// 					</div>
+	// 					<div className="form-group">
+	// 						<label>GST Number: </label>
+	// 						<input type="text" 
+	// 						  className="form-control"
+	// 						  value={this.state.business_gst_number}
+	// 						  onChange={this.onChangeGstNumber}
+	// 						  />
+	// 					</div>
+	// 					<div className="form-group">
+	// 						<input type="submit" value="Register Business" className="btn btn-primary"/>
+	// 					</div>
+	// 				</form>
+	// 			</div>
+	// 			</div>
+	// 		)
+		
+	// }
+
+
+
+  
 }
-export default Map
+
