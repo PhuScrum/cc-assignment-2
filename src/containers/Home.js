@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import './Home.css';
-import Map from './Map.js';
+import Map2 from './markedMap';
 
 export default class Home extends Component {
 	constructor(props) {
@@ -34,11 +34,15 @@ export default class Home extends Component {
 
 	renderTest() {
 		return (
+			<div>
 			<div className="test">
-				<PageHeader>Welcome to the Clean Up Page</PageHeader>
-				
+				<PageHeader>Welcome to Viet Nam Sach Va Xanh.</PageHeader>
+				<p>Here are the current registered locations to select from.</p>
+				<Map2 />
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
+			</div>
+			
 			</div>
 		);
 	}

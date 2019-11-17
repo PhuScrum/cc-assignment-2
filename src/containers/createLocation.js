@@ -3,7 +3,6 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "reac
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
-import Map from "./Map"
 
 Geocode.setApiKey( "AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw" );
 Geocode.enableDebug();
