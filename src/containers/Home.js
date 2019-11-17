@@ -9,8 +9,7 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
-			isLoading: true,
-			testApiCall: []
+			isLoading: true
 		};
 	}
 
@@ -18,25 +17,10 @@ export default class Home extends Component {
 		if (!this.props.isAuthenticated) {
 			return;
 		}
-
-		try {
-			const testApiCall = await this.testApiCall();
-			this.setState({ testApiCall });
-		} catch (e) {
-			alert(e);
-		}
-
 		this.setState({ isLoading: false });
 	}
 
-	testApiCall() {
-		return API.get('testApiCall', '/hello');
-	}
 
-	renderTestAPI(testApiCall) {
-		console.log(testApiCall);
-		return testApiCall.message;
-	}
 
 	renderLander() {
 		return (
@@ -53,7 +37,7 @@ export default class Home extends Component {
 			<div className="test">
 				<PageHeader>Welcome to the Clean Up Page</PageHeader>
 				
-				<ListGroup>{!this.state.isLoading && this.renderTestAPI(this.state.testApiCall)}</ListGroup>
+				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
 			</div>
 		);

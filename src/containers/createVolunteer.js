@@ -3,20 +3,27 @@ import { PageHeader, ListGroup } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import './Home.css';
 
-import Map from './createLocation.js';
 
-export default class Home2 extends Component {
+export default class createVolunteer extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			isLoading: true,
+			testApiCall: []
 		};
 	}
 
 	
 
-	
+	testApiCall() {
+		return API.get('testApiCall', '/hello');
+	}
+
+	renderTestAPI(testApiCall) {
+		console.log(testApiCall);
+		return testApiCall.message;
+	}
 
 	renderLander() {
 		return (
@@ -31,14 +38,9 @@ export default class Home2 extends Component {
 	renderTest() {
 		return (
 			<div className="test">
-				<PageHeader>Create a CleanUp Site!</PageHeader>
-				<ListGroup>{!this.state.isLoading}</ListGroup>
-				<Map
-					google={this.props.google}
-					center={{lat: 10.8231, lng: 106.6297}}
-					height='300px'
-					zoom={15}
-				/>
+				<PageHeader>Volunteer yourself with your friends!</PageHeader>
+				<ListGroup>{!this.state.isLoading && this.renderTestAPI(this.state.testApiCall)}</ListGroup>
+				
 			</div>
 		);
 	}
