@@ -26,6 +26,19 @@
         "type": "Point",
         "coordinates": [106.6938, 10.7296 ]
       }
+    }, 
+
+    
+    {
+      "type": "Feature",
+      "properties": {
+        "NAME": "RMIT",
+        "DESCRIPTIO": "Parking Lot Clearance"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [106.6938, 10.7296 ]
+      }
     }
     
     
