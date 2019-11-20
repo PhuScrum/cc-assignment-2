@@ -133,14 +133,14 @@ export default class Signup extends Component {
 					<FormControl autoFocus type="email" value={this.state.email} onChange={this.handleChange} />
 				</FormGroup>
 				
-				{/* <FormGroup controlId="fname" bsSize="large">
+				<FormGroup controlId="fname" bsSize="large">
 						<ControlLabel>First Name</ControlLabel>
 						<FormControl value={this.state.fname} onChange={this.handleChange} type="fname" />
 					</FormGroup>
 					<FormGroup controlId="lname" bsSize="large">
 						<ControlLabel>Last Name</ControlLabel>
 						<FormControl value={this.state.lname} onChange={this.handleChange} type="lname" />
-					</FormGroup> */}
+					</FormGroup>
 			
 					<FormGroup controlId="password" bsSize="large">
 					<ControlLabel>Password</ControlLabel>
