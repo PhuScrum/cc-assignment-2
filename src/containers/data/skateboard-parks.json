@@ -6,38 +6,18 @@
   },
   "features": [
     {
-      "type": "Feature",
       "properties": {
         "NAME": "K-Mart PMH",
-        "DESCRIPTIO": "Abandoned store needs clearance"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [106.709039, 10.729691]
+        "DESCRIPTION": "Abandoned store needs clearance",
+        "coordinates": [10.729691, 106.709039]
       }
+      
     },
     {
-      "type": "Feature",
       "properties": {
         "NAME": "RMIT",
-        "DESCRIPTIO": "Parking Lot Clearance"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [106.6938, 10.7296 ]
-      }
-    }, 
-
-    
-    {
-      "type": "Feature",
-      "properties": {
-        "NAME": "RMIT",
-        "DESCRIPTIO": "Parking Lot Clearance"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [106.6938, 10.7296 ]
+        "DESCRIPTION": "Parking Lot Clearance",
+        "coordinates": [10.7296, 106.6938 ]
       }
     }
     

@@ -26,6 +26,8 @@ export default class Signup extends Component {
 		this.signUp = this.signUp.bind(this)
 	}
 
+	
+
 	signUp(){
 		const {email, fname, lname} = this.state
 		console.log(email, fname, lname)

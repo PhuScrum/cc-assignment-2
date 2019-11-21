@@ -202,6 +202,7 @@ class Map extends Component{
 						>
 							<div>
 								<span style={{ padding: 0, margin: 0 }}>{ this.state.address }</span>
+								
 							</div>
 						</InfoWindow>
 						{/*Marker*/}
