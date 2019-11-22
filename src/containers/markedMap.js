@@ -1,4 +1,5 @@
 import React, { Component } from "react"
+import {Link} from "react-router-dom"
 import { compose } from "recompose"
 import {
   withScriptjs,
@@ -25,9 +26,10 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
                 <div>
                  <h4> {marker.name}</h4>
                  <p>{marker.address}</p>
+                 <p><Link to ={`/location/${marker._id}`}>Details</Link></p>
                 </div>
               </InfoWindow>}
-            }
+            
           </Marker>
         )
       })}
