@@ -34,7 +34,7 @@ const userSchema = new Schema({
  fName: {type: String},
  lName: {type: String},
  email: {type: String, unique: true},
-//  password: {type: String},
+ phoneNumber: {type: String},
  gender: {type: String},
  type: {type: String},
  dateCreated: {type: Date, default: Date.now}
@@ -43,10 +43,11 @@ const userSchema = new Schema({
 
 const locationSchema = new Schema({
  name: {type: String},
+ description: {type: String},
  address: {type: String},
  time: {type: String},
  input: {type: Object},
- member: {type: Array},
+ members: {type: Array},
  locationOwner: {type: String},
  dateCreated: {type: Date, default: Date.now}
 })
