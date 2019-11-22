@@ -4,6 +4,7 @@ import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
 
+
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
 Geocode.enableDebug();
 
@@ -70,13 +71,15 @@ export default class createLocation extends Component {
             },
             method: 'POST',
             body: JSON.stringify({
+				
 				// add more values
 			   "name": this.state.name,
 			   "address": this.state.address,
 			   "time": this.state.time,
 			   "description": this.state.description,
-			   "lat": this.state.lat,
-			   "lng": this.state.lng
+			   "lat": lat,
+			   "lng": lng,
+			   "locationOwner": localStorage.getItem("email")
             }
             )
         })

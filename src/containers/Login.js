@@ -28,7 +28,7 @@ export default class Login extends Component {
 
 	handleSubmit = async event => {
 		event.preventDefault();
-
+		localStorage.setItem("email", this.state.email);
 		this.setState({ isLoading: true });
 
 		try {

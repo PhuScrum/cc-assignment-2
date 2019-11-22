@@ -97,6 +97,7 @@ app.route('/location')
         })
     })
     .post(function(req, res){
+        console.log(req.body)
         locationModel.create(req.body, function(err, doc){
             if(!err){
                 res.json('location created')
