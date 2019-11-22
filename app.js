@@ -107,6 +107,15 @@ app.route('/location')
         })
     })
 
+app.route('/locationDetails')
+    .post(function(req, res){
+        console.log(req.body)
+        locationModel.findOne({_id: req.body.locationId}, function(err, doc){
+            console.log(doc)
+            res.json(doc)
+        })
+    })
+
 app.route('/hello')
     .get((req, res) => {
         res.status(200).send('Hello world AWS Beanstalk deployment ES6')

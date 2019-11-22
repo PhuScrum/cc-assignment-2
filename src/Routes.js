@@ -11,6 +11,7 @@ import LoginWFacebook from './containers/LoginWFacebook';
 import Home2 from './containers/Home2';
 import createLocation from './containers/createLocation';
 import createVolunteer from './containers/createVolunteer';
+import LocationDetails from './containers/LocationList/LocationDetails';
 
 export default ({ childProps }) => (
 	<Switch>
@@ -21,6 +22,8 @@ export default ({ childProps }) => (
 		<AppliedRoute path="/Home2" exact component={Home2} props={childProps} />
 		<AppliedRoute path="/createLocation" exact component={createLocation} props={childProps} />
 		<AppliedRoute path="/createVolunteer" exact component={createVolunteer} props={childProps} />
+		<AppliedRoute path='/location/:id' exact component={LocationDetails} props={childProps} />
+
 		{/* Finally, catch all unmatched routes */}
 		<Route component={NotFound} />
 	</Switch>
