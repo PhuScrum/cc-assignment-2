@@ -11,7 +11,7 @@ import {
 const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
 
   return (
-    <GoogleMap defaultZoom={8} defaultCenter={{ lat: 10.7291, lng: 106.7189 }}>
+    <GoogleMap defaultZoom={8} defaultCenter={{lat: 10.7291, lng: 106.7189 }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -23,8 +23,8 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
             {props.selectedMarker === marker &&
               <InfoWindow>
                 <div>
-                  <h3>{marker.name}</h3>
-				  <p>{marker.address}</p>
+                 <h4> {marker.name}</h4>
+                 <p>{marker.address}</p>
                 </div>
               </InfoWindow>}
             }
@@ -35,12 +35,12 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
   )
 })
 
-export default class ShelterMap extends Component {
+export default class markedMap extends Component {
   constructor(props) {
     super(props)
     this.state = {
-	  shelters: [],
-	  location:[],
+      shelters: [],
+      location: [],
       selectedMarker: false
     }
   }
@@ -48,7 +48,7 @@ export default class ShelterMap extends Component {
     fetch("http://localhost:8080/location")
       .then(r => r.json())
       .then(data => {
-        this.setState({ location : data })
+        this.setState({ location: data })
       })
   }
   handleClick = (marker, event) => {
