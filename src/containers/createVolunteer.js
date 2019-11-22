@@ -37,19 +37,19 @@ export default class createVolunteer extends Component {
 		})
 	  }
 
-	  onSubmit(e) {
-		e.preventDefault();
-		const obj = {
-		  person_name: this.state.person_name,
-		  business_name: this.state.business_name,
-		  business_gst_number: this.state.business_gst_number
-		};
-		this.setState({
-		  person_name: '',
-		  business_name: '',
-		  business_gst_number: ''
-		})
-	  }
+	//   onSubmit(e) {
+	// 	e.preventDefault();
+	// 	const obj = {
+	// 	  person_name: this.state.person_name,
+	// 	  business_name: this.state.business_name,
+	// 	  business_gst_number: this.state.business_gst_number
+	// 	};
+	// 	this.setState({
+	// 	  person_name: '',
+	// 	  business_name: '',
+	// 	  business_gst_number: ''
+	// 	})
+	//   }
 
 	  onSubmit(e) {
 		e.preventDefault();

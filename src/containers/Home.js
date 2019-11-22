@@ -18,15 +18,18 @@ export default class Home extends Component {
 		};
 	}
 
+
 	fetchLocation() {
 		console.log('fetch location')
 		fetch(urlLocation)
 			.then(response => response.json())
 			.then(data => {
 				this.setState({ location: data })
-				console.log(this.state.location)
+				console.log(this.state.location.address)
 			})
 	}
+
+	
 
 
 	async componentDidMount() {
@@ -60,7 +63,7 @@ export default class Home extends Component {
 							<MarkedMap
 							data={this.state}
 							google={this.props.google}
-							center={{ lat: 47.444, lng: -122.176 }}
+							center={{ lat: 10.8231, lng: 106.6297 }}
 							height='300px'
 							zoom={8}>
 						</MarkedMap>
