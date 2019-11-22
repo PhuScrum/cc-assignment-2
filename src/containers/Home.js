@@ -3,7 +3,7 @@ import { PageHeader, ListGroup, Row, Col } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import './Home.css';
 import MarkedMap from './markedMap.js';
-
+import LocationList from './LocationList'
 import { Marker } from 'google-maps-react';
 const urlLocation = 'http://localhost:8080/location'
 
@@ -68,7 +68,9 @@ export default class Home extends Component {
 							zoom={8}>
 						</MarkedMap>
 						</Col>
-						<Col sm={4}>sm=4</Col>
+						<Col sm={4}>
+							<LocationList data={this.state}/>
+						</Col>
 					</Row>
 
 					<ListGroup>{!this.state.isLoading}</ListGroup>

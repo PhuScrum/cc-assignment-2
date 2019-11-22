@@ -42,6 +42,8 @@ const userSchema = new Schema({
 })
 
 const locationSchema = new Schema({
+ lat:{type: Number},
+ lng: {type: Number},
  name: {type: String},
  description: {type: String},
  address: {type: String},
