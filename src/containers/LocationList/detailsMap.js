@@ -51,7 +51,7 @@ export default class createLocation extends Component {
 		e.preventDefault();
 		this.registerLocation();
 		console.log(`The values are ${this.state.name}, ${this.state.time},  
-		${this.state.description}, ${this.state.address}, lat ${this.state.markerPosition.lat}, lng ${this.state.markerPosition.lng}`)
+		${this.state.description}, ${this.state.address}, `)
 		this.setState({
 			name: '',
 			time: '',
@@ -59,42 +59,17 @@ export default class createLocation extends Component {
 		})
 	}
 
-	registerLocation(){
-		const {name, address, time, description} = this.state
-		const {lat, lng} = this.state.markerPosition
-		console.log(name, address, time, description, lat, lng)
-		fetch(urlLocation, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
- 
-            },
-            method: 'POST',
-            body: JSON.stringify({
-				
-				// add more values
-			   "name": this.state.name,
-			   "address": this.state.address,
-			   "time": this.state.time,
-			   "description": this.state.description,
-			   "lat": lat,
-			   "lng": lng,
-			   "locationOwner": localStorage.getItem("email")
-            }
-            )
-        })
-            .then(resp => resp.json())
-
-	};
-
+	
 	///map 
 	componentDidMount() {
+		console.log(this.props.center.lat, this.props.center.lng)
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
 				const address = response.results[0].formatted_address;
 				this.setState({
 					address: (address) ? address : '',
 				})
+				
 			},
 			error => {
 				console.error(error);
@@ -160,38 +135,8 @@ export default class createLocation extends Component {
 
 	};
 
-	/**
-	 * When the marker is dragged you get the lat and long using the functions available from event object.
-	 * Use geocode to get the address, District, area and state from the lat and lng positions.
-	 * And then set those values in the state.
-	 *
-	 * @param event
-	 */
-	onMarkerDragEnd = (event) => {
-		let newLat = event.latLng.lat(),
-			newLng = event.latLng.lng();
 
-		Geocode.fromLatLng(newLat, newLng).then(
-			response => {
-				const address = response.results[0].formatted_address,
-					addressArray = response.results[0].address_components;
-				this.setState({
-					address: (address) ? address : '',
-					markerPosition: {
-						lat: newLat,
-						lng: newLng
-					},
-					mapPosition: {
-						lat: newLat,
-						lng: newLng
-					},
-				})
-			},
-			error => {
-				console.error(error);
-			}
-		);
-	};
+	
 
 	/**
 	 * When the user types an address in the search box
@@ -206,10 +151,6 @@ export default class createLocation extends Component {
 		// Set these values in the state.
 		this.setState({
 			address: (address) ? address : '',
-			markerPosition: {
-				lat: latValue,
-				lng: lngValue
-			},
 			mapPosition: {
 				lat: latValue,
 				lng: lngValue
@@ -221,12 +162,6 @@ export default class createLocation extends Component {
 			showPopup: !this.state.showPopup
 		});
 	};
-
-	handleEditLocation(name, address, time, ){
-		console.log('edit location')
-
-
-	}
 
 	
 	render() {
@@ -250,7 +185,6 @@ export default class createLocation extends Component {
 						{/*Marker*/}
 						<Marker google={this.props.google}
 							name={'Dolores park'}
-							draggable={true}
 							onDragEnd={this.onMarkerDragEnd}
 							position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
 						/>

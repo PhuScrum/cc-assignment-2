@@ -259,6 +259,7 @@ class Map extends Component{
 						<div style={{ height: `100%` }} />
 					}
 				/>
+				
 			</div>
 		} else {
 			map = <div style={{height: this.props.height}} />
