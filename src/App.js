@@ -33,7 +33,19 @@ class App extends Component {
 		this.onChangeDescription = this.onChangeDescription.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 		// this.registerLocation = this.registerLocation.bind(this);
+		//edit location
+		this.handleEdit = this.handleEdit.bind(this);
 		
+	}
+	//edit location
+
+	handleEdit(){
+		console.log('fuck edit')
+
+	}
+
+	editLocaton(){
+
 	}
 
 	testDropping(){
@@ -135,7 +147,9 @@ class App extends Component {
 			onChangeDescription: this.onChangeDescription,
 			onChangeName: this.onChangeName,
 			onChangeTime: this.onChangeTime,
-			onSubmit: this.onSubmit
+			onSubmit: this.onSubmit,
+			//edit location
+			handleEdit: this.handleEdit
 		};
 		return (
 			<div className="App container">

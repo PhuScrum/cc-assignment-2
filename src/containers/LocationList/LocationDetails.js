@@ -3,6 +3,7 @@ import {Col, Row} from 'react-bootstrap'
 // import Map from './detailsMap'
 import Map from './detailsMap';
 import Marker from 'react-google-maps'
+import BasicInfo from './BasicInfo'
 const locationUrl = 'http://localhost:8080/locationDetails'
 
 export default class LocationDetails extends Component {
@@ -76,36 +77,14 @@ export default class LocationDetails extends Component {
         return (
             <div>
                 <Row>
-                    <Col></Col>
-                    <Col></Col>
-                </Row>
-                details page.
-                <br/>
-                <b>Name:</b> {name}
-                <br/>
-                <b>Address:</b> {address}
-                <br/>
-                <b>Time:</b> {time}
-                <br/>
-                <b>Description:</b> {description}
-                <br/>
-                <b>lat{latt}</b>
-                <br/>
-                <b>lng{lngg}</b>
-                <br/>
-                {typeof(dataLat)} <br/>
-                {typeof(10.78628972041983)}
-                
-                <Map
-					google={this.props.google}
-					center={{lat: parseFloat(localStorage.getItem('lat')), lng: parseFloat(localStorage.getItem('lng'))}}
-					height='300px'
-                    zoom={15}
+                    <Col lg={8}>Basic info and map
+                    <BasicInfo {...this.props} data={this.state}/>
+                    </Col>
+                    <Col lg={4}>User profile 
                     
-				/>
-                
-                
-                
+                    </Col>
+                </Row>
+
 
             </div>
             

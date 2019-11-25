@@ -18,8 +18,7 @@ export default class LocationCard extends Component {
                         <Link  to={`/location/${_id}` }>Details</Link>
                         <br/>
                         <br/>
-                        <p>You own this location</p>
-                        {/* <p><button> <Link to={`/Home2`} onClick={this.props.handleEditLocation.bind(this)}>Edit</Link></button> <button>Delete</button></p> */}
+                        <p><button> <Link to={`/Home2`} >Edit</Link></button> <button>Delete</button></p>
                     </div>
                 </div>
         )
