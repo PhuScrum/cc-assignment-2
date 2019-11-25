@@ -97,7 +97,6 @@ export default class LocationDetails extends Component {
                 {typeof(10.78628972041983)}
                 
                 <Map
-
 					google={this.props.google}
 					center={{lat: parseFloat(localStorage.getItem('lat')), lng: parseFloat(localStorage.getItem('lng'))}}
 					height='300px'

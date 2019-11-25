@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import { API } from 'aws-amplify';
 import './Home.css';
-
-import Map from './createLocation.js';
+import Popup from "reactjs-popup";
+import CreateLocation from './createLocation.js';
 
 export default class Home2 extends Component {
 	constructor(props) {
@@ -13,7 +13,14 @@ export default class Home2 extends Component {
 			isLoading: true,
 		};
 	}
-
+	componentDidMount() {
+		console.log(this.props.isAuthenticated)
+		//e
+		console.log(this.props)
+		this.props.testDropping()
+		console.log(this.props.appdata.name)
+		
+	}
 	
 
 	
@@ -31,9 +38,13 @@ export default class Home2 extends Component {
 	renderTest() {
 		return (
 			<div className="test">
+				{this.props.appdata.name}
 				<PageHeader>Create a CleanUp Site!</PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
-				<Map
+				
+				<CreateLocation
+				// spread attributes
+					{...this.props}
 					google={this.props.google}
 					center={{lat: 10.8231, lng: 106.6297}}
 					height='300px'

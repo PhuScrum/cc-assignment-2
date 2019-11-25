@@ -33,6 +33,7 @@ export default class Home extends Component {
 
 
 	async componentDidMount() {
+		console.log(this.props.isAuthenticated)
 		this.fetchLocation()
 		if (!this.props.isAuthenticated) {
 			return;
@@ -58,6 +59,7 @@ export default class Home extends Component {
 				<div className="test">
 					<PageHeader>Welcome to Viet Nam Sach Va Xanh.</PageHeader>
 					<p>Here are the current registered locations to select from.</p>
+					
 					<Row>
 						<Col sm={8}>
 							<MarkedMap

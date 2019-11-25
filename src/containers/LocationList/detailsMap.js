@@ -189,18 +189,6 @@ export default class createLocation extends Component {
 							position={{ lat: this.state.markerPosition.lat, lng: this.state.markerPosition.lng }}
 						/>
 						<Marker />
-						{/* For Auto complete Search Box */}
-						<Autocomplete
-							style={{
-								width: '100%',
-								height: '40px',
-								paddingLeft: '16px',
-								marginTop: '2px',
-								marginBottom: '500px'
-							}}
-							onPlaceSelected={this.onPlaceSelected}
-							types={['(regions)']}
-						/>
 					</GoogleMap>
 				)
 			)
@@ -210,33 +198,7 @@ export default class createLocation extends Component {
 			map = <div>
 
 				<form onSubmit={this.onSubmit}>
-					<div className="form-group">
-						<label>Name: </label>
-						<input type="text"
-							className="form-control"
-							value={this.state.name}
-							onChange={this.onChangeName}
-						/></div>
-					<label>Time: </label>
-					<input type="text"
-						className="form-control"
-						value={this.state.time}
-						onChange={this.onChangeTime}
-					/>
-					<br/>
-					<label>Description: </label>
-					<input type="text"
-						className="form-control"
-						value={this.state.description}
-						onChange={this.onChangeDescription}
-					/>
-					<div>
-						<br />
-						<div className="form-group">
-							<label htmlFor="">Address</label>
-							<input type="text" name="address" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.address} />
-						</div>
-					</div>
+					
 					<AsyncMap
 						googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
 						loadingElement={
@@ -253,10 +215,8 @@ export default class createLocation extends Component {
 					<br />
 					<br />
 					<div className="form-group">
-
-						<Popup trigger={<button type="submit" className="btn btn-primary" >Register Location</button>} position="right center">
-							<div>Location Successfully Registered</div>
-						</Popup>
+					
+			
 					</div>
 				</form>
 

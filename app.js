@@ -111,7 +111,16 @@ app.route('/locationDetails')
     .post(function(req, res){
         console.log(req.body)
         locationModel.findOne({_id: req.body.locationId}, function(err, doc){
-            console.log(doc)
+            console.log('details')
+            res.json(doc)
+        })
+    })
+
+app.route('/delete')
+    .post(function(req, res){
+        console.log(req.body)
+        locationModel.findOneAndDelete({_id: req.body.locationId}, function(err, doc){
+            console.log('item deleted')
             res.json(doc)
         })
     })

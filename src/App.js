@@ -6,17 +6,97 @@ import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 
-
 import './App.css';
+
+const urlLocation = 'http://localhost:8080/location'
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			name: 'chai fu22',
+			time:'',
+			address:'',
+			description:'',
+			lat: 0.0,
+			lng: 0.0,
 			isAuthenticated: false,
-			isAuthenticating: true
+			isAuthenticating: true,
+			
 		};
+
+		this.testDropping = this.testDropping.bind(this)
+		// createlocation
+		this.onChangeName = this.onChangeName.bind(this);
+		this.onChangeTime = this.onChangeTime.bind(this);
+		this.onChangeDescription = this.onChangeDescription.bind(this);
+		this.onSubmit = this.onSubmit.bind(this);
+		// this.registerLocation = this.registerLocation.bind(this);
+		
+	}
+
+	testDropping(){
+		console.log('test dropping')
+	}
+
+	//createlocation function
+	onChangeName(e) {
+		this.setState({
+			name: e.target.value
+		});
+	}
+	onChangeTime(e) {
+		this.setState({
+			time: e.target.value
+		})
+	}
+	onChangeDescription(e) {
+		this.setState({
+			description: e.target.value
+		})
+	}
+
+	onSubmit(lat, lng, e) {
+		console.log('passed values', 'lat', lat, 'lng', lng)
+		e.preventDefault();
+		this.registerLocation(lat, lng);
+		console.log(`The values are ${this.state.name}, ${this.state.time},  
+		${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
+		// lat ${this.state.markerPosition.lat}, lng ${this.state.markerPosition.lng}
+		this.setState({
+			name: '',
+			time: '',
+			description:'',
+			lat: '',
+			lng:''
+		})
+	}
+	registerLocation(lat, lng){
+		const {name, address, time, description} = this.state
+		console.log('lat',lat, 'lng',lng)
+		fetch(urlLocation, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+				
+				// add more values
+			   "name": this.state.name,
+			   "address": this.state.address,
+			   "time": this.state.time,
+			   "description": this.state.description,
+			   "lng": lng,
+			   "lat": lat,
+			   "locationOwner": localStorage.getItem("email")
+            }
+            )
+        })
+            .then(resp => resp.json(this.props.history.push('/')))
+
 	}
 
 	async componentDidMount() {
@@ -48,8 +128,14 @@ class App extends Component {
 
 	render() {
 		const childProps = {
+			appdata: this.state,
+			testDropping: this.testDropping,
 			isAuthenticated: this.state.isAuthenticated,
-			userHasAuthenticated: this.userHasAuthenticated
+			userHasAuthenticated: this.userHasAuthenticated,
+			onChangeDescription: this.onChangeDescription,
+			onChangeName: this.onChangeName,
+			onChangeTime: this.onChangeTime,
+			onSubmit: this.onSubmit
 		};
 		return (
 			<div className="App container">
@@ -87,7 +173,9 @@ class App extends Component {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-				<Routes childProps={childProps} />
+				<Routes childProps={childProps} 
+
+				/>
 			</div>
 		);
 	}

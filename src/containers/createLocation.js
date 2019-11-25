@@ -10,16 +10,13 @@ Geocode.enableDebug();
 
 
 
-const urlLocation = 'http://localhost:8080/location'
+
 
 export default class createLocation extends Component {
 	constructor(props) {
 		super(props);
-		this.onChangeName = this.onChangeName.bind(this);
-		this.onChangeTime = this.onChangeTime.bind(this);
-		this.onChangeDescription = this.onChangeDescription.bind(this);
-		this.onSubmit = this.onSubmit.bind(this);
-
+		
+		// cant transfer to app cause dont know what this is
 		this.state = {
 			mapPosition: {
 				lat: this.props.center.lat,
@@ -31,64 +28,14 @@ export default class createLocation extends Component {
 			}
 		}
 	}
-	onChangeName(e) {
-		this.setState({
-			name: e.target.value
-		});
-	}
-	onChangeTime(e) {
-		this.setState({
-			time: e.target.value
-		})
-	}
-	onChangeDescription(e) {
-		this.setState({
-			description: e.target.value
-		})
-	}
+	
 
-	onSubmit(e) {
-		e.preventDefault();
-		this.registerLocation();
-		console.log(`The values are ${this.state.name}, ${this.state.time},  
-		${this.state.description}, ${this.state.address}, lat ${this.state.markerPosition.lat}, lng ${this.state.markerPosition.lng}`)
-		this.setState({
-			name: '',
-			time: '',
-			description:''
-		})
-	}
-
-	registerLocation(){
-		const {name, address, time, description} = this.state
-		const {lat, lng} = this.state.markerPosition
-		console.log(name, address, time, description, lat, lng)
-		fetch(urlLocation, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
- 
-            },
-            method: 'POST',
-            body: JSON.stringify({
-				
-				// add more values
-			   "name": this.state.name,
-			   "address": this.state.address,
-			   "time": this.state.time,
-			   "description": this.state.description,
-			   "lat": lat,
-			   "lng": lng,
-			   "locationOwner": localStorage.getItem("email")
-            }
-            )
-        })
-            .then(resp => resp.json())
-
-	};
+	
 
 	///map 
 	componentDidMount() {
+		console.log(this.props)
+		console.log(this.props.isAuthenticated)	
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
 				const address = response.results[0].formatted_address;
@@ -112,7 +59,10 @@ export default class createLocation extends Component {
 	shouldComponentUpdate(nextProps, nextState) {
 		if (
 			this.state.markerPosition.lat !== this.props.center.lat ||
-			this.state.address !== nextState.address
+			this.state.address !== nextState.address ||
+			this.props.appdata.name !== nextState.name ||
+			this.props.appdata.time !== nextState.time ||
+			this.props.appdata.description !== nextState.description
 		) {
 			return true
 		} else if (this.props.center.lat === nextProps.center.lat) {
@@ -184,8 +134,10 @@ export default class createLocation extends Component {
 					mapPosition: {
 						lat: newLat,
 						lng: newLng
-					},
+					},		
 				})
+				// localStorage.setItem("newLat", this.state.mapPosition.lat);
+				// localStorage.setItem("newLng", this.state.mapPosition.lng);
 			},
 			error => {
 				console.error(error);
@@ -230,7 +182,7 @@ export default class createLocation extends Component {
 
 	
 	render() {
-
+		
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
@@ -241,7 +193,7 @@ export default class createLocation extends Component {
 						{/* InfoWindow on top of marker */}
 						<InfoWindow
 							onClose={this.onInfoWindowClose}
-							position={{ lat: (this.state.markerPosition.lat + 0.0018), lng: this.state.markerPosition.lng }}
+							position={{ lat: (this.state.markerPosition.lat + 0.0028), lng: this.state.markerPosition.lng }}
 						>
 							<div>
 								<span style={{ padding: 0, margin: 0 }}>{this.state.address}</span>
@@ -271,30 +223,32 @@ export default class createLocation extends Component {
 				)
 			)
 		);
+		const {markerPosition} = this.state
 		let map;
 		if (this.props.center.lat !== undefined) {
 			map = <div>
+				
 
-				<form onSubmit={this.onSubmit}>
+				
 					<div className="form-group">
-						<label>Name: </label>
+						<label>Name: {this.state.markerPosition.lat}</label>
 						<input type="text"
 							className="form-control"
-							value={this.state.name}
-							onChange={this.onChangeName}
+							value={this.props.appdata.name}
+							onChange={this.props.onChangeName.bind(this)}
 						/></div>
 					<label>Time: </label>
 					<input type="text"
 						className="form-control"
-						value={this.state.time}
-						onChange={this.onChangeTime}
+						value={this.props.appdata.time}
+						onChange={this.props.onChangeTime.bind(this)}
 					/>
 					<br/>
 					<label>Description: </label>
 					<input type="text"
 						className="form-control"
-						value={this.state.description}
-						onChange={this.onChangeDescription}
+						value={this.props.appdata.description}
+						onChange={this.props.onChangeDescription.bind(this)}
 					/>
 					<div>
 						<br />
@@ -320,11 +274,9 @@ export default class createLocation extends Component {
 					<br />
 					<div className="form-group">
 
-						<Popup trigger={<button type="submit" className="btn btn-primary" >Register Location</button>} position="right center">
-							<div>Location Successfully Registered</div>
-						</Popup>
+						<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat , markerPosition.lng)}>Register Location</button>
+						
 					</div>
-				</form>
 
 
 
