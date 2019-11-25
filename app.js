@@ -125,6 +125,23 @@ app.route('/delete')
         })
     })
 
+app.route('/fetchUserByEmail')
+    .post((req, res) =>{
+        const {userEmail} = req.body
+        console.log('fetch user by email: ', userEmail)
+        userModel.findOne({email: userEmail}, (err, doc)=>{
+            if(!err)
+                res.json(doc)
+            else
+                console.log(err)
+        })
+    })
+
+app.route('/joinLocation')
+    .post((req, res) =>{
+        const {userId}= req.body
+    })
+
 app.route('/hello')
     .get((req, res) => {
         res.status(200).send('Hello world AWS Beanstalk deployment ES6')

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import {Col, Row} from 'react-bootstrap'
+import {Col, Row, Button    } from 'react-bootstrap'
 // import Map from './detailsMap'
 import Map from './detailsMap';
 import Marker from 'react-google-maps'
 import BasicInfo from './BasicInfo'
 const locationUrl = 'http://localhost:8080/locationDetails'
+const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 
 export default class LocationDetails extends Component {
     constructor(props){
@@ -19,6 +20,39 @@ export default class LocationDetails extends Component {
             dataLng:0
             
         }
+
+    }
+
+    fetchOwner(locationOwner){
+        // const {locationOwner} = this.state
+        fetch(fetchUserByEmail_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'userEmail': locationOwner
+            }
+            )
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log(data)
+                const {fName, lName, age, gender} = data
+                console.log(data.name)
+                this.setState({
+                    fName: fName,
+                    lName:lName ,
+                    age: age,
+                    gender: gender,
+                    // phoneNumber: phoneNumber,
+                   
+                })        
+              
+
+            })
 
     }
 
@@ -38,16 +72,19 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                const {name, address, time, description, lat, lng} = data
-                console.log(data.name)
+                const {name, address, time, description, lat, lng, locationOwner} = data
+                console.log(data)
                 this.setState({
                     name: name,
                     address: address,
                     time: time,
                     description: description,
                     dataLat: lat,
-                    dataLng: lng
+                    dataLng: lng,
+                    locationOwner: locationOwner
                 })        
+                console.log(locationOwner)
+                this.fetchOwner(locationOwner)
                 localStorage.setItem("lat", this.state.dataLat);
                 localStorage.setItem("lng", this.state.dataLng);
                 this.windowOnload()
@@ -70,7 +107,7 @@ export default class LocationDetails extends Component {
     }
     
     render() {
-        const {name, address, time, description, dataLat, dataLng} = this.state
+        const {name, address, time, description, dataLat, dataLng, fName, lName, age, gender, locationOwner} = this.state
         var latt = localStorage.getItem('lat')
         var lngg = localStorage.getItem('lng')
         
@@ -80,7 +117,15 @@ export default class LocationDetails extends Component {
                     <Col lg={8}>Basic info and map
                     <BasicInfo {...this.props} data={this.state}/>
                     </Col>
-                    <Col lg={4}>User profile 
+                    <Col lg={4}>Contact Info
+                    <br/>
+                    {fName} {lName} <br/>
+                    {locationOwner} <br/>
+                    {age} years old <br/>
+                    {gender} <br/><br/>
+                    List of members <br/>
+
+                    <Button>Join</Button>
                     
                     </Col>
                 </Row>
