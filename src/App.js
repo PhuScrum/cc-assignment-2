@@ -7,6 +7,7 @@ import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 
 import './App.css';
+import { id } from 'date-fns/locale';
 
 const urlLocation = 'http://localhost:8080/location'
 
@@ -39,12 +40,45 @@ class App extends Component {
 	}
 	//edit location
 
-	handleEdit(){
-		console.log('fuck edit')
+	handleEdit( name, e, description, _id, time, lat, lng){
+		console.log('name', name, 'time', time, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
+		// e.preventDefault();
+		this.setState({
+			name: name,
+			time: time,
+			description: description,
+			lat: lat,
+			lng: lng
+		})
+		this.props.history.push('/home2')
+		// this.editLocation();
 
+		
 	}
 
-	editLocaton(){
+	editLocation(){
+		const {name, address, time, description} = this.state
+		// console.log('lat',lat, 'lng',lng)
+		fetch(urlLocation, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+				// add more values
+			   "name": this.state.name,
+			   "address": this.state.address,
+			   "time": this.state.time,
+			   "description": this.state.description,
+			//    "lng": lng,
+			//    "lat": lat,
+			   "locationOwner": localStorage.getItem("email")
+            }
+            )
+        })
+            .then(resp => resp.json(this.props.history.push('/')))
 
 	}
 
@@ -149,7 +183,7 @@ class App extends Component {
 			onChangeTime: this.onChangeTime,
 			onSubmit: this.onSubmit,
 			//edit location
-			handleEdit: this.handleEdit
+			handleEdit: this.handleEdit,
 		};
 		return (
 			<div className="App container">

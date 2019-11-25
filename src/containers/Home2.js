@@ -39,7 +39,7 @@ export default class Home2 extends Component {
 		return (
 			<div className="test">
 				{this.props.appdata.name}
-				<PageHeader>Create a CleanUp Site!</PageHeader>
+				<PageHeader>Create a CleanUp Site! </PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
 				<CreateLocation
@@ -50,6 +50,7 @@ export default class Home2 extends Component {
 					height='300px'
 					zoom={15}
 				/>
+				
 			</div>
 		);
 	}

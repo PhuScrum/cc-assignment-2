@@ -71,7 +71,7 @@ export default class Home extends Component {
 						</MarkedMap>
 						</Col>
 						<Col sm={4}>
-							<LocationList data={this.state}/>
+							<LocationList {...this.props} data={this.state} />
 						</Col>
 					</Row>
 
