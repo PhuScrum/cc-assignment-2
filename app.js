@@ -125,6 +125,29 @@ app.route('/delete')
         })
     })
 
+app.route('/fetchUserByEmail')
+    .post((req, res) =>{
+        const {userEmail} = req.body
+        console.log('fetch user by email: ', userEmail)
+        userModel.findOne({email: userEmail}, (err, doc)=>{
+            if(!err)
+                res.json(doc)
+            else
+                console.log(err)
+        })
+    })
+
+// both join and unjoin can use this function.
+app.route('/joinLocation')
+    .post((req, res) =>{
+        const {locationId, members}= req.body
+        locationModel.updateOne({_id: locationId}, {members: members}, (err, doc)=>{
+            res.json(doc)
+        })
+    })
+
+
+
 app.route('/hello')
     .get((req, res) => {
         res.status(200).send('Hello world AWS Beanstalk deployment ES6')
