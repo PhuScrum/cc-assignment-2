@@ -137,10 +137,16 @@ app.route('/fetchUserByEmail')
         })
     })
 
+// both join and unjoin can use this function.
 app.route('/joinLocation')
     .post((req, res) =>{
-        const {userId}= req.body
+        const {locationId, members}= req.body
+        locationModel.updateOne({_id: locationId}, {members: members}, (err, doc)=>{
+            res.json(doc)
+        })
     })
+
+
 
 app.route('/hello')
     .get((req, res) => {
