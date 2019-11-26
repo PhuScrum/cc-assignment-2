@@ -55,6 +55,14 @@ const joinLocation = (req, res) =>{
     })
 }
 
+const addInput = (req, res) =>{
+    console.log(req.body)
+    const {locationId, input} = req.body
+    locationModel.updateOne({_id: locationId}, {input: input}, (err, doc)=>{
+        res.json(doc)
+    })
+}
+
 
 module.exports = {
     getAll: getAll,
@@ -62,5 +70,6 @@ module.exports = {
     editLocation: editLocation,
     deleteLocation: deleteLocation,
     locationDetails: locationDetails,
-    joinLocation: joinLocation
+    joinLocation: joinLocation,
+    addInput: addInput
 }
