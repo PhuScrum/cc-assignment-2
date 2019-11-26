@@ -61,12 +61,6 @@ const locationModel = mongoose.model('location', locationSchema)
 app.route('/register')
     .post(function(req, res){
         console.log(req.body)
-        // userModel.find({email: email}, function(err, doc){
-        //     if(!err){
-        //         res.json('user exists')
-        //     }
-        // })
-        
         userModel.create(req.body, function(err, doc){
             if(!err){
                 res.json('register success')
@@ -106,21 +100,33 @@ app.route('/location')
             }
         })
     })
+    .put((req, res)=>{
+        const {locationId, name, address, description, lat, lng, time} = req.body
+        locationModel.updateOne({_id: locationId}, {
+            name: name,
+            address: address,
+            time: time, 
+            description: description,
+            lat: lat,
+            lng: lng,
+        }, (err, doc)=>{
+            res.json(doc)
+        })
+    })
+    .delete(function(req, res){
+        console.log(req.body)
+        locationModel.findOneAndDelete({_id: req.body.locationId}, function(err, doc){
+            console.log('item deleted')
+            res.json(doc)
+        })
+    })
 
+// fetching location details
 app.route('/locationDetails')
     .post(function(req, res){
         console.log(req.body)
         locationModel.findOne({_id: req.body.locationId}, function(err, doc){
             console.log('details')
-            res.json(doc)
-        })
-    })
-
-app.route('/delete')
-    .post(function(req, res){
-        console.log(req.body)
-        locationModel.findOneAndDelete({_id: req.body.locationId}, function(err, doc){
-            console.log('item deleted')
             res.json(doc)
         })
     })
