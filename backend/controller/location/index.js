@@ -49,6 +49,7 @@ const locationDetails = (req, res) =>{
 
 const joinLocation = (req, res) =>{
     const {locationId, members}= req.body
+    console.log('members joined: ' ,members)
     locationModel.updateOne({_id: locationId}, {members: members}, (err, doc)=>{
         res.json(doc)
     })
