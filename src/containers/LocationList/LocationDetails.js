@@ -20,7 +20,8 @@ export default class LocationDetails extends Component {
             time: '',
             locationOwner: '',
             dataLat:0,
-            dataLng:0
+            dataLng:0,
+            input:{}
             
         }
 
@@ -75,7 +76,7 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                const {name, address, time, description, lat, lng, locationOwner, members} = data
+                const {name, address, time, description, lat, lng, locationOwner, members, input} = data
                 console.log(data)
                 this.setState({
                     name: name,
@@ -86,8 +87,11 @@ export default class LocationDetails extends Component {
                     dataLng: lng,
                     locationOwner: locationOwner,
                     members: members,
+                    input: input
                 })        
                 console.log(locationOwner)
+                console.log(name)
+                console.log(input)
                 this.fetchOwner(locationOwner)
                 localStorage.setItem("lat", this.state.dataLat);
                 localStorage.setItem("lng", this.state.dataLng);
@@ -155,7 +159,7 @@ export default class LocationDetails extends Component {
     render() {
         const {members, fName, lName, age, gender, locationOwner} = this.state
         const userEmail = localStorage.getItem('email')
-        
+        console.log(this.state.input)
         return (
             <div>
                 <Row>
@@ -178,7 +182,8 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
-                <InputInformation/>
+                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}
+                />
             
 
 

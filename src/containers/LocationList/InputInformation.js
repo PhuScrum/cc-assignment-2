@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import '../Home.css';
-import {Col, Row} from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
+const locationUrl = 'http://localhost:8080/locationDetails'
 
-const urlLocation = 'http://localhost:8080/location'
+const urlLocation = 'http://localhost:8080/Input'
 
 export default class InputInformation extends Component {
     constructor(props) {
@@ -15,49 +16,65 @@ export default class InputInformation extends Component {
 
         this.state = {
             isLoading: true,
-            kilos: '',
-            attended: '',
-            cost: ''
+            kilos: 0.0,
+            attended: 0.0,
+            cost: 0.0
 
 
         };
     }
 
+
+
+    componentDidMount() {
+        console.log(this.props.locationId)
+        console.log(this.props)
+    }
+
     onSubmit() {
-        
         const { kilos, attended, cost } = this.state
         var input = { kilos, attended, cost }
-        console.log('fuck uck', input)
+        
+        console.log("datatype", typeof(kiloss))
         this.registerInput();
         this.setState({
-            kilos: '',
-            attended: '',
-            cost: ''
+            kilos: 0.0,
+            attended: 0.0,
+            cost: 0.0
         })
 
     }
 
-    // registerInput(lat, lng){
-    // 	const {name, address, time, description} = this.state
-    // 	console.log('lat',lat, 'lng',lng)
-    // 	fetch(urlLocation, {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
+    registerInput() {
+        console.log('register input')
+        const { kilos, attended, cost } = this.state
+        var kiloss = parseFloat(kilos)
+        var attendedd = parseFloat(attended)
+        var costt = parseFloat(cost)
+        fetch(urlLocation, {
+            
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
 
-    //         },
-    //         method: 'POST',
-    //         body: JSON.stringify({
+            },
+            method: 'POST',
+            
+            body: JSON.stringify({
+                // add more values
+                
+                locationId: this.props.locationId,
+                input: {
+                    kilos: kiloss,
+                    attended: attendedd,
+                    cost: costt
+                }
+            }
+            )
+        })
+            .then(resp => resp.json())
 
-    // 			// add more values
-    //            input : { kilo: this.state.kilo,
-    //         }
-    //         }
-    //         )
-    //     })
-    //         .then(resp => resp.json(this.props.history.push('/')))
-
-    // }
+    }
 
     onChangeKilos(e) {
         this.setState({
@@ -101,50 +118,50 @@ export default class InputInformation extends Component {
             <div>
                 <h5>Input data after cleanup completion</h5>
                 <ListGroup>{!this.state.isLoading}</ListGroup>
-                {/* <container>
+                <container>
                     <Row className="justify-content-md-center">
                         <Col xs lg="2">
-                            {this.state.input.kilos}
+                            {this.props.input.kilos}
                         </Col>
-                        <Col xs lg="2">{this.state.input.attended}</Col>
+                        <Col xs lg="2">{this.props.input.attended}</Col>
                         <Col xs lg="2">
-                        {this.state.input.cost}
+                        {this.props.input.cost}
                         </Col>
                     </Row>
-                    </container> */}
-                    <div style={{ marginTop: 10 }}>
-                        <div className="form-group">
-                            <label>Amount of collected waste:  </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                value={this.state.kilos}
-                                onChange={this.onChangeKilos}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Amount of attendees: </label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.attended}
-                                onChange={this.onChangeAttended}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label>Cost of operation: </label>
-                            <input type="text"
-                                className="form-control"
-                                value={this.state.cost}
-                                onChange={this.onChangeCost}
-                            />
-                        </div>
-                        <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Input Info</button>
-
-
+                    </container>
+                <div style={{ marginTop: 10 }}>
+                    <div className="form-group">
+                        <label>Amount of collected waste(kilos) : </label>
+                        <input
+                            
+                            className="form-control"
+                            value={this.state.kilos}
+                            onChange={this.onChangeKilos}
+                        />
                     </div>
+                    <div className="form-group">
+                        <label>Amount of attendees:  </label>
+                        <input 
+                            className="form-control"
+                            value={this.state.attended}
+                            onChange={this.onChangeAttended}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Cost of operation (VND): </label>
+                        <input 
+                            className="form-control"
+                            value={this.state.cost}
+                            onChange={this.onChangeCost}
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Input Info</button>
+
+
+                </div>
             </div>
-                );
-            }
-        
-        
-        }
+        );
+    }
+
+
+}
