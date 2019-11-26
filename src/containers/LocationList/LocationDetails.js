@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import {Col, Row, Button    } from 'react-bootstrap'
 // import Map from './detailsMap'
 import Map from './detailsMap';
-import Marker from 'react-google-maps'
-import BasicInfo from './BasicInfo'
+import Marker from 'react-google-maps';
+import BasicInfo from './BasicInfo';
+import InputInformation from './InputInformation'
 const locationUrl = 'http://localhost:8080/locationDetails'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 
@@ -116,6 +117,7 @@ export default class LocationDetails extends Component {
                 <Row>
                     <Col lg={8}>Basic info and map
                     <BasicInfo {...this.props} data={this.state}/>
+                    
                     </Col>
                     <Col lg={4}>Contact Info
                     <br/>
@@ -129,6 +131,8 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
+                <InputInformation/>
+            
 
 
             </div>

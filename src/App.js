@@ -16,7 +16,7 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			name: 'chai fu22',
+			name: '',
 			time:'',
 			address:'',
 			description:'',
