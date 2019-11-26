@@ -46,7 +46,7 @@ export default class Home2 extends Component {
 				// spread attributes
 					{...this.props}
 					google={this.props.google}
-					center={{lat: 10.8231, lng: 106.6297}}
+					center={{lat: this.props.appdata.lat, lng: this.props.appdata.lng}}
 					height='300px'
 					zoom={15}
 				/>

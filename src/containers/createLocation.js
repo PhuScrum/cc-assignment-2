@@ -228,7 +228,7 @@ export default class createLocation extends Component {
 		if (this.props.center.lat !== undefined) {
 			map = <div>
 				
-
+				
 				
 					<div className="form-group">
 						<label>Name: {this.state.markerPosition.lat}</label>
@@ -253,10 +253,16 @@ export default class createLocation extends Component {
 					<div>
 						<br />
 						<div className="form-group">
+							<label htmlFor="">Id</label>
+							<input type="text" name="address" className="form-control" readOnly="readOnly" value={this.props.appdata.id} />
+						</div>
+						<br/>
+						<div className="form-group">
 							<label htmlFor="">Address</label>
 							<input type="text" name="address" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.address} />
 						</div>
 					</div>
+					
 					<AsyncMap
 						googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
 						loadingElement={
@@ -272,6 +278,7 @@ export default class createLocation extends Component {
 					<br />
 					<br />
 					<br />
+					
 					<div className="form-group">
 
 						<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat , markerPosition.lng)}>Register Location</button>

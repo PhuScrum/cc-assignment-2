@@ -18,6 +18,10 @@ export default class Signup extends Component {
 			password: '',
 			fname:'',
 			lname:'',
+			age:'',
+			gender:'',
+			phoneNumber:'',
+			imageUrl:'',
 			confirmPassword: '',
 			confirmationCode: '',
 			newUser: null
@@ -29,8 +33,9 @@ export default class Signup extends Component {
 	
 
 	signUp(){
-		const {email, fname, lname} = this.state
-		console.log(email, fname, lname)
+		const {email, fname, lname, age, gender, phoneNumber, imageUrl} = this.state
+		console.log(email, fname, lname, age, gender, phoneNumber, imageUrl)
+		localStorage.setItem("email", this.state.email);
 		fetch(urlRegister, {
             headers: {
                 'Accept': 'application/json',
@@ -42,7 +47,12 @@ export default class Signup extends Component {
 				// add more values
 			   "email": this.state.email,
 			   "fName": this.state.fname,
-			   "lName": this.state.lname
+			   "lName": this.state.lname,
+			   "age": this.state.age,
+			   "gender": this.state.gender,
+			   "phoneNumber": this.state.phoneNumber,
+			   "imageUrl": this.state.imageUrl
+
             }
             )
         })
@@ -142,6 +152,22 @@ export default class Signup extends Component {
 					<FormGroup controlId="lname" bsSize="large">
 						<ControlLabel>Last Name</ControlLabel>
 						<FormControl value={this.state.lname} onChange={this.handleChange} type="lname" />
+					</FormGroup>
+					<FormGroup controlId="age" bsSize="large">
+						<ControlLabel>Age</ControlLabel>
+						<FormControl value={this.state.age} onChange={this.handleChange} type="age" />
+					</FormGroup>
+					<FormGroup controlId="gender" bsSize="large">
+						<ControlLabel>Gender</ControlLabel>
+						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+					</FormGroup>
+					<FormGroup controlId="phoneNumber" bsSize="large">
+						<ControlLabel>Phone Number</ControlLabel>
+						<FormControl value={this.state.phoneNumber} onChange={this.handleChange} type="phoneNumber" />
+					</FormGroup>
+					<FormGroup controlId="imageUrl" bsSize="large">
+						<ControlLabel>Photo URL</ControlLabel>
+						<FormControl value={this.state.imageUrl} onChange={this.handleChange} type="imageUrl" />
 					</FormGroup>
 			
 					<FormGroup controlId="password" bsSize="large">
