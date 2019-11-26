@@ -29,128 +29,36 @@ connectDB()
 
 // declare SChema
 
-const Schema = mongoose.Schema;
-const userSchema = new Schema({
- fName: {type: String},
- lName: {type: String},
- email: {type: String, unique: true},
- phoneNumber: {type: String},
- gender: {type: String},
- type: {type: String},
- dateCreated: {type: Date, default: Date.now}
 
-})
-
-const locationSchema = new Schema({
- lat:{type: Number},
- lng: {type: Number},
- name: {type: String},
- description: {type: String},
- address: {type: String},
- time: {type: String},
- input: {type: Object},
- members: {type: Array},
- locationOwner: {type: String},
- dateCreated: {type: Date, default: Date.now}
-})
-
-const userModel = mongoose.model('user', userSchema)
-const locationModel = mongoose.model('location', locationSchema)
-
+const user_API = require('./backend/controller/user')
+const location_API = require('./backend/controller/location')
 
 app.route('/register')
-    .post(function(req, res){
-        console.log(req.body)
-        userModel.create(req.body, function(err, doc){
-            if(!err){
-                res.json('register success')
-            } else{
-                res.json('error')
-            }
-        })
-    })
+    .post(user_API.register)
 
 app.route('/login')
-    .post(function(req, res){
-        const {email} = req.body
-        userModel.find({email: email}, function(err, doc){
-            if(!err){
-                res.json('registered user')
-            } else{
-                res.json('first time sign in user')
-            }
-        })
-    })
+    .post(user_API.login)
 
 
 
 app.route('/location')
-    .get(function(req, res){
-        locationModel.find({}, function (err, doc){
-            res.json(doc)
-        })
-    })
-    .post(function(req, res){
-        console.log(req.body)
-        locationModel.create(req.body, function(err, doc){
-            if(!err){
-                res.json('location created')
-            } else{
-                res.json('error')
-            }
-        })
-    })
-    .put((req, res)=>{
-        const {locationId, name, address, description, lat, lng, time} = req.body
-        locationModel.updateOne({_id: locationId}, {
-            name: name,
-            address: address,
-            time: time, 
-            description: description,
-            lat: lat,
-            lng: lng,
-        }, (err, doc)=>{
-            res.json(doc)
-        })
-    })
-    .delete(function(req, res){
-        console.log(req.body)
-        locationModel.findOneAndDelete({_id: req.body.locationId}, function(err, doc){
-            console.log('item deleted')
-            res.json(doc)
-        })
-    })
+    .get(location_API.getAll)
+    .post(location_API.createLocation)
+    .put(location_API.editLocation)
+    .delete(location_API.deleteLocation)
 
 // fetching location details
 app.route('/locationDetails')
-    .post(function(req, res){
-        console.log(req.body)
-        locationModel.findOne({_id: req.body.locationId}, function(err, doc){
-            console.log('details')
-            res.json(doc)
-        })
-    })
+    .post(location_API.locationDetails)
 
+
+const userModel = require('./backend/model/user')
 app.route('/fetchUserByEmail')
-    .post((req, res) =>{
-        const {userEmail} = req.body
-        console.log('fetch user by email: ', userEmail)
-        userModel.findOne({email: userEmail}, (err, doc)=>{
-            if(!err)
-                res.json(doc)
-            else
-                console.log(err)
-        })
-    })
+    .post(user_API.fetchUserByEmail)
 
 // both join and unjoin can use this function.
 app.route('/joinLocation')
-    .post((req, res) =>{
-        const {locationId, members}= req.body
-        locationModel.updateOne({_id: locationId}, {members: members}, (err, doc)=>{
-            res.json(doc)
-        })
-    })
+    .post(location_API.joinLocation)
 
 
 
