@@ -55,7 +55,10 @@ class App extends Component {
 			time: time,
 			description: description,
 			lat: lat,
-			lng: lng
+			lng: lng,
+			cost: 0.0,
+			kilos:0.0,
+			attended:0.0
 		})
 		this.props.history.push('/home2')
 		
@@ -166,7 +169,12 @@ class App extends Component {
 			   "description": this.state.description,
 			   "lng": lng,
 			   "lat": lat,
-			   "locationOwner": localStorage.getItem("email")
+			   "locationOwner": localStorage.getItem("email"),
+			   "input": {
+				   attended:0,
+				   cost: 0,
+				   kilos:0
+			   }
             }
             )
         })
@@ -175,6 +183,7 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
+		console.log()
 		try {
 			if (await Auth.currentSession()) {
 				this.userHasAuthenticated(true);

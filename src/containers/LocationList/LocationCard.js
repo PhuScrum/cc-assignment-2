@@ -17,7 +17,6 @@ export default class LocationCard extends Component {
                         <p class="card-text">{description}</p>
                         <p>{time}</p>
                         <p class="card-text">{locationOwner} </p>
-                        <p>Lat {lat} Lng {lng}</p>
                         <Link  to={`/location/${_id}` }>Details</Link>
                         <br/>
                         <br/>
@@ -37,6 +36,7 @@ export default class LocationCard extends Component {
                     <p class="card-text">{description}</p>
                     <p>{time}</p>
                     <p class="card-text">{locationOwner} </p>
+                    <p></p>
                     <Link  to={`/location/${_id}` }>Details</Link>
 
                 </div>

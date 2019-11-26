@@ -72,7 +72,7 @@ export default class InputInformation extends Component {
             }
             )
         })
-            .then(resp => resp.json())
+            .then(resp => resp.json(), window.location.reload())
 
     }
 
@@ -123,7 +123,9 @@ export default class InputInformation extends Component {
                         <Col xs lg="2">
                             {this.props.input.kilos}
                         </Col>
-                        <Col xs lg="2">{this.props.input.attended}</Col>
+                        <Col xs lg="2">
+                            {this.props.input.attended}
+                            </Col>
                         <Col xs lg="2">
                         {this.props.input.cost}
                         </Col>
