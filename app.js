@@ -62,6 +62,9 @@ app.route('/fetchUserByEmail')
 app.route('/joinLocation')
     .post(location_API.joinLocation)
 
+app.route('/input')
+    .post(location_API.addInput)
+
 
 
 app.route('/hello')

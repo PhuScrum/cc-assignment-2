@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import {Col, Row, Button    } from 'react-bootstrap'
+import {Col, Row} from 'react-bootstrap'
+import { Button } from "antd";
+
 // import Map from './detailsMap'
 import Map from './detailsMap';
 import Marker from 'react-google-maps';
@@ -7,7 +9,7 @@ import BasicInfo from './BasicInfo';
 import InputInformation from './InputInformation'
 const locationUrl = 'http://localhost:8080/locationDetails'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
-
+const joinLocationURL = 'http://localhost:8080/joinLocation'
 export default class LocationDetails extends Component {
     constructor(props){
         super(props)
@@ -73,7 +75,7 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                const {name, address, time, description, lat, lng, locationOwner} = data
+                const {name, address, time, description, lat, lng, locationOwner, members} = data
                 console.log(data)
                 this.setState({
                     name: name,
@@ -82,7 +84,8 @@ export default class LocationDetails extends Component {
                     description: description,
                     dataLat: lat,
                     dataLng: lng,
-                    locationOwner: locationOwner
+                    locationOwner: locationOwner,
+                    members: members,
                 })        
                 console.log(locationOwner)
                 this.fetchOwner(locationOwner)
@@ -106,11 +109,52 @@ export default class LocationDetails extends Component {
         this.fetchLocation(this.props.match.params.id)
         
     }
+
+    userCancelJoin(members, userEmail){
+        members.splice(members.indexOf(userEmail), 1)
+        this.setState({
+            members: members
+        })
+        this.sendJoin(members)
+    }
+
+    sendJoin(members){
+        fetch(joinLocationURL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'locationId': this.props.match.params.id,
+                'members': members
+            }
+            )
+        })
+            .then(resp => resp.json())
+    }
+
+    userJoinLocation(members, userEmail){
+       members.push(userEmail)
+       this.setState({
+           members: members
+       })
+       this.sendJoin(members)
+    }
+
+    joinLocation(){
+        const{members} = this.state
+        const userEmail = localStorage.getItem('email')
+        if(members.includes(userEmail)){
+            this.userCancelJoin(members, userEmail)
+        }else{
+            this.userJoinLocation(members, userEmail)
+        }
+    }
     
     render() {
-        const {name, address, time, description, dataLat, dataLng, fName, lName, age, gender, locationOwner} = this.state
-        var latt = localStorage.getItem('lat')
-        var lngg = localStorage.getItem('lng')
+        const {members, fName, lName, age, gender, locationOwner} = this.state
+        const userEmail = localStorage.getItem('email')
         
         return (
             <div>
@@ -127,7 +171,10 @@ export default class LocationDetails extends Component {
                     {gender} <br/><br/>
                     List of members <br/>
 
-                    <Button>Join</Button>
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
+                            {/* {members.length}  */}
+                            {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
                     
                     </Col>
                 </Row>

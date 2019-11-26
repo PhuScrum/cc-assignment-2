@@ -50,7 +50,16 @@ const locationDetails = (req, res) =>{
 
 const joinLocation = (req, res) =>{
     const {locationId, members}= req.body
+    console.log('members joined: ' ,members)
     locationModel.updateOne({_id: locationId}, {members: members}, (err, doc)=>{
+        res.json(doc)
+    })
+}
+
+const addInput = (req, res) =>{
+    console.log(req.body)
+    const {locationId, input} = req.body
+    locationModel.updateOne({_id: locationId}, {input: input}, (err, doc)=>{
         res.json(doc)
     })
 }
@@ -62,5 +71,6 @@ module.exports = {
     editLocation: editLocation,
     deleteLocation: deleteLocation,
     locationDetails: locationDetails,
-    joinLocation: joinLocation
+    joinLocation: joinLocation,
+    addInput: addInput
 }

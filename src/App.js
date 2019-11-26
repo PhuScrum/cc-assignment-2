@@ -5,7 +5,9 @@ import { Link, withRouter } from 'react-router-dom';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import Routes from './Routes';
 import { Auth } from 'aws-amplify';
-
+import 'antd/dist/antd.css';
+import './index.css';
+import {Button} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 
