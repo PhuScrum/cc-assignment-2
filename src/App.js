@@ -22,10 +22,11 @@ class App extends Component {
 			time:'',
 			address:'',
 			description:'',
-			lat: 0.0,
-			lng: 0.0,
+			lat: 10.8231,
+			lng: 106.6297,
 			isAuthenticated: false,
 			isAuthenticating: true,
+			id: '',
 			
 		};
 
@@ -38,14 +39,18 @@ class App extends Component {
 		// this.registerLocation = this.registerLocation.bind(this);
 		//edit location
 		this.handleEdit = this.handleEdit.bind(this);
+		//delete location
+		this.handleDeleteLocation = this.handleDeleteLocation.bind(this);
 		
 	}
 	//edit location
 
 	handleEdit( name, e, description, _id, time, lat, lng){
-		console.log('name', name, 'time', time, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
+		// console.log('name', name, 'time', time, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
+		console.log('handleEdit', lat, lng)
 		// e.preventDefault();
 		this.setState({
+			id: _id,
 			name: name,
 			time: time,
 			description: description,
@@ -53,30 +58,45 @@ class App extends Component {
 			lng: lng
 		})
 		this.props.history.push('/home2')
-		// this.editLocation();
+		
 
 		
 	}
 
-	editLocation(){
-		const {name, address, time, description} = this.state
-		// console.log('lat',lat, 'lng',lng)
+	handleDeleteLocation(_id) {
+		console.log('delete this', _id)
+        // e.preventDefault()
+		if (window.confirm('Are you sure?')) {
+            fetch(urlLocation + '/' + _id, { 
+           method: 'delete'
+            })
+                .then(res => window.location.reload(), console.log('delete phase2'))
+        }
+    }
+
+
+	editLocation(lat, lng){
+		console.log('editLocation function')
+		const {id, name, address, description, time} = this.state
+		console.log(this.state.id, name, address, description, lat, lng, time)
+		console.log('outputting lat',lat, 'lng',lng)
 		fetch(urlLocation, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
  
             },
-            method: 'POST',
+            method: 'put',
             body: JSON.stringify({
 				// add more values
-			   "name": this.state.name,
-			   "address": this.state.address,
-			   "time": this.state.time,
-			   "description": this.state.description,
-			//    "lng": lng,
-			//    "lat": lat,
-			   "locationOwner": localStorage.getItem("email")
+				locationId: id,
+			   name: name,
+			   address: address,
+			   time: time,
+			   description: description,
+			   lng: lng,
+			   lat: lat,
+			   locationOwner: localStorage.getItem("email")
             }
             )
         })
@@ -106,7 +126,9 @@ class App extends Component {
 	}
 
 	onSubmit(lat, lng, e) {
-		console.log('passed values', 'lat', lat, 'lng', lng)
+		if(this.state.id == '') {
+		console.log('register')
+		// console.log('passed values', 'lat', lat, 'lng', lng)
 		e.preventDefault();
 		this.registerLocation(lat, lng);
 		console.log(`The values are ${this.state.name}, ${this.state.time},  
@@ -119,7 +141,12 @@ class App extends Component {
 			lat: '',
 			lng:''
 		})
+	}else{
+		console.log('poop')
+		this.editLocation(lat, lng)
 	}
+	}
+
 	registerLocation(lat, lng){
 		const {name, address, time, description} = this.state
 		console.log('lat',lat, 'lng',lng)
@@ -186,6 +213,8 @@ class App extends Component {
 			onSubmit: this.onSubmit,
 			//edit location
 			handleEdit: this.handleEdit,
+			//delete location
+			handleDeleteLocation: this.handleDeleteLocation,
 		};
 		return (
 			<div className="App container">

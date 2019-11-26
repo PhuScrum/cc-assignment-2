@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import {Button, ButtonToolbar} from 'react-bootstrap'
 
 
 export default class LocationCard extends Component {
@@ -20,7 +21,10 @@ export default class LocationCard extends Component {
                         <Link  to={`/location/${_id}` }>Details</Link>
                         <br/>
                         <br/>
-                        <p><button onClick={this.props.handleEdit.bind(this, name, address, description, _id, time, lat, lng)}>Edit</button></p>
+                        <ButtonToolbar>
+                        <p><Button variant="primary" onClick={this.props.handleEdit.bind(this, name, address, description, _id, time, lat, lng)}>Edit</Button>
+                        <Button variant="danger" onClick={this.props.handleDeleteLocation.bind(this, _id)}> delete </Button></p>
+                        </ButtonToolbar>
                     </div>
                 </div>
         )

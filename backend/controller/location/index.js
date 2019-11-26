@@ -18,6 +18,7 @@ const createLocation = (req, res) =>{
 }
 
 const editLocation = (req, res)=>{
+    console.log('edit location: ', req.body)
     const {locationId, name, address, description, lat, lng, time} = req.body
     locationModel.updateOne({_id: locationId}, {
         name: name,
@@ -32,8 +33,8 @@ const editLocation = (req, res)=>{
 }
 
 const deleteLocation = (req, res) => {
-    console.log(req.body)
-    locationModel.findOneAndDelete({_id: req.body.locationId}, function(err, doc){
+    console.log('delete location', req.body)
+    locationModel.findOneAndDelete({_id: req.params.locationId}, function(err, doc){
         console.log('item deleted')
         res.json(doc)
     })

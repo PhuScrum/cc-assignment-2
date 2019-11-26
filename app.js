@@ -46,6 +46,8 @@ app.route('/location')
     .post(location_API.createLocation)
     .put(location_API.editLocation)
     .delete(location_API.deleteLocation)
+app.route('/location/:locationId')
+    .delete(location_API.deleteLocation)
 
 // fetching location details
 app.route('/locationDetails')
