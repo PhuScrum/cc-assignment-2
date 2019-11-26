@@ -2,12 +2,47 @@ import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import '../Home.css';
 import { Col, Row } from 'react-bootstrap';
-
 import { Modal, Button } from 'antd';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 const locationUrl = 'http://localhost:8080/locationDetails'
 
 const urlLocation = 'http://localhost:8080/Input'
 
+const StyledTableCell = withStyles(theme => ({
+    head: {
+        fontSize: 20,
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  
+  const StyledTableRow = withStyles(theme => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.background.default,
+      },
+    },
+  }))(TableRow);
+
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing(3),
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+  }));
 export default class InputInformation extends Component {
     constructor(props) {
         super(props);
@@ -25,6 +60,9 @@ export default class InputInformation extends Component {
 
         };
     }
+    
+
+    
 
     showModal = () => {
         this.setState({
@@ -117,40 +155,58 @@ export default class InputInformation extends Component {
         })
     }
 
-    //   onSubmit(e) {
-    // 	e.preventDefault();
-    // 	const obj = {
-    // 	  person_name: this.state.person_name,
-    // 	  business_name: this.state.business_name,
-    // 	  business_gst_number: this.state.business_gst_number
-    // 	};
-    // 	this.setState({
-    // 	  person_name: '',
-    // 	  business_name: '',
-    // 	  business_gst_number: ''
-    // 	})
-    //   }
-
-
-
     render() {
+        
         return (
             <div>
                 <h5>Input data after cleanup completion</h5>
                 <ListGroup>{!this.state.isLoading}</ListGroup>
-                <container>
+                <Paper>
+      <Table aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>CleanUp Data</StyledTableCell>
+            <StyledTableCell align="right">Gathered Amount&nbsp;(Kg)</StyledTableCell>
+            <StyledTableCell align="right">Attended Number</StyledTableCell>
+            <StyledTableCell align="right">Cost&nbsp;(VND)</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+       
+            <StyledTableRow>
+              <StyledTableCell > Number
+              </StyledTableCell>
+              <StyledTableCell align="right">{this.props.input.kilos}</StyledTableCell>
+              <StyledTableCell align="right">{this.props.input.attended}</StyledTableCell>
+              <StyledTableCell align="right">{this.props.input.cost}</StyledTableCell>
+            </StyledTableRow>
+        </TableBody>
+      </Table>
+    </Paper>
+                {/* <container>
                     <Row className="justify-content-md-center">
-                        <Col xs lg="2">
+                        <Col xs lg="3">
                             {this.props.input.kilos}
                         </Col>
-                        <Col xs lg="2">
+                        <Col xs lg="3">
                             {this.props.input.attended}
                             </Col>
-                        <Col xs lg="2">
+                        <Col xs lg="3">
                         {this.props.input.cost}
                         </Col>
                     </Row>
-                    </container>
+                    <Row className="justify-content-md-center">
+                        <Col xs lg="3">
+                            {this.props.input.kilos}
+                        </Col>
+                        <Col xs lg="3">
+                            {this.props.input.attended}
+                            </Col>
+                        <Col xs lg="3">
+                        {this.props.input.cost}
+                        </Col>
+                    </Row>
+                    </container> */}
 <br/>
 
                 <button type="submit" className="btn btn-primary pull-right" 
