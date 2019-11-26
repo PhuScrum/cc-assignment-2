@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Col, Row} from 'react-bootstrap'
-import { Button } from "antd";
+import { Modal, Button } from 'antd';
+
+import ListOfMembers from './ListOfMembers'
 
 // import Map from './detailsMap'
 import Map from './detailsMap';
@@ -44,16 +46,19 @@ export default class LocationDetails extends Component {
             .then(resp => resp.json())
             .then(data => {
                 console.log(data)
-                const {fName, lName, age, gender} = data
-                console.log(data.name)
-                this.setState({
-                    fName: fName,
-                    lName:lName ,
-                    age: age,
-                    gender: gender,
-                    // phoneNumber: phoneNumber,
-                   
-                })        
+                if(data){
+                    const {fName, lName, age, gender} = data
+                    console.log(data.name)
+                    this.setState({
+                        fName: fName,
+                        lName:lName ,
+                        age: age,
+                        gender: gender,
+                        // phoneNumber: phoneNumber,
+                       
+                    })    
+                }
+                    
               
 
             })
@@ -136,6 +141,7 @@ export default class LocationDetails extends Component {
             )
         })
             .then(resp => resp.json())
+            .then(resp => this.fetchLocation(this.props.match.params.id))
     }
 
     userJoinLocation(members, userEmail){
@@ -149,8 +155,10 @@ export default class LocationDetails extends Component {
     joinLocation(){
         const{members} = this.state
         const userEmail = localStorage.getItem('email')
+        const locationId = this.props.match.params.id
         if(members.includes(userEmail)){
             this.userCancelJoin(members, userEmail)
+
         }else{
             this.userJoinLocation(members, userEmail)
         }
@@ -173,7 +181,8 @@ export default class LocationDetails extends Component {
                     {locationOwner} <br/>
                     {age} years old <br/>
                     {gender} <br/><br/>
-                    List of members <br/>
+                   
+                    <ListOfMembers data={this.state}/>
 
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
                     <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
