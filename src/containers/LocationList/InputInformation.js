@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { PageHeader, ListGroup } from 'react-bootstrap';
 import '../Home.css';
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap';
+
+import { Modal, Button } from 'antd';
 const locationUrl = 'http://localhost:8080/locationDetails'
 
 const urlLocation = 'http://localhost:8080/Input'
@@ -24,7 +26,25 @@ export default class InputInformation extends Component {
         };
     }
 
-
+    showModal = () => {
+        this.setState({
+          visible: true,
+        });
+      };
+    
+      handleOk = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
+    
+      handleCancel = e => {
+        console.log(e);
+        this.setState({
+          visible: false,
+        });
+      };
 
     componentDidMount() {
         console.log(this.props.locationId)
@@ -131,7 +151,17 @@ export default class InputInformation extends Component {
                         </Col>
                     </Row>
                     </container>
-                <div style={{ marginTop: 10 }}>
+<br/>
+
+                <button type="submit" className="btn btn-primary pull-right" 
+                onClick={this.showModal }>Input / Edit</button>
+                <Modal
+ title={<h3>Fill in information after Site CleanUp</h3>}
+                    visible={this.state.visible}
+                    onOk={this.onSubmit.bind(this)}
+                    onCancel={this.handleCancel}
+                    >
+                        <div style={{ marginTop: 10 }}>
                     <div className="form-group">
                         <label>Amount of collected waste(kilos) : </label>
                         <input
@@ -157,10 +187,13 @@ export default class InputInformation extends Component {
                             onChange={this.onChangeCost}
                         />
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Input Info</button>
+                    {/* <button type="submit" className="btn btn-primary" onClick={this.onSubmit.bind(this)}>Input / Edit</button> */}
 
 
                 </div>
+                    </Modal>
+
+                
             </div>
         );
     }

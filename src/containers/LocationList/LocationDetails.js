@@ -191,8 +191,12 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
+                
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}
                 />
+                <br/>
+                <br/>
+                <br/>
             
 
 
