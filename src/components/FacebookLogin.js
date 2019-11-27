@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import { Link } from 'react-router-dom';
 import { HelpBlock, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+import Delay from 'react-delay';
+
 const urlRegister = 'http://localhost:8080/register'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 export default class Facebook extends Component {
@@ -64,8 +66,10 @@ export default class Facebook extends Component {
       email: response.email,
       imageUrl: response.picture.data.url
     });
-
-    localStorage.setItem("email", response.email);
+    
+    localStorage.setItem("email", this.state.email);
+    this.fetchMember()
+    
   };
 
   //test 
@@ -120,7 +124,8 @@ export default class Facebook extends Component {
                 phoneNumber: data.phoneNumber,
                 age: data.age,
                 gender: data.gender
-            })        
+            })
+            
           
 
         })
@@ -132,7 +137,8 @@ export default class Facebook extends Component {
   render() {
     let fbRender;
     if (this.state.isLoggedIn) {
-     if(this.state.phoneNumber === ""){fbRender = (
+     if(this.state.phoneNumber === ""){
+       fbRender = (
         
       <div>
 
@@ -204,7 +210,8 @@ export default class Facebook extends Component {
           autoLoad={true}
           fields="name,email,picture"
           callback={this.responseFacebook}
-          onClick={() => { this.fetchMember() }}
+          
+          
         />
 
       );
