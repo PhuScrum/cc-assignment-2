@@ -18,7 +18,7 @@ export default class LocationDetails extends Component {
         this.state ={
             name:'',
             address: '',
-            members: [],
+            members: [], 
             time: '',
             locationOwner: '',
             dataLat:0,
@@ -123,7 +123,7 @@ export default class LocationDetails extends Component {
         members.splice(members.indexOf(userEmail), 1)
         this.setState({
             members: members
-        })
+        }) 
         this.sendJoin(members)
     }
 

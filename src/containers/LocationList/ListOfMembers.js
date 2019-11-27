@@ -31,7 +31,7 @@ export default class ListOfMembers extends Component {
             <div>
                 <a  onClick={this.showModal}>
                     List Of Members
-                </a>
+                </a> 
                     <Modal
                     title={this.props.data.members.length + ' ' + 'members'}
                     visible={this.state.visible}
