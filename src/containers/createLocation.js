@@ -3,7 +3,8 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "reac
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
-
+import { Modal, Button } from 'antd';
+import CreateLocationInfo from './createLocationInfo'
 
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
 Geocode.enableDebug();
@@ -15,7 +16,7 @@ Geocode.enableDebug();
 export default class createLocation extends Component {
 	constructor(props) {
 		super(props);
-		
+
 		// cant transfer to app cause dont know what this is
 		this.state = {
 			mapPosition: {
@@ -28,14 +29,14 @@ export default class createLocation extends Component {
 			}
 		}
 	}
-	
 
-	
+
+
 
 	///map 
 	componentDidMount() {
 		console.log(this.props)
-		console.log(this.props.isAuthenticated)	
+		console.log(this.props.isAuthenticated)
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
 				const address = response.results[0].formatted_address;
@@ -56,19 +57,19 @@ export default class createLocation extends Component {
 		 * @param nextState
 		 * @return {boolean}
 		 */
-	shouldComponentUpdate(nextProps, nextState) {
-		if (
-			this.state.markerPosition.lat !== this.props.center.lat ||
-			this.state.address !== nextState.address ||
-			this.props.appdata.name !== nextState.name ||
-			this.props.appdata.time !== nextState.time ||
-			this.props.appdata.description !== nextState.description
-		) {
-			return true
-		} else if (this.props.center.lat === nextProps.center.lat) {
-			return false
-		}
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	if (
+	// 		this.state.markerPosition.lat !== this.props.center.lat ||
+	// 		this.state.address !== nextState.address ||
+	// 		this.props.appdata.name !== nextState.name ||
+	// 		this.props.appdata.time !== nextState.time ||
+	// 		this.props.appdata.description !== nextState.description
+	// 	) {
+	// 		return true
+	// 	} else if (this.props.center.lat === nextProps.center.lat) {
+	// 		return false
+	// 	}
+	// }
 	//phase 3
 	/**
 		 * Get the area and set the area input value to the one selected
@@ -134,7 +135,7 @@ export default class createLocation extends Component {
 					mapPosition: {
 						lat: newLat,
 						lng: newLng
-					},		
+					},
 				})
 				// localStorage.setItem("newLat", this.state.mapPosition.lat);
 				// localStorage.setItem("newLng", this.state.mapPosition.lng);
@@ -168,21 +169,32 @@ export default class createLocation extends Component {
 			},
 		})
 	};
-	togglePopup() {
+	/// modal
+	showModal = () => {
 		this.setState({
-			showPopup: !this.state.showPopup
+			visible: true,
+			
 		});
 	};
 
-	handleEditLocation(name, address, time, ){
-		console.log('edit location')
+	handleOk = e => {
+		console.log(e);
+		this.setState({
+			visible: false,
+		});
+	};
+
+	handleCancel = e => {
+		console.log(e);
+		this.setState({
+			visible: false,
+		});
+	};
 
 
-	}
 
-	
 	render() {
-		
+
 		const AsyncMap = withScriptjs(
 			withGoogleMap(
 				props => (
@@ -223,14 +235,47 @@ export default class createLocation extends Component {
 				)
 			)
 		);
-		const {markerPosition} = this.state
+		const { markerPosition } = this.state
 		let map;
 		if (this.props.center.lat !== undefined) {
 			map = <div>
-				
-				
-				
-					<div className="form-group">
+
+				<CreateLocationInfo {...this.props} />
+				<br/>
+				<div onClick={this.showModal} className="form-group">
+					<label htmlFor="">Address</label>
+					<input type="text" name="address" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.address} />
+				</div>
+
+
+				<Modal
+					title={<h3>Select a CleanUp Location</h3>}
+					visible={this.state.visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					width= {1000}
+				>
+
+					<AsyncMap
+						googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
+						loadingElement={
+							<div style={{ height: `110%` }} />
+						}
+						containerElement={
+							<div style={{ height: this.props.height }} />
+						}
+						mapElement={
+							<div style={{ height: `110%` }} />
+						}
+					/>
+					<br/>
+					<br/>
+					<br/>
+					<br/>
+					
+				</Modal>
+
+				{/* <div className="form-group">
 						<label>Name: {this.state.markerPosition.lat}</label>
 						<input type="text"
 							className="form-control"
@@ -256,35 +301,23 @@ export default class createLocation extends Component {
 							<label htmlFor="">Id</label>
 							<input type="text" name="address" className="form-control" readOnly="readOnly" value={this.props.appdata.id} />
 						</div>
-						<br/>
-						<div className="form-group">
-							<label htmlFor="">Address</label>
-							<input type="text" name="address" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.address} />
-						</div>
-					</div>
-					
-					<AsyncMap
-						googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
-						loadingElement={
-							<div style={{ height: `100%` }} />
-						}
-						containerElement={
-							<div style={{ height: this.props.height }} />
-						}
-						mapElement={
-							<div style={{ height: `100%` }} />
-						}
-					/>
-					<br />
-					<br />
-					<br />
-					
-					<div className="form-group">
+						<br/> */}
 
-						<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat , markerPosition.lng)}>Register Location</button>
-						
-					</div>
+				{/* </div> */}
 
+
+				<br />
+				<br />
+				<br />
+
+				<div className="form-group">
+
+					<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat, markerPosition.lng)}>Register Location</button>
+
+				</div>
+				<br />
+				<br />
+				<br />
 
 
 			</div>
@@ -297,9 +330,8 @@ export default class createLocation extends Component {
 
 
 
-	
 	// render(){
-	
+
 	// 		return (
 	// 			<div>
 	// 			<div style={{ marginTop: 10 }}>
@@ -337,11 +369,11 @@ export default class createLocation extends Component {
 	// 			</div>
 	// 			</div>
 	// 		)
-		
+
 	// }
 
 
 
-  
+
 }
 

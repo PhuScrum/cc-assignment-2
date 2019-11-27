@@ -38,7 +38,6 @@ export default class Home2 extends Component {
 	renderTest() {
 		return (
 			<div className="test">
-				{this.props.appdata.name}
 				<PageHeader>Create a CleanUp Site! </PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
@@ -48,7 +47,7 @@ export default class Home2 extends Component {
 					google={this.props.google}
 					center={{lat: this.props.appdata.lat, lng: this.props.appdata.lng}}
 					height='300px'
-					zoom={15}
+					zoom={this.props.appdata.zoom}
 				/>
 				
 			</div>

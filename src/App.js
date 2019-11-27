@@ -27,6 +27,7 @@ class App extends Component {
 			isAuthenticated: false,
 			isAuthenticating: true,
 			id: '',
+			zoom:15,
 			
 		};
 
