@@ -5,6 +5,7 @@ import './Home.css';
 import MarkedMap from './markedMap.js';
 import LocationList from './LocationList'
 import { Marker } from 'google-maps-react';
+import { FaListUl } from 'react-icons/fa';
 const urlLocation = 'http://localhost:8080/location'
 
 export default class Home extends Component {
@@ -58,19 +59,22 @@ export default class Home extends Component {
 			<div>
 				<div className="test">
 					<PageHeader>Welcome to Viet Nam Sach Va Xanh.</PageHeader>
-					<p>Here are the current registered locations to select from.</p>
+					
 					
 					<Row>
+					
 						<Col sm={8}>
+						<h3>Here are the current registered locations to select from.</h3>
 							<MarkedMap
 							data={this.state}
 							google={this.props.google}
 							center={{ lat: 10.8231, lng: 106.6297 }}
-							height='300px'
+							height='400px'
 							zoom={8}>
 						</MarkedMap>
 						</Col>
 						<Col sm={4}>
+						<h3> Location List</h3>
 							<LocationList {...this.props} data={this.state} />
 						</Col>
 					</Row>
