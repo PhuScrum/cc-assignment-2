@@ -41,9 +41,9 @@ export default class Home2 extends Component {
 				<PageHeader>Create a CleanUp Site! </PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
-				<CreateLocation
+				<CreateLocation 
 				// spread attributes
-					{...this.props}
+					{...this.props} 
 					google={this.props.google}
 					center={{lat: this.props.appdata.lat, lng: this.props.appdata.lng}}
 					height='300px'

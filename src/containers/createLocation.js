@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
-import Autocomplete from 'react-google-autocomplete';
+import Autocomplete from 'react-google-autocomplete'; 
 import Popup from "reactjs-popup";
 import { Modal, Button } from 'antd';
 import CreateLocationInfo from './createLocationInfo'
@@ -256,7 +256,7 @@ export default class createLocation extends Component {
 					width= {1000}
 				>
 
-					<AsyncMap
+					<AsyncMap 
 						googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
 						loadingElement={
 							<div style={{ height: `110%` }} />
@@ -274,36 +274,6 @@ export default class createLocation extends Component {
 					<br/>
 					
 				</Modal>
-
-				{/* <div className="form-group">
-						<label>Name: {this.state.markerPosition.lat}</label>
-						<input type="text"
-							className="form-control"
-							value={this.props.appdata.name}
-							onChange={this.props.onChangeName.bind(this)}
-						/></div>
-					<label>Time: </label>
-					<input type="text"
-						className="form-control"
-						value={this.props.appdata.time}
-						onChange={this.props.onChangeTime.bind(this)}
-					/>
-					<br/>
-					<label>Description: </label>
-					<input type="text"
-						className="form-control"
-						value={this.props.appdata.description}
-						onChange={this.props.onChangeDescription.bind(this)}
-					/>
-					<div>
-						<br />
-						<div className="form-group">
-							<label htmlFor="">Id</label>
-							<input type="text" name="address" className="form-control" readOnly="readOnly" value={this.props.appdata.id} />
-						</div>
-						<br/> */}
-
-				{/* </div> */}
 
 
 				<br />
@@ -326,54 +296,6 @@ export default class createLocation extends Component {
 		}
 		return (map)
 	}
-
-
-
-
-	// render(){
-
-	// 		return (
-	// 			<div>
-	// 			<div style={{ marginTop: 10 }}>
-	// 				<h3>Add New Business</h3>
-	// 				<form onSubmit={this.onSubmit}>
-	// 					<div className="form-group">
-	// 						<label>Person Name:  </label>
-	// 						<input 
-	// 						  type="text" 
-	// 						  className="form-control" 
-	// 						  value={this.state.person_name}
-	// 						  onChange={this.onChangePersonName}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<label>Business Name: </label>
-	// 						<input type="text" 
-	// 						  className="form-control"
-	// 						  value={this.state.business_name}
-	// 						  onChange={this.onChangeBusinessName}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<label>GST Number: </label>
-	// 						<input type="text" 
-	// 						  className="form-control"
-	// 						  value={this.state.business_gst_number}
-	// 						  onChange={this.onChangeGstNumber}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<input type="submit" value="Register Business" className="btn btn-primary"/>
-	// 					</div>
-	// 				</form>
-	// 			</div>
-	// 			</div>
-	// 		)
-
-	// }
-
-
-
 
 }
 
