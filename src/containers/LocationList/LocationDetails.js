@@ -45,10 +45,10 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if(data){
                     const {fName, lName, age, gender} = data
-                    console.log(data.name)
+                    // console.log(data.name)
                     this.setState({
                         fName: fName,
                         lName:lName ,
@@ -66,7 +66,7 @@ export default class LocationDetails extends Component {
     }
 
     fetchLocation(id){
-        console.log(id)
+        // console.log(id)
         fetch(locationUrl, {
             headers: {
                 'Accept': 'application/json',
@@ -82,7 +82,7 @@ export default class LocationDetails extends Component {
             .then(resp => resp.json())
             .then(data => {
                 const {name, address, time, description, lat, lng, locationOwner, members, input} = data
-                console.log(data)
+                // console.log(data)
                 this.setState({
                     name: name,
                     address: address,
@@ -94,9 +94,9 @@ export default class LocationDetails extends Component {
                     members: members,
                     input: input
                 })        
-                console.log(locationOwner)
-                console.log(name)
-                console.log(input)
+                // console.log(locationOwner)
+                // console.log(name)
+                // console.log(input)
                 this.fetchOwner(locationOwner)
                 localStorage.setItem("lat", this.state.dataLat);
                 localStorage.setItem("lng", this.state.dataLng);
@@ -116,6 +116,7 @@ export default class LocationDetails extends Component {
 
     componentDidMount(){
         this.fetchLocation(this.props.match.params.id)
+        
         
     }
 
@@ -167,7 +168,7 @@ export default class LocationDetails extends Component {
     render() {
         const {members, fName, lName, age, gender, locationOwner} = this.state
         const userEmail = localStorage.getItem('email')
-        console.log(this.state.input)
+        // console.log(this.state.input)
         return (
             <div>
                 <Row>

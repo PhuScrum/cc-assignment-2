@@ -50,8 +50,8 @@ export default class createLocation extends Component {
 	onSubmit(e) {
 		e.preventDefault();
 		this.registerLocation();
-		console.log(`The values are ${this.state.name}, ${this.state.time},  
-		${this.state.description}, ${this.state.address}, `)
+		// console.log(`The values are ${this.state.name}, ${this.state.time},  
+		// ${this.state.description}, ${this.state.address}, `)
 		this.setState({
 			name: '',
 			time: '',
@@ -62,7 +62,7 @@ export default class createLocation extends Component {
 	
 	///map 
 	componentDidMount() {
-		console.log(this.props.center.lat, this.props.center.lng)
+		// console.log(this.props.center.lat, this.props.center.lng)
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
 				const address = response.results[0].formatted_address;
@@ -143,7 +143,7 @@ export default class createLocation extends Component {
 	 * @param place
 	 */
 	onPlaceSelected = (place) => {
-		console.log('plc', place);
+		// console.log('plc', place);
 		const address = place.formatted_address,
 			addressArray = place.address_components,
 			latValue = place.geometry.location.lat(),

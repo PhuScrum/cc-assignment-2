@@ -71,29 +71,29 @@ export default class InputInformation extends Component {
       };
     
       handleOk = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
         });
       };
     
       handleCancel = e => {
-        console.log(e);
+        // console.log(e);
         this.setState({
           visible: false,
         });
       };
 
     componentDidMount() {
-        console.log(this.props.locationId)
-        console.log(this.props)
+        // console.log(this.props.locationId)
+        // console.log(this.props)
     }
 
     onSubmit() {
         const { kilos, attended, cost } = this.state
         var input = { kilos, attended, cost }
         
-        console.log("datatype", typeof(kiloss))
+        // console.log("datatype", typeof(kiloss))
         this.registerInput();
         this.setState({
             kilos: 0.0,
@@ -104,7 +104,7 @@ export default class InputInformation extends Component {
     }
 
     registerInput() {
-        console.log('register input')
+        // console.log('register input')
         const { kilos, attended, cost } = this.state
         var kiloss = parseFloat(kilos)
         var attendedd = parseFloat(attended)

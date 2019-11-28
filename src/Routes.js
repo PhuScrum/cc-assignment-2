@@ -13,6 +13,8 @@ import createLocation from './containers/createLocation';
 import createVolunteer from './containers/createVolunteer';
 import LocationDetails from './containers/LocationList/LocationDetails';
 import LocationCard from './containers/LocationList/LocationCard';
+//
+import DownloadRedirect from './containers/LocationList/DownloadRedirect'
 //testing
 import CreateLocationInfo from './containers/createLocationInfo'
 
@@ -27,6 +29,9 @@ export default ({ childProps }) => (
 		<AppliedRoute path="/createVolunteer" exact component={createVolunteer} props={childProps} />
 		<AppliedRoute path='/location/:id' exact component={LocationDetails} props={childProps} />
 		<AppliedRoute path="/createLocatonInfo" exact component={CreateLocationInfo} props={childProps} />
+		//
+		
+		<AppliedRoute path="/DownloadRedirect" exact component={DownloadRedirect} props={childProps} />
 		{/* Finally, catch all unmatched routes */}
 		<Route component={NotFound} />
 	</Switch>
