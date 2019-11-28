@@ -12,9 +12,8 @@ import {
 import Geocode from "react-geocode";
 
 const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
-
   return (
-    <GoogleMap defaultZoom={10} defaultCenter={{lat: 10.7291, lng: 106.7189 }}>
+    <GoogleMap defaultZoom={10} defaultCenter={{lat: e.state.mapPosition.lat, lng: e.state.mapPosition.lng }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -31,17 +30,7 @@ const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
                  <p><Link to ={`/location/${marker._id}`}>Details</Link></p>
                 </div>
               </InfoWindow>}
-              <Autocomplete
-							style={{
-								width: '100%',
-								height: '40px',
-								paddingLeft: '16px',
-								marginTop: '2px',
-								marginBottom: '500px'
-							}}
-							onPlaceSelected={e.onPlaceSelected}
-							types={['(regions)']}
-						/>
+             
              
             
           </Marker>
@@ -62,59 +51,54 @@ export default class markedMap extends Component {
       //test
       selectedMarker: false,
       mapPosition: {
-				lat: 0,
-				lng: 0
-			},
-			markerPosition: {
-				lat: 0,
-				lng: 0
-			}
+        lat: 10.8231,
+        lng: 106.6297
+      },
+      
     }
   }
   
-  onPlaceSelected = (place) => {
-    console.log('plc', place.geometry.location.lat(),
-    place.geometry.location.lng());
-		const address = place.formatted_address,
-			addressArray = place.address_components,
-			latValue = place.geometry.location.lat(),
-			lngValue = place.geometry.location.lng();
-		// Set these values in the state.
-		this.setState({
-      address: (address) ? address : '',
-      lat: 10,
-      lng: 106,
-			markerPosition: {
-				lat: latValue,
-				lng: lngValue
-			},
-			mapPosition: {
-				lat: latValue,
-				lng: lngValue
-      },
-    }
-    )
-	};
+  // onPlaceSelected = (place) => {
+  //   // console.log('plc', place.geometry.location.lat(),
+  //   // place.geometry.location.lng());
+	// 	const address = place.formatted_address,
+	// 		addressArray = place.address_components,
+	// 		latValue = place.geometry.location.lat(),
+	// 		lngValue = place.geometry.location.lng();
+	// 	// Set these values in the state.
+	// 	this.setState({
+  //     address: (address) ? address : '',
+	// 		mapPosition: {
+	// 			lat: latValue,
+	// 			lng: lngValue
+  //     },
+  //   }
+    
+  //    )
+  //   // localStorage.setItem("homeLat", this.state.mapPosition.lat)
+  //   // localStorage.setItem("homeLng", this.state.mapPosition.lng)
+  //   console.log('lat',this.state.mapPosition.lat, 'lng',this.state.mapPosition.lng)
+  //   // window.location.reload()
+	// };
   
-
 
   componentDidMount() {
     fetch("http://localhost:8080/location")
       .then(r => r.json())
       .then(data => {
-        this.setState({ location: data })
+        this.setState({ location: data,
+          })
       })
   }
   handleClick = (marker, event) => {
     // console.log({ marker })
     this.setState({ selectedMarker: marker })
   }
+
   render() {
     
     return (
       <MarkedMap 
-        mapdata={this.state}
-
         selectedMarker={this.state.selectedMarker}
         markers={this.state.location}
         onClick={this.handleClick}

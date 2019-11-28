@@ -5,7 +5,7 @@ import './Home.css';
 import Popup from "reactjs-popup";
 import CreateLocation from './createLocation.js';
 
-export default class Home2 extends Component {
+export default class CreateLocationPage extends Component {
 	constructor(props) {
 		super(props);
 

@@ -61,7 +61,7 @@ class App extends Component {
 			kilos:0.0,
 			attended:0.0
 		})
-		this.props.history.push('/home2')
+		this.props.history.push('/CreateLocationForm')
 		
 
 		
@@ -240,14 +240,12 @@ class App extends Component {
 							{this.state.isAuthenticated ? (
 								<Fragment>
 								{/* <NavItem ><Link to="/createVolunteer">Add Volunteers</Link></NavItem> */}
-								<NavItem ><Link to="/home2">Create Location</Link></NavItem>
+								<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
 								<NavItem onClick={this.handleLogout}>Logout</NavItem>
 								</Fragment>
 							) : (
 								<Fragment>
-									{/* <LinkContainer to="/home2">
-										<NavItem>create location</NavItem>
-									</LinkContainer> */}
+									
 									<LinkContainer to="/signup">
 										<NavItem>Signup</NavItem>
 									</LinkContainer>

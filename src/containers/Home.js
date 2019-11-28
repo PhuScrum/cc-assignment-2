@@ -33,17 +33,14 @@ export default class Home extends Component {
 	
 
 
-	async componentDidMount(mapdata) {
+	async componentDidMount() {
 		console.log(this.props.isAuthenticated)
 		this.fetchLocation()
 		if (!this.props.isAuthenticated) {
 			return;
 		}
-		this.setState({ 
-			isLoading: false,
-			
-
-		 });
+		this.setState({ isLoading: false });
+		
 	}
 
 
@@ -58,7 +55,7 @@ export default class Home extends Component {
 		);
 	}
 
-	renderTest(mapdata) {
+	renderTest() {
 		return (
 			<div>
 				<div className="test">
@@ -72,8 +69,7 @@ export default class Home extends Component {
 							<MarkedMap
 							data={this.state}
 							google={this.props.google}
-							center={{ lat: 10 , lng: 106 }}
-							//lat: 10.8231, lng: 106.6297
+							center={{ lat: 10.8231, lng: 106.6297 }}
 							height='400px'
 							zoom={8}>
 						</MarkedMap>

@@ -8,7 +8,7 @@ import Login from './containers/Login';
 import Signup from './containers/Signup';
 import LoginWFacebook from './containers/LoginWFacebook';
 
-import Home2 from './containers/Home2';
+import CreateLocationPage from './containers/CreateLocationPage';
 import createLocation from './containers/createLocation';
 import createVolunteer from './containers/createVolunteer';
 import LocationDetails from './containers/LocationList/LocationDetails';
@@ -23,7 +23,7 @@ export default ({ childProps }) => (
 		<AppliedRoute path="/login" exact component={Login} props={childProps} />
 		<AppliedRoute path="/signup" exact component={Signup} props={childProps} />
 		<AppliedRoute path="/loginWFacebook" exact component={LoginWFacebook} props={childProps} />
-		<AppliedRoute path="/Home2" exact component={Home2} props={childProps} />
+		<AppliedRoute path="/CreateLocationPage" exact component={CreateLocationPage} props={childProps} />
 		<AppliedRoute path="/createVolunteer" exact component={createVolunteer} props={childProps} />
 		<AppliedRoute path='/location/:id' exact component={LocationDetails} props={childProps} />
 		<AppliedRoute path="/createLocatonInfo" exact component={CreateLocationInfo} props={childProps} />
