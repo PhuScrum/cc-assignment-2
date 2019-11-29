@@ -13,10 +13,11 @@ import createLocation from './containers/createLocation';
 import createVolunteer from './containers/createVolunteer';
 import LocationDetails from './containers/LocationList/LocationDetails';
 import LocationCard from './containers/LocationList/LocationCard';
-//
 import DownloadRedirect from './containers/LocationList/DownloadRedirect'
-//testing
 import CreateLocationInfo from './containers/createLocationInfo'
+// testing emailjs
+import Emailjs from './containers/Emailjs'
+import EmailjsRedirect from './containers/EmailjsRedirect'
 
 export default ({ childProps }) => (
 	<Switch>
@@ -29,7 +30,10 @@ export default ({ childProps }) => (
 		<AppliedRoute path="/createVolunteer" exact component={createVolunteer} props={childProps} />
 		<AppliedRoute path='/location/:id' exact component={LocationDetails} props={childProps} />
 		<AppliedRoute path="/createLocatonInfo" exact component={CreateLocationInfo} props={childProps} />
-		//
+		{/* test */}
+		<AppliedRoute path="/Emailjs" exact component={Emailjs} props={childProps} />
+		<AppliedRoute path="/EmailjsRedirect" exact component={EmailjsRedirect} props={childProps} />
+		
 		
 		<AppliedRoute path="/DownloadRedirect" exact component={DownloadRedirect} props={childProps} />
 		{/* Finally, catch all unmatched routes */}

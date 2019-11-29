@@ -7,7 +7,7 @@ import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 import 'antd/dist/antd.css';
 import './index.css';
-import {Button} from 'antd'
+import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 
@@ -260,9 +260,42 @@ class App extends Component {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-				<Routes childProps={childProps} 
 
+				<Routes childProps={childProps} 
 				/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+			
+				<Navbar fluid collapseOnSelect fixed="bottom">
+					<Navbar.Header>
+						<Navbar.Brand>
+						</Navbar.Brand>
+						<Navbar.Toggle />
+					</Navbar.Header>
+					<Navbar.Collapse>
+						<Nav pullRight>
+							{this.state.isAuthenticated ? (
+								<Fragment>
+								<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+								</Fragment>
+							) : (
+								<Fragment>
+									
+									
+								</Fragment>
+							)}
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
 			</div>
 		);
 	}

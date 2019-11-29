@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
-import Autocomplete from 'react-google-autocomplete';
-import Popup from "reactjs-popup";
+// import Autocomplete from 'react-google-autocomplete';
+// import Popup from "reactjs-popup";
 
 
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
@@ -10,7 +10,7 @@ Geocode.enableDebug();
 
 
 
-const urlLocation = 'http://localhost:8080/location'
+// const urlLocation = 'http://localhost:8080/location'
 
 export default class createLocation extends Component {
 	constructor(props) {

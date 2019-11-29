@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { PageHeader, ListGroup, Row, Col } from 'react-bootstrap';
-import { API } from 'aws-amplify';
+// import { API } from 'aws-amplify';
 import './Home.css';
 import MarkedMap from './markedMap.js';
 import LocationList from './LocationList'
-import { Marker } from 'google-maps-react';
-import { FaListUl } from 'react-icons/fa';
+// import { Marker } from 'google-maps-react';
+// import { FaListUl } from 'react-icons/fa';
 const urlLocation = 'http://localhost:8080/location'
 
 export default class Home extends Component {

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
 import Autocomplete from 'react-google-autocomplete'; 
-import Popup from "reactjs-popup";
-import { Modal, Button } from 'antd';
+// import Popup from "reactjs-popup";
+import { Modal} from 'antd';
 import CreateLocationInfo from './createLocationInfo'
 
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
@@ -276,18 +276,12 @@ export default class createLocation extends Component {
 				</Modal>
 
 
-				<br />
-				<br />
-				<br />
 
 				<div className="form-group">
 
 					<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat, markerPosition.lng)}>Register Location</button>
 
 				</div>
-				<br />
-				<br />
-				<br />
 
 
 			</div>
