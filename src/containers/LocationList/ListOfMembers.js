@@ -3,6 +3,8 @@ import { Modal, Button } from 'antd';
 // import CsvDownloader from 'react-csv-downloader';
 import { CSVLink, CSVDownload } from "react-csv";
 
+import { Link, withRouter } from 'react-router-dom';
+
 import SingleMember from './SingleMember'
 
 export default class ListOfMembers extends Component {
@@ -65,7 +67,7 @@ export default class ListOfMembers extends Component {
           onCancel={this.handleCancel}
         >
           {memberListing}
-          <CSVLink
+          {/* <CSVLink
             data={json}
             filename={"my-file.csv"}
             className="btn btn-primary"
@@ -73,7 +75,8 @@ export default class ListOfMembers extends Component {
           >
             Download me
           </CSVLink>
-         
+          */}
+           <button className="btn"><Link to="/DownloadRedirect" target="_blank">Download Members</Link></button>
           
         </Modal>
       </div>
