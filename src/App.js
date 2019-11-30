@@ -10,7 +10,7 @@ import './index.css';
 import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
-import ReportPage from './containers/CreateVolunteer'
+import ReportPage from './containers/RunReport'
 
 const urlLocation = 'http://localhost:8080/location'
 

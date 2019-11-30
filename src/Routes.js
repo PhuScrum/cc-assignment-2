@@ -10,7 +10,7 @@ import LoginWFacebook from './containers/LoginWFacebook';
 
 import CreateLocationPage from './containers/CreateLocationPage';
 import createLocation from './containers/createLocation';
-import createVolunteer from './containers/CreateVolunteer';
+import createVolunteer from './containers/RunReport';
 import LocationDetails from './containers/LocationList/LocationDetails';
 import LocationCard from './containers/LocationList/LocationCard';
 import DownloadRedirect from './containers/LocationList/DownloadRedirect'
@@ -19,7 +19,7 @@ import CreateLocationInfo from './containers/createLocationInfo'
 import Emailjs from './containers/Emailjs'
 import EmailjsRedirect from './containers/EmailjsRedirect'
 // running report
-import ReportPage from './containers/CreateVolunteer'
+import ReportPage from './containers/RunReport'
 
 export default ({ childProps }) => (
 	<Switch>
