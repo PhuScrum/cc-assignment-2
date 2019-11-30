@@ -42,7 +42,7 @@ export default class Facebook extends Component {
     // localStorage.setItem("email", this.state.email);
     // localStorage.setItem("containermail", email);
     // localStorage.setItem("name", fname);
-    // localStorage.setItem("age", age);
+    localStorage.setItem("age", age);
     // localStorage.setItem("gender", gender);
     // localStorage.setItem("phone", phoneNumber);
     // localStorage.setItem("img", imageUrl);

@@ -50,7 +50,8 @@ export default class ReportPage extends Component {
         </div>)
 		return (
 			<div className="test">
-				<PageHeader>Volunteer yourself with your friends!</PageHeader>
+				<PageHeader>Outcome of each sites</PageHeader>
+				<label>If the value is 0, the owner has probably not entered the value of outcome.</label>
 				{inputListing}
 				</div>
 		);

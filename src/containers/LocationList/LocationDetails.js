@@ -169,6 +169,8 @@ export default class LocationDetails extends Component {
         const {members, fName, lName, age, gender, locationOwner} = this.state
         const userEmail = localStorage.getItem('email')
         // console.log(this.state.input)
+        var ownerLogin = localStorage.getItem('email')
+        if(ownerLogin === locationOwner){
         return (
             <div>
                 <Row>
@@ -193,8 +195,7 @@ export default class LocationDetails extends Component {
                     </Col>
                 </Row>
                 
-                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}
-                />
+                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
                 <br/>
                 <br/>
                 <br/>
@@ -204,5 +205,36 @@ export default class LocationDetails extends Component {
             </div>
             
         )
+        //
+        }
+        else{
+            return(
+            <div>
+            <Row>
+                <Col lg={8}>Basic info and map
+                <BasicInfo {...this.props} data={this.state}/>
+                
+                </Col>
+                <Col lg={4}>Contact Info
+                <br/>
+                {fName} {lName} <br/>
+                {locationOwner} <br/>
+                {age} years old <br/>
+                {gender} <br/><br/>
+               
+                <ListOfMembers data={this.state}/>
+
+                {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
+                        {/* {members.length}  */}
+                        {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
+                
+                </Col>
+            </Row>
+
+
+        </div>
+        )
+        }
     }
 }

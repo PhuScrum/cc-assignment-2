@@ -11,7 +11,7 @@ import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
-
+// const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 const urlLocation = 'http://localhost:8080/location'
 
 class App extends Component {
@@ -29,6 +29,7 @@ class App extends Component {
 			isAuthenticating: true,
 			id: '',
 			zoom:15,
+			siteOwner:''
 			
 		};
 
@@ -209,6 +210,8 @@ class App extends Component {
 		this.userHasAuthenticated(false);
 		this.props.history.push('/login');
 	};
+	
+
 
 	
 
@@ -227,6 +230,8 @@ class App extends Component {
 			//delete location
 			handleDeleteLocation: this.handleDeleteLocation,
 		};
+		var ownerLogin = localStorage.getItem('email')
+        if(ownerLogin === 'vncleangreen@gmail.com'){
 		return (
 			<div className="App container">
 				<Navbar fluid collapseOnSelect>
@@ -299,6 +304,79 @@ class App extends Component {
 				</Navbar>
 			</div>
 		);
+							}
+							else{
+								return(<div className="App container">
+								<Navbar fluid collapseOnSelect>
+									<Navbar.Header>
+										<Navbar.Brand>
+											<Link to="/">CleanUp Home</Link>
+										</Navbar.Brand>
+										<Navbar.Toggle />
+									</Navbar.Header>
+									<Navbar.Collapse>
+										<Nav pullRight>
+											{this.state.isAuthenticated ? (
+												<Fragment>
+												
+												<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
+												<NavItem onClick={this.handleLogout}>Logout</NavItem>
+												</Fragment>
+											) : (
+												<Fragment>
+													
+													<LinkContainer to="/signup">
+														<NavItem>Signup</NavItem>
+													</LinkContainer>
+													<LinkContainer to="/login">
+														<NavItem>Login</NavItem>
+													</LinkContainer>
+													<LinkContainer to="/loginWFacebook">
+														<NavItem>Facebook Login</NavItem>
+													</LinkContainer>
+												</Fragment>
+											)}
+										</Nav>
+									</Navbar.Collapse>
+								</Navbar>
+				
+								<Routes childProps={childProps} 
+								/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+							
+								<Navbar fluid collapseOnSelect fixed="bottom">
+									<Navbar.Header>
+										<Navbar.Brand>
+										</Navbar.Brand>
+										<Navbar.Toggle />
+									</Navbar.Header>
+									<Navbar.Collapse>
+										<Nav pullRight>
+											{this.state.isAuthenticated ? (
+												<Fragment>
+												<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+												</Fragment>
+											) : (
+												<Fragment>
+													
+													
+												</Fragment>
+											)}
+										</Nav>
+									</Navbar.Collapse>
+								</Navbar>
+							</div>)
+							}
 	}
 }
 
