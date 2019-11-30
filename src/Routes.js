@@ -10,7 +10,7 @@ import LoginWFacebook from './containers/LoginWFacebook';
 
 import CreateLocationPage from './containers/CreateLocationPage';
 import createLocation from './containers/createLocation';
-import createVolunteer from './containers/createVolunteer';
+import createVolunteer from './containers/CreateVolunteer';
 import LocationDetails from './containers/LocationList/LocationDetails';
 import LocationCard from './containers/LocationList/LocationCard';
 import DownloadRedirect from './containers/LocationList/DownloadRedirect'
@@ -18,6 +18,8 @@ import CreateLocationInfo from './containers/createLocationInfo'
 // testing emailjs
 import Emailjs from './containers/Emailjs'
 import EmailjsRedirect from './containers/EmailjsRedirect'
+// running report
+import ReportPage from './containers/CreateVolunteer'
 
 export default ({ childProps }) => (
 	<Switch>
@@ -33,6 +35,8 @@ export default ({ childProps }) => (
 		{/* test */}
 		<AppliedRoute path="/Emailjs" exact component={Emailjs} props={childProps} />
 		<AppliedRoute path="/EmailjsRedirect" exact component={EmailjsRedirect} props={childProps} />
+		{/* running report */}
+		<AppliedRoute path="/ReportPage" exact component={ReportPage} props={childProps} />
 		
 		
 		<AppliedRoute path="/DownloadRedirect" exact component={DownloadRedirect} props={childProps} />

@@ -2,12 +2,18 @@ import React, { Component } from "react";
 import FacebookLogin from "react-facebook-login";
 import { Link } from 'react-router-dom';
 import { HelpBlock, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import Delay from 'react-delay';
 
 
 const urlRegister = 'http://localhost:8080/register'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
+
 export default class Facebook extends Component {
+  constructor(props) {
+		super(props);
+		this.state = {
+		}
+
+	}
   state = {
     isLoggedIn: false,
     userID: "",
@@ -19,14 +25,20 @@ export default class Facebook extends Component {
     imageUrl: "",
     phoneNumber: "",
     gender: "",
-    locationOwner: '',
+    locationOwner: ''
+    
   };
 
   
 
   signUp() {
-    const { email, fname, age, gender, phoneNumber, imageUrl } = this.state
-    console.log(email, fname, age, gender, phoneNumber, imageUrl)
+    const { email, fname, age, gender, phoneNumber, imageUrl, isRegistered } = this.state
+  this.setState({
+    isRegistered: true
+  })
+  console.log("test is regis", this.state.isRegistered)
+    console.log(email, fname, age, gender, phoneNumber, imageUrl, isRegistered)
+   
     // localStorage.setItem("email", this.state.email);
     // localStorage.setItem("containermail", email);
     // localStorage.setItem("name", fname);
@@ -34,6 +46,7 @@ export default class Facebook extends Component {
     // localStorage.setItem("gender", gender);
     // localStorage.setItem("phone", phoneNumber);
     // localStorage.setItem("img", imageUrl);
+
     fetch(urlRegister, {
       headers: {
         'Accept': 'application/json',
@@ -48,7 +61,8 @@ export default class Facebook extends Component {
         "age": age,
         "gender": gender,
         "phoneNumber": phoneNumber,
-        "imageUrl": imageUrl
+        "imageUrl": imageUrl,
+        "isRegistered": true
 
       }
       )
@@ -100,7 +114,10 @@ export default class Facebook extends Component {
   };
   
   handleSubmit() {
-    this.setState({ isLoading: true });
+    this.setState({
+      isLoading: true,
+     });
+    
     this.signUp();
     try {
       this.props.userHasAuthenticated(true);
@@ -133,13 +150,18 @@ export default class Facebook extends Component {
     })
         .then(resp => resp.json())
         .then(data => {
-            console.log(data.phoneNumber)
-            console.log(typeof(data.phoneNumber))
+            // console.log(data.phoneNumber)
+            // console.log(typeof(data.phoneNumber))
+            if(data){
             this.setState({
                 phoneNumber: data.phoneNumber,
                 age: data.age,
-                gender: data.gender
+                gender: data.gender,
+                isRegistered: data.isRegistered
+
+
             })
+          }
             
           
 
@@ -152,7 +174,8 @@ export default class Facebook extends Component {
   render() {
     let fbRender;
     if (this.state.isLoggedIn) {
-     if(this.state.phoneNumber === ""){
+      console.log("FUCK", this.state.isRegistered)
+     if(this.state.isRegistered === undefined){
        fbRender = (
         
       <div>
