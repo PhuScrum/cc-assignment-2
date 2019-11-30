@@ -16,14 +16,13 @@ export default class LocationCard extends Component {
                         <h4 class="card-title">{name}</h4> 
                         <p class="card-text">{description}</p>
                         <p>{time}</p>
-                        <p class="card-text">{locationOwner} </p>
-                        <p>Lat {lat} Lng {lng}</p>
+                        <p class="card-text">{locationOwner} </p> 
                         <Link  to={`/location/${_id}` }>Details</Link>
                         <br/>
                         <br/>
                         <ButtonToolbar>
-                        <p><Button variant="primary" onClick={this.props.handleEdit.bind(this, name, address, description, _id, time, lat, lng)}>Edit</Button>
-                        <Button variant="danger" onClick={this.props.handleDeleteLocation.bind(this, _id)}> delete </Button></p>
+                        <Button variant="primary " onClick={this.props.handleEdit.bind(this, name, address, description, _id, time, lat, lng)}>Edit</Button>
+                        <Button variant="danger" onClick={this.props.handleDeleteLocation.bind(this, _id)}> delete </Button>
                         </ButtonToolbar>
                     </div>
                 </div>
@@ -37,6 +36,7 @@ export default class LocationCard extends Component {
                     <p class="card-text">{description}</p>
                     <p>{time}</p>
                     <p class="card-text">{locationOwner} </p>
+                    <p></p>
                     <Link  to={`/location/${_id}` }>Details</Link>
 
                 </div>

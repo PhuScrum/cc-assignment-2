@@ -7,9 +7,9 @@ export default class LoginWFacebook extends Component {
 	render() {
 		return (
 			<div className="Login">
-				<form onSubmit={this.handleSubmit}>
+				<form>
 					<br/>
-					<Facebook />
+					<Facebook {...this.props}  />
 				</form>
 			</div>
 		);

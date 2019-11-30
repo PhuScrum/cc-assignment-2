@@ -7,7 +7,7 @@ import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 import 'antd/dist/antd.css';
 import './index.css';
-import {Button} from 'antd'
+import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 
@@ -18,7 +18,7 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			name: 'chai fu22',
+			name: '',
 			time:'',
 			address:'',
 			description:'',
@@ -27,6 +27,7 @@ class App extends Component {
 			isAuthenticated: false,
 			isAuthenticating: true,
 			id: '',
+			zoom:15,
 			
 		};
 
@@ -55,9 +56,12 @@ class App extends Component {
 			time: time,
 			description: description,
 			lat: lat,
-			lng: lng
+			lng: lng,
+			cost: 0.0,
+			kilos:0.0,
+			attended:0.0
 		})
-		this.props.history.push('/home2')
+		this.props.history.push('/CreateLocationForm')
 		
 
 		
@@ -166,7 +170,12 @@ class App extends Component {
 			   "description": this.state.description,
 			   "lng": lng,
 			   "lat": lat,
-			   "locationOwner": localStorage.getItem("email")
+			   "locationOwner": localStorage.getItem("email"),
+			   "input": {
+				   attended:0,
+				   cost: 0,
+				   kilos:0
+			   }
             }
             )
         })
@@ -175,6 +184,7 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
+		console.log()
 		try {
 			if (await Auth.currentSession()) {
 				this.userHasAuthenticated(true);
@@ -229,15 +239,13 @@ class App extends Component {
 						<Nav pullRight>
 							{this.state.isAuthenticated ? (
 								<Fragment>
-								<NavItem ><Link to="/createVolunteer">Add Volunteers</Link></NavItem>
-								<NavItem ><Link to="/home2">Create Location</Link></NavItem>
+								{/* <NavItem ><Link to="/createVolunteer">Add Volunteers</Link></NavItem> */}
+								<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
 								<NavItem onClick={this.handleLogout}>Logout</NavItem>
 								</Fragment>
 							) : (
 								<Fragment>
-									{/* <LinkContainer to="/home2">
-										<NavItem>create location</NavItem>
-									</LinkContainer> */}
+									
 									<LinkContainer to="/signup">
 										<NavItem>Signup</NavItem>
 									</LinkContainer>
@@ -252,9 +260,42 @@ class App extends Component {
 						</Nav>
 					</Navbar.Collapse>
 				</Navbar>
-				<Routes childProps={childProps} 
 
+				<Routes childProps={childProps} 
 				/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+			
+				<Navbar fluid collapseOnSelect fixed="bottom">
+					<Navbar.Header>
+						<Navbar.Brand>
+						</Navbar.Brand>
+						<Navbar.Toggle />
+					</Navbar.Header>
+					<Navbar.Collapse>
+						<Nav pullRight>
+							{this.state.isAuthenticated ? (
+								<Fragment>
+								<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+								</Fragment>
+							) : (
+								<Fragment>
+									
+									
+								</Fragment>
+							)}
+						</Nav>
+					</Navbar.Collapse>
+				</Navbar>
 			</div>
 		);
 	}

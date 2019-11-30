@@ -6,8 +6,9 @@ import ListOfMembers from './ListOfMembers'
 
 // import Map from './detailsMap'
 import Map from './detailsMap';
-import Marker from 'react-google-maps'
-import BasicInfo from './BasicInfo'
+import Marker from 'react-google-maps';
+import BasicInfo from './BasicInfo';
+import InputInformation from './InputInformation'
 const locationUrl = 'http://localhost:8080/locationDetails'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 const joinLocationURL = 'http://localhost:8080/joinLocation'
@@ -17,11 +18,12 @@ export default class LocationDetails extends Component {
         this.state ={
             name:'',
             address: '',
-            members: [],
+            members: [], 
             time: '',
             locationOwner: '',
             dataLat:0,
-            dataLng:0
+            dataLng:0,
+            input:{}
             
         }
 
@@ -43,10 +45,10 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 if(data){
                     const {fName, lName, age, gender} = data
-                    console.log(data.name)
+                    // console.log(data.name)
                     this.setState({
                         fName: fName,
                         lName:lName ,
@@ -64,7 +66,7 @@ export default class LocationDetails extends Component {
     }
 
     fetchLocation(id){
-        console.log(id)
+        // console.log(id)
         fetch(locationUrl, {
             headers: {
                 'Accept': 'application/json',
@@ -79,8 +81,8 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                const {name, address, time, description, lat, lng, locationOwner, members} = data
-                console.log(data)
+                const {name, address, time, description, lat, lng, locationOwner, members, input} = data
+                // console.log(data)
                 this.setState({
                     name: name,
                     address: address,
@@ -90,8 +92,11 @@ export default class LocationDetails extends Component {
                     dataLng: lng,
                     locationOwner: locationOwner,
                     members: members,
+                    input: input
                 })        
-                console.log(locationOwner)
+                // console.log(locationOwner)
+                // console.log(name)
+                // console.log(input)
                 this.fetchOwner(locationOwner)
                 localStorage.setItem("lat", this.state.dataLat);
                 localStorage.setItem("lng", this.state.dataLng);
@@ -112,13 +117,14 @@ export default class LocationDetails extends Component {
     componentDidMount(){
         this.fetchLocation(this.props.match.params.id)
         
+        
     }
 
     userCancelJoin(members, userEmail){
         members.splice(members.indexOf(userEmail), 1)
         this.setState({
             members: members
-        })
+        }) 
         this.sendJoin(members)
     }
 
@@ -162,12 +168,13 @@ export default class LocationDetails extends Component {
     render() {
         const {members, fName, lName, age, gender, locationOwner} = this.state
         const userEmail = localStorage.getItem('email')
-        
+        // console.log(this.state.input)
         return (
             <div>
                 <Row>
                     <Col lg={8}>Basic info and map
                     <BasicInfo {...this.props} data={this.state}/>
+                    
                     </Col>
                     <Col lg={4}>Contact Info
                     <br/>
@@ -185,6 +192,13 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
+                
+                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}
+                />
+                <br/>
+                <br/>
+                <br/>
+            
 
 
             </div>

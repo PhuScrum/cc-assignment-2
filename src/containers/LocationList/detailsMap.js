@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker } from "react-google-maps";
 import Geocode from "react-geocode";
-import Autocomplete from 'react-google-autocomplete';
-import Popup from "reactjs-popup";
+// import Autocomplete from 'react-google-autocomplete';
+// import Popup from "reactjs-popup";
 
 
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
@@ -10,7 +10,7 @@ Geocode.enableDebug();
 
 
 
-const urlLocation = 'http://localhost:8080/location'
+// const urlLocation = 'http://localhost:8080/location'
 
 export default class createLocation extends Component {
 	constructor(props) {
@@ -50,8 +50,8 @@ export default class createLocation extends Component {
 	onSubmit(e) {
 		e.preventDefault();
 		this.registerLocation();
-		console.log(`The values are ${this.state.name}, ${this.state.time},  
-		${this.state.description}, ${this.state.address}, `)
+		// console.log(`The values are ${this.state.name}, ${this.state.time},  
+		// ${this.state.description}, ${this.state.address}, `)
 		this.setState({
 			name: '',
 			time: '',
@@ -62,7 +62,7 @@ export default class createLocation extends Component {
 	
 	///map 
 	componentDidMount() {
-		console.log(this.props.center.lat, this.props.center.lng)
+		// console.log(this.props.center.lat, this.props.center.lng)
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
 				const address = response.results[0].formatted_address;
@@ -143,7 +143,7 @@ export default class createLocation extends Component {
 	 * @param place
 	 */
 	onPlaceSelected = (place) => {
-		console.log('plc', place);
+		// console.log('plc', place);
 		const address = place.formatted_address,
 			addressArray = place.address_components,
 			latValue = place.geometry.location.lat(),
@@ -233,47 +233,6 @@ export default class createLocation extends Component {
 
 
 	
-	// render(){
-	
-	// 		return (
-	// 			<div>
-	// 			<div style={{ marginTop: 10 }}>
-	// 				<h3>Add New Business</h3>
-	// 				<form onSubmit={this.onSubmit}>
-	// 					<div className="form-group">
-	// 						<label>Person Name:  </label>
-	// 						<input 
-	// 						  type="text" 
-	// 						  className="form-control" 
-	// 						  value={this.state.person_name}
-	// 						  onChange={this.onChangePersonName}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<label>Business Name: </label>
-	// 						<input type="text" 
-	// 						  className="form-control"
-	// 						  value={this.state.business_name}
-	// 						  onChange={this.onChangeBusinessName}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<label>GST Number: </label>
-	// 						<input type="text" 
-	// 						  className="form-control"
-	// 						  value={this.state.business_gst_number}
-	// 						  onChange={this.onChangeGstNumber}
-	// 						  />
-	// 					</div>
-	// 					<div className="form-group">
-	// 						<input type="submit" value="Register Business" className="btn btn-primary"/>
-	// 					</div>
-	// 				</form>
-	// 			</div>
-	// 			</div>
-	// 		)
-		
-	// }
 
 
 

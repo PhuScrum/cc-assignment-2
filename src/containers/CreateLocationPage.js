@@ -5,7 +5,7 @@ import './Home.css';
 import Popup from "reactjs-popup";
 import CreateLocation from './createLocation.js';
 
-export default class Home2 extends Component {
+export default class CreateLocationPage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -38,17 +38,16 @@ export default class Home2 extends Component {
 	renderTest() {
 		return (
 			<div className="test">
-				{this.props.appdata.name}
 				<PageHeader>Create a CleanUp Site! </PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
-				<CreateLocation
+				<CreateLocation 
 				// spread attributes
-					{...this.props}
+					{...this.props} 
 					google={this.props.google}
 					center={{lat: this.props.appdata.lat, lng: this.props.appdata.lng}}
 					height='300px'
-					zoom={15}
+					zoom={this.props.appdata.zoom}
 				/>
 				
 			</div>

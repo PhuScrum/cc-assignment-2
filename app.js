@@ -65,7 +65,7 @@ app.route('/joinLocation')
 app.route('/input')
     .post(location_API.addInput)
 
-
+    
 
 app.route('/hello')
     .get((req, res) => {

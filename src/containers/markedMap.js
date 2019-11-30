@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import {Link} from "react-router-dom"
 import { compose } from "recompose"
+import Autocomplete from 'react-google-autocomplete';
 import {
   withScriptjs,
   withGoogleMap,
@@ -8,11 +9,11 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps"
+import Geocode from "react-geocode";
 
-const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
-
+const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
   return (
-    <GoogleMap defaultZoom={10} defaultCenter={{lat: 10.7291, lng: 106.7189 }}>
+    <GoogleMap defaultZoom={10} defaultCenter={{lat: e.state.mapPosition.lat, lng: e.state.mapPosition.lng }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -24,11 +25,13 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
             {props.selectedMarker === marker &&
               <InfoWindow>
                 <div>
-                 <h4> {marker.name}</h4>
+                 <h4>{marker.name}</h4>
                  <p>{marker.address}</p>
                  <p><Link to ={`/location/${marker._id}`}>Details</Link></p>
                 </div>
               </InfoWindow>}
+             
+             
             
           </Marker>
         )
@@ -37,29 +40,65 @@ const MapWithAMarker = compose(withScriptjs, withGoogleMap)(props => {
   )
 })
 
+var e
 export default class markedMap extends Component {
   constructor(props) {
     super(props)
+    e = this
     this.state = {
       shelters: [],
       location: [],
-      selectedMarker: false
+      //test
+      selectedMarker: false,
+      mapPosition: {
+        lat: 10.8231,
+        lng: 106.6297
+      },
+      
     }
   }
+  
+  // onPlaceSelected = (place) => {
+  //   // console.log('plc', place.geometry.location.lat(),
+  //   // place.geometry.location.lng());
+	// 	const address = place.formatted_address,
+	// 		addressArray = place.address_components,
+	// 		latValue = place.geometry.location.lat(),
+	// 		lngValue = place.geometry.location.lng();
+	// 	// Set these values in the state.
+	// 	this.setState({
+  //     address: (address) ? address : '',
+	// 		mapPosition: {
+	// 			lat: latValue,
+	// 			lng: lngValue
+  //     },
+  //   }
+    
+  //    )
+  //   // localStorage.setItem("homeLat", this.state.mapPosition.lat)
+  //   // localStorage.setItem("homeLng", this.state.mapPosition.lng)
+  //   console.log('lat',this.state.mapPosition.lat, 'lng',this.state.mapPosition.lng)
+  //   // window.location.reload()
+	// };
+  
+
   componentDidMount() {
     fetch("http://localhost:8080/location")
       .then(r => r.json())
       .then(data => {
-        this.setState({ location: data })
+        this.setState({ location: data,
+          })
       })
   }
   handleClick = (marker, event) => {
     // console.log({ marker })
     this.setState({ selectedMarker: marker })
   }
+
   render() {
+    
     return (
-      <MapWithAMarker
+      <MarkedMap 
         selectedMarker={this.state.selectedMarker}
         markers={this.state.location}
         onClick={this.handleClick}

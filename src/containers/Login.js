@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton';
 import { Auth } from 'aws-amplify';
-
+// import LoginWFacebook from './LoginWFacebook'
 import './Login.css';
 
 export default class Login extends Component {
@@ -63,6 +63,10 @@ export default class Login extends Component {
 						text="Login"
 						loadingText="Logging in…"
 					/>
+
+					{/* <LoginWFacebook {...this.props} /> */}
+
+					
 					<br/>
 				</form>
 			</div>
