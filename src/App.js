@@ -10,6 +10,7 @@ import './index.css';
 import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
+import ReportPage from './containers/CreateVolunteer'
 
 const urlLocation = 'http://localhost:8080/location'
 
@@ -239,7 +240,7 @@ class App extends Component {
 						<Nav pullRight>
 							{this.state.isAuthenticated ? (
 								<Fragment>
-								{/* <NavItem ><Link to="/createVolunteer">Add Volunteers</Link></NavItem> */}
+								<NavItem ><Link to="/ReportPage">Run Report</Link></NavItem>
 								<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
 								<NavItem onClick={this.handleLogout}>Logout</NavItem>
 								</Fragment>

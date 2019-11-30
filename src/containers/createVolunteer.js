@@ -3,7 +3,7 @@ import { PageHeader, ListGroup } from 'react-bootstrap';
 import './Home.css';
 
 
-export default class createVolunteer extends Component {
+export default class ReportPage extends Component {
 	constructor(props) {
 		super(props);
 
@@ -63,19 +63,6 @@ export default class createVolunteer extends Component {
 
 	
 
-
-
-
-	renderLander() {
-		return (
-			<div className="lander">
-				<h1>Test web app</h1>
-				<p>A simple react test app</p>
-			</div>
-			
-		);
-	}
-
 	renderTest() {
 		return (
 			<div className="test">
@@ -128,6 +115,6 @@ export default class createVolunteer extends Component {
 	}
 
 	render() {
-		return <div className="Home">{!this.props.isAuthenticated ? this.renderTest() : this.renderTest()}</div>;
+		return this.renderTest();
 	}
 }

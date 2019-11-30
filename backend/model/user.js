@@ -10,6 +10,7 @@ const userSchema = new Schema({
  age: {type: Number},
  imageUrl: {type: String},
  type: {type: String},
+ isRegistered: {type: Boolean, default: false},
  dateCreated: {type: Date, default: Date.now}
 
 })
