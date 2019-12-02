@@ -11,7 +11,7 @@ import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
-// const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
+const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 const urlLocation = 'http://localhost:8080/location'
 
 class App extends Component {
@@ -29,7 +29,12 @@ class App extends Component {
 			isAuthenticating: true,
 			id: '',
 			zoom:15,
-			siteOwner:''
+			siteOwner:'',
+			userType:'',
+			adminEmail:'',
+			error_name: '',
+			error_time:'',
+			error_description:''
 			
 		};
 
@@ -78,7 +83,8 @@ class App extends Component {
             })
                 .then(res => window.location.reload(), console.log('delete phase2'))
         }
-    }
+	}
+	
 
 
 	editLocation(lat, lng){
@@ -130,12 +136,43 @@ class App extends Component {
 			description: e.target.value
 		})
 	}
+	// form validation
+checkRegistrationForm() {
+	var valid = true;
+
+	this.state.error_name = "";
+	this.state.error_time = "";
+	this.state.error_description = "";
+	if (this.state.time == undefined || this.state.time.length < 1) {
+		this.state.error_time = "Please enter a valid date ";
+		valid = false;
+	}
+	if (this.state.name == undefined || this.state.name.length < 10 ) {
+		this.state.error_name = "Your location name is invalid, please include more than 10 characters ";
+		valid = false;
+	}
+
+	
+
+	if (this.state.description == undefined || this.state.description.length < 9) {
+		this.state.error_description = "The description must contain more than 25 letters ";
+		valid = false;
+	}
+
+	document.getElementById("error-time").innerHTML = this.state.error_time;
+	document.getElementById("error-name").innerHTML = this.state.error_name;
+	document.getElementById("error-description").innerHTML = this.state.error_description;
+	return valid;
+}
 
 	onSubmit(lat, lng, e) {
 		if(this.state.id == '') {
 		console.log('register')
 		// console.log('passed values', 'lat', lat, 'lng', lng)
 		e.preventDefault();
+		if (!this.checkRegistrationForm()) {
+			return;
+		  } else {
 		this.registerLocation(lat, lng);
 		console.log(`The values are ${this.state.name}, ${this.state.time},  
 		${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
@@ -147,7 +184,8 @@ class App extends Component {
 			lat: '',
 			lng:''
 		})
-	}else{
+		}}
+	else{
 		console.log('poop')
 		this.editLocation(lat, lng)
 	}
@@ -186,10 +224,17 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
-		console.log()
+		// console.log()
+		
 		try {
 			if (await Auth.currentSession()) {
-				this.userHasAuthenticated(true);
+				this.userHasAuthenticated(true)
+				this.setState({ 
+					adminEmail: localStorage.getItem('email')
+				 });
+				 
+				
+				this.fetchOwner();
 			}
 		} catch (e) {
 			if (e !== 'No current user') {
@@ -197,7 +242,12 @@ class App extends Component {
 			}
 		}
 
-		this.setState({ isAuthenticating: false });
+		this.setState({ 
+			isAuthenticating: false
+		 });
+		
+		this.fetchOwner()
+		
 	}
 
 	userHasAuthenticated = authenticated => {
@@ -211,11 +261,59 @@ class App extends Component {
 		this.props.history.push('/login');
 	};
 	
+	// testing admin account
+	windowOnload() {
+		console.log('load')
+        if(!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+	}
+	
+	fetchOwner(){
+		// const {locationOwner} = this.state
+
+        fetch(fetchUserByEmail_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'userEmail': this.state.adminEmail
+            }
+            )
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                console.log('user info', data)
+                if(data){
+                    const {fName, lName, age, gender, userType} = data
+                    // console.log(data.name)
+                    this.setState({
+                        fName: fName,
+                        lName:lName ,
+                        age: age,
+						gender: gender,
+						userType: userType
+                        // phoneNumber: phoneNumber,
+                       
+                    })    
+				}
+				
+                    
+              
+
+            })
+
+    }
 
 
 	
 
 	render() {
+		
 		const childProps = {
 			appdata: this.state,
 			testDropping: this.testDropping,
@@ -230,8 +328,9 @@ class App extends Component {
 			//delete location
 			handleDeleteLocation: this.handleDeleteLocation,
 		};
-		var ownerLogin = localStorage.getItem('email')
-        if(ownerLogin === 'vncleangreen@gmail.com'){
+		// var ownerLogin = localStorage.getItem('email')
+        if(this.state.userType === 'admin'){
+			
 		return (
 			<div className="App container">
 				<Navbar fluid collapseOnSelect>

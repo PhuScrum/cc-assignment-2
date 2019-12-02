@@ -60,14 +60,17 @@ export default class CreateLocationInfo extends Component {
 						<input type="text"
 							className="form-control"
 							value={this.props.appdata.name}
-							onChange={this.props.onChangeName.bind(this)}
-						/></div>
+							onChange={this.props.onChangeName.bind(this)}/>
+						<div style={{ color:'red'}} className="error" id="error-name" />
+						</div>
+						
 					<label>Time: </label>
 					<input type="text"
 						className="form-control"
 						value={this.props.appdata.time}
 						onChange={this.props.onChangeTime.bind(this)}
 					/>
+					<div style={{ color:'red'}} className="error" id="error-time" />
 					<br/>
 					<label>Description: </label>
 					<input type="text"
@@ -75,6 +78,7 @@ export default class CreateLocationInfo extends Component {
 						value={this.props.appdata.description}
 						onChange={this.props.onChangeDescription.bind(this)}
 					/>
+					<div style={{ color:'red'}} className="error" id="error-description" />
 					<div>
 						<br />
 						<div className="form-group">

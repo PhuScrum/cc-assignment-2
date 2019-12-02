@@ -29,6 +29,9 @@ export default class Facebook extends Component {
     
   };
 
+ 
+
+
   
 
   signUp() {
@@ -36,16 +39,9 @@ export default class Facebook extends Component {
   this.setState({
     isRegistered: true
   })
-  console.log("test is regis", this.state.isRegistered)
-    console.log(email, fname, age, gender, phoneNumber, imageUrl, isRegistered)
+  // console.log("test is regis", this.state.isRegistered)
+  //   console.log(email, fname, age, gender, phoneNumber, imageUrl, isRegistered)
    
-    // localStorage.setItem("email", this.state.email);
-    // localStorage.setItem("containermail", email);
-    // localStorage.setItem("name", fname);
-    localStorage.setItem("age", age);
-    // localStorage.setItem("gender", gender);
-    // localStorage.setItem("phone", phoneNumber);
-    // localStorage.setItem("img", imageUrl);
 
     fetch(urlRegister, {
       headers: {
@@ -93,8 +89,8 @@ export default class Facebook extends Component {
       "-2");
      localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.LastAuthUser", "aa526432-1cc6-4db9-a9a5-0751975ed378");
 
-     localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.userData", 
-     {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
+    //  localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.userData", 
+    //  {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
 
      localStorage.setItem("amplify-signin-with-hostedUI", "false");
      this.fetchMember()
@@ -112,12 +108,54 @@ export default class Facebook extends Component {
       this.setState({ isLoading: false });
     }
   };
-  
+
+  checkRegistrationForm() {
+		var valid = true;
+	
+		var error_age = "";
+		var error_gender = "";
+		var error_phoneNumber = "";
+	
+		if (this.state.age == undefined || this.state.age.length < 1 ) {
+			error_age = "Your age is invalid ";
+			valid = false;
+		}
+
+		if (this.state.gender == undefined || this.state.gender.length < 1) {
+			error_gender = "Please select a gender ";
+			valid = false;
+		}
+
+		if (this.state.phoneNumber == undefined || this.state.phoneNumber.length < 9) {
+			error_phoneNumber = "Invalid. A phone number must have more than 9 numbers ";
+			valid = false;
+		}
+		  
+	
+		// if (this.state.pwd == undefined || this.state.pwd.length < 5) {
+		//   error_pwd = "Password must have at least 5 characters";
+		//   valid = false;
+		// }
+	
+		// if (this.state.verify_pwd != this.state.pwd && this.state.pwd != "") {
+		//   error_verify = "Retyped password does not match orginal password";
+		//   this.setState({ pwd: "", verify_pwd: "" });
+		//   valid = false;
+		// }
+	
+		document.getElementById("error-age").innerHTML = error_age;
+		document.getElementById("error-gender").innerHTML = error_gender;
+		document.getElementById("error-phoneNumber").innerHTML = error_phoneNumber;
+		return valid;
+    }
+    
   handleSubmit() {
     this.setState({
       isLoading: true,
      });
-    
+     if (!this.checkRegistrationForm()) {
+			return;
+		  } else {
     this.signUp();
     try {
       this.props.userHasAuthenticated(true);
@@ -126,6 +164,7 @@ export default class Facebook extends Component {
       alert(e.message);
       this.setState({ isLoading: false });
     }
+  }
   };
   handleChange = event => {
     this.setState({
@@ -195,14 +234,17 @@ export default class Facebook extends Component {
           <FormGroup controlId="age" bsSize="large">
             <ControlLabel>Age</ControlLabel>
             <FormControl value={this.state.age} onChange={this.handleChange} type="age" />
+            <div style={{ color:'red'}} className="error" id="error-age" />
           </FormGroup>
           <FormGroup controlId="gender" bsSize="large">
             <ControlLabel>Gender</ControlLabel>
             <FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+            <div style={{ color:'red'}} className="error" id="error-gender" />
           </FormGroup>
           <FormGroup controlId="phoneNumber" bsSize="large">
             <ControlLabel>Phone Number</ControlLabel>
             <FormControl value={this.state.phoneNumber} onChange={this.handleChange} type="phoneNumber" />
+            <div style={{ color:'red'}} className="error" id="error-phoneNumber" />
           </FormGroup>
 
 

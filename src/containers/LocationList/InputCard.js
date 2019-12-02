@@ -78,7 +78,7 @@ export default class LocationCard extends Component {
         <TableBody>
        
             <StyledTableRow>
-              <StyledTableCell > 
+              <StyledTableCell > Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.attended}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.cost}</StyledTableCell>

@@ -67,6 +67,59 @@ export default class Signup extends Component {
 			this.state.password === this.state.confirmPassword
 		);
 	}
+	// validate
+	checkRegistrationForm() {
+		var valid = true;
+		var error_fname = "";
+		var error_lname = "";
+		var error_age = "";
+		var error_gender = "";
+		var error_phoneNumber = "";
+	
+		if (this.state.fname == undefined || this.state.fname.length < 1) {
+		  error_fname = "fname with at least 1 characters  ";
+		  valid = false;
+		}
+	
+		if (this.state.lname == undefined || this.state.lname.length < 4) {
+		  error_lname = "lname must have at least 5 characters" ;
+		  valid = false;
+		}
+
+		if (this.state.age == undefined || this.state.age.length < 1 ) {
+			error_age = "Your age is invalid ";
+			valid = false;
+		}
+
+		if (this.state.gender == undefined || this.state.gender.length < 1) {
+			error_gender = "Please select a gender ";
+			valid = false;
+		}
+
+		if (this.state.phoneNumber == undefined || this.state.phoneNumber.length < 9) {
+			error_phoneNumber = "Invalid. A phone number must have more than 9 numbers ";
+			valid = false;
+		}
+		  
+	
+		// if (this.state.pwd == undefined || this.state.pwd.length < 5) {
+		//   error_pwd = "Password must have at least 5 characters";
+		//   valid = false;
+		// }
+	
+		// if (this.state.verify_pwd != this.state.pwd && this.state.pwd != "") {
+		//   error_verify = "Retyped password does not match orginal password";
+		//   this.setState({ pwd: "", verify_pwd: "" });
+		//   valid = false;
+		// }
+	
+		document.getElementById("error-fname").innerHTML = error_fname;
+		document.getElementById("error-lname").innerHTML = error_lname;
+		document.getElementById("error-age").innerHTML = error_age;
+		document.getElementById("error-gender").innerHTML = error_gender;
+		document.getElementById("error-phoneNumber").innerHTML = error_phoneNumber;
+		return valid;
+	  }
 
 	validateConfirmationForm() {
 		return this.state.confirmationCode.length > 0;
@@ -79,7 +132,11 @@ export default class Signup extends Component {
 	};
 
 	handleSubmit = async event => {
+		
 		event.preventDefault();
+		if (!this.checkRegistrationForm()) {
+			return;
+		  } else {
 		this.signUp()
 
 		this.setState({ isLoading: true });
@@ -97,6 +154,7 @@ export default class Signup extends Component {
 		}
 
 		this.setState({ isLoading: false });
+	}
 	};
 
 	handleConfirmationSubmit = async event => {
@@ -148,26 +206,36 @@ export default class Signup extends Component {
 				<FormGroup controlId="fname" bsSize="large">
 						<ControlLabel>First Name</ControlLabel>
 						<FormControl value={this.state.fname} onChange={this.handleChange} type="fname" />
+						<div style={{ color:'red'}} className="error" id="error-fname" />
 					</FormGroup>
+					
 					<FormGroup controlId="lname" bsSize="large">
 						<ControlLabel>Last Name</ControlLabel>
 						<FormControl value={this.state.lname} onChange={this.handleChange} type="lname" />
+						<div style={{ color:'red'}} className="error" id="error-lname" />
 					</FormGroup>
+					
 					<FormGroup controlId="age" bsSize="large">
 						<ControlLabel>Age</ControlLabel>
 						<FormControl value={this.state.age} onChange={this.handleChange} type="age" />
+						<div style={{ color:'red'}} className="error" id="error-age" />
 					</FormGroup>
+					
 					<FormGroup controlId="gender" bsSize="large">
 						<ControlLabel>Gender</ControlLabel>
 						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+						<div style={{ color:'red'}} className="error" id="error-gender" />
 					</FormGroup>
+					
 					<FormGroup controlId="phoneNumber" bsSize="large">
 						<ControlLabel>Phone Number</ControlLabel>
 						<FormControl value={this.state.phoneNumber} onChange={this.handleChange} type="phoneNumber" />
+						<div style={{ color:'red'}} className="error" id="error-phoneNumber" />
 					</FormGroup>
+					
 					<FormGroup controlId="imageUrl" bsSize="large">
 						<ControlLabel>Photo URL</ControlLabel>
-						<FormControl value={this.state.imageUrl} onChange={this.handleChange} type="imageUrl" />
+						<FormControl value={this.state.imageUrl} onChange={this.handleChange} placeholder={'Optional'} type="imageUrl" />
 					</FormGroup>
 			
 					<FormGroup controlId="password" bsSize="large">

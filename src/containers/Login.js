@@ -15,7 +15,13 @@ export default class Login extends Component {
 			password: ''
 		};
 	}
-
+	windowOnload() {
+		console.log('load')
+        if(!window.location.hash) {
+            window.location = window.location + '#loaded';
+            window.location.reload();
+        }
+	}
 	validateForm() {
 		return this.state.email.length > 0 && this.state.password.length > 0;
 	}
@@ -35,6 +41,7 @@ export default class Login extends Component {
 			await Auth.signIn(this.state.email, this.state.password);
 			this.props.userHasAuthenticated(true);
 			this.props.history.push('/');
+			this.windowOnload()
 		} catch (e) {
 			alert(e.message);
 			this.setState({ isLoading: false });

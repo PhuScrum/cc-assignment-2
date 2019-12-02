@@ -148,7 +148,7 @@ export default class createLocation extends Component {
 
 	/**
 	 * When the user types an address in the search box
-	 * @param place
+	 * @param place 
 	 */
 	onPlaceSelected = (place) => {
 		console.log('plc', place);
