@@ -47,14 +47,14 @@ export default class Home extends Component {
 
 	renderLander() {
 		return (
-			<div className="lander">
+			<div className="lander" >
 				{/* <h1>Test web app</h1>
 				<p>A simple react test app</p> */}
-				<Carousel>
-  <Carousel.Item>
+				<Carousel >
+  <Carousel.Item style={{height: 500}}>
     <img
       className="d-block w-100"
-      src="https://static.ybox.vn/2018/1/21/eae000f4-feb6-11e7-9191-cac091044fd5.jpg"
+      src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
       alt="First slide"
     />
     {/* <Carousel.Caption> */}
@@ -62,10 +62,11 @@ export default class Home extends Component {
       {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
     {/* </Carousel.Caption> */}
   </Carousel.Item>
-  <Carousel.Item>
+  <Carousel.Item style={{height: 500}}>
     <img
+	height={500}
       className="d-block w-100 h-100"
-      src="https://i.ytimg.com/vi/m_rsujyqghU/maxresdefault.jpg"
+      src="https://4.bp.blogspot.com/-oxAP42k9ulA/XbVI5-_vvEI/AAAAAAAAJfw/Y4eTxtWpa2Ev349IE_V4ZnGTr_Zah0hywCLcBGAsYHQ/s1600/trees-mr-beast-n.jpg"
       alt="Third slide"
     />
 
@@ -74,10 +75,11 @@ export default class Home extends Component {
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </Carousel.Caption> */}
   </Carousel.Item>
-  <Carousel.Item>
+  <Carousel.Item style={{height: 500}}>
     <img
+	
       className="d-block w-100"
-      src="http://image.baothuathienhue.vn/fckeditor/upload/2019/20190502/images/du-lich.jpg"
+      src="https://www.collegechoice.net/wp-content/uploads/2018/06/Best-Master_s-in-Environmental-Management.jpg"
       alt="Third slide"
     />
 
