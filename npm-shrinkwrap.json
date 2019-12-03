@@ -2069,7 +2069,11 @@
             },
             "brace-expansion": {
               "version": "1.1.11",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "balanced-match": "^1.0.0",
+                "concat-map": "0.0.1"
+              }
             },
             "chownr": {
               "version": "1.1.1",
@@ -2164,7 +2168,10 @@
             },
             "is-fullwidth-code-point": {
               "version": "1.0.0",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "number-is-nan": "^1.0.0"
+              }
             },
             "isarray": {
               "version": "1.0.0",
@@ -2173,7 +2180,10 @@
             },
             "minimatch": {
               "version": "3.0.4",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "brace-expansion": "^1.1.7"
+              }
             },
             "minimist": {
               "version": "0.0.8",
@@ -2181,7 +2191,11 @@
             },
             "minipass": {
               "version": "2.3.5",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "safe-buffer": "^5.1.2",
+                "yallist": "^3.0.0"
+              }
             },
             "minizlib": {
               "version": "1.2.1",
@@ -2190,7 +2204,10 @@
             },
             "mkdirp": {
               "version": "0.5.1",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "minimist": "0.0.8"
+              }
             },
             "ms": {
               "version": "2.1.1",
@@ -2238,7 +2255,10 @@
             },
             "once": {
               "version": "1.4.0",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "wrappy": "1"
+              }
             },
             "os-homedir": {
               "version": "1.0.2",
@@ -2316,6 +2336,15 @@
               "bundled": true,
               "optional": true
             },
+            "string-width": {
+              "version": "1.0.2",
+              "bundled": true,
+              "requires": {
+                "code-point-at": "^1.0.0",
+                "is-fullwidth-code-point": "^1.0.0",
+                "strip-ansi": "^3.0.0"
+              }
+            },
             "string_decoder": {
               "version": "1.1.1",
               "bundled": true,
@@ -2327,7 +2356,10 @@
             },
             "strip-ansi": {
               "version": "3.0.1",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "ansi-regex": "^2.0.0"
+              }
             },
             "strip-json-comments": {
               "version": "2.0.1",
@@ -5224,7 +5256,11 @@
             },
             "brace-expansion": {
               "version": "1.1.11",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "balanced-match": "^1.0.0",
+                "concat-map": "0.0.1"
+              }
             },
             "chownr": {
               "version": "1.1.1",
@@ -5319,7 +5355,10 @@
             },
             "is-fullwidth-code-point": {
               "version": "1.0.0",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "number-is-nan": "^1.0.0"
+              }
             },
             "isarray": {
               "version": "1.0.0",
@@ -5328,7 +5367,10 @@
             },
             "minimatch": {
               "version": "3.0.4",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "brace-expansion": "^1.1.7"
+              }
             },
             "minimist": {
               "version": "0.0.8",
@@ -5336,7 +5378,11 @@
             },
             "minipass": {
               "version": "2.3.5",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "safe-buffer": "^5.1.2",
+                "yallist": "^3.0.0"
+              }
             },
             "minizlib": {
               "version": "1.2.1",
@@ -5345,7 +5391,10 @@
             },
             "mkdirp": {
               "version": "0.5.1",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "minimist": "0.0.8"
+              }
             },
             "ms": {
               "version": "2.1.1",
@@ -5393,7 +5442,10 @@
             },
             "once": {
               "version": "1.4.0",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "wrappy": "1"
+              }
             },
             "os-homedir": {
               "version": "1.0.2",
@@ -5471,6 +5523,15 @@
               "bundled": true,
               "optional": true
             },
+            "string-width": {
+              "version": "1.0.2",
+              "bundled": true,
+              "requires": {
+                "code-point-at": "^1.0.0",
+                "is-fullwidth-code-point": "^1.0.0",
+                "strip-ansi": "^3.0.0"
+              }
+            },
             "string_decoder": {
               "version": "1.1.1",
               "bundled": true,
@@ -5482,7 +5543,10 @@
             },
             "strip-ansi": {
               "version": "3.0.1",
-              "bundled": true
+              "bundled": true,
+              "requires": {
+                "ansi-regex": "^2.0.0"
+              }
             },
             "strip-json-comments": {
               "version": "2.0.1",

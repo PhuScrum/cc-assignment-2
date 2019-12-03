@@ -11,6 +11,7 @@ import {Button, Modal} from 'antd'
 import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
+// import registerServiceWorker from './registerServiceWorker';
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 const urlLocation = 'http://localhost:8080/location'
 
@@ -390,11 +391,12 @@ checkRegistrationForm() {
 						<Nav pullRight>
 							{this.state.isAuthenticated ? (
 								<Fragment>
+								<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 								<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+								
 								</Fragment>
 							) : (
 								<Fragment>
-									
 									
 								</Fragment>
 							)}
@@ -478,5 +480,5 @@ checkRegistrationForm() {
 							}
 	}
 }
-
+// registerServiceWorker();
 export default withRouter(App);

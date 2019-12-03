@@ -247,8 +247,15 @@ export default class Signup extends Component {
 					
 					<FormGroup controlId="gender" bsSize="large">
 						<ControlLabel>Gender</ControlLabel>
-						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
-						<div style={{ color:'red'}} className="error" id="error-gender" />
+						<br/>
+						{/* <FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+						<div style={{ color:'red'}} className="error" id="error-gender" /> */}
+					<select gender={this.state.gender} onChange={this.handleChange}>
+						<option gender="grapefruit">Male</option>
+						<option gender="lime">Female</option>
+						<option gender="coconut">Other</option>
+						<option gender="mango">Prefer not to say</option>
+					</select>
 					</FormGroup>
 					
 					<FormGroup controlId="phoneNumber" bsSize="large">
