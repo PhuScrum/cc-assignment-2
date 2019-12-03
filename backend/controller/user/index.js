@@ -22,12 +22,19 @@ const login = (req, res) =>{
     })
 }
 
+
+const redis = require('redis')
+const redisClient = redis.createClient(6379)
+
 const fetchUserByEmail = (req, res) =>{
     const {userEmail} = req.body
     console.log('fetch user by email: ', userEmail)
     userModel.findOne({email: userEmail}, (err, doc)=>{
-        if(!err)
+        if(!err){
+            // set Data to redis
+            redisClient.setex(userEmail, 60, doc)
             res.json(doc)
+        }
         else
             console.log(err)
     })
