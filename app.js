@@ -40,6 +40,10 @@ app.route('/register')
 app.route('/login')
     .post(user_API.login)
 
+
+const redis = require('redis')
+const redisClient = redis.createClient(process.env.PORT || 6379)
+
 // cache location details
 function cacheLocation(req, res, next){
     redisClient.get("allLocation", function(err, reply) {
@@ -66,8 +70,6 @@ app.route('/location/:locationId')
     .delete(location_API.deleteLocation)
 
 
-const redis = require('redis')
-const redisClient = redis.createClient(6379)
 
 // cache fetch user by email info.
 function cache(req, res, next){

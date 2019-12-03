@@ -24,7 +24,7 @@ const login = (req, res) =>{
 
 
 const redis = require('redis')
-const redisClient = redis.createClient(6379)
+const redisClient = redis.createClient(process.env.PORT || 6379)
 
 const fetchUserByEmail = (req, res) =>{
     const {userEmail} = req.body

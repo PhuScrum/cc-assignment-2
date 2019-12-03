@@ -1,7 +1,7 @@
 
 const locationModel = require('../../model/location')
 const redis = require('redis')
-const redisClient = redis.createClient(6379)
+const redisClient = redis.createClient(process.env.PORT || 6379)
 
 
 const getAll = (req, res) =>{
