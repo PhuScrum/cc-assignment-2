@@ -79,7 +79,17 @@ export default class Facebook extends Component {
     });
     
     localStorage.setItem("email", this.state.email);
-    localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.refreshToken",
+
+    
+     this.fetchMember()
+    
+  };
+
+  //test 
+  handleSubmitNoSignUp() {
+    this.setState({ isLoading: true });
+    try {
+      localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.refreshToken",
      "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.VAoHCpHEkyZNMQfQjw_OgaLcJEDlnMQg3epPRd459PupY70MPE1EJOaZDBbicf1qKRieutVBElCKZg8pdo4NG1jaAGKY47UdiyhEQGiOAyke0RFMMyqXHUUIG479_qSTCsN_SgzaVKFzoe3OQyQdpSaRy1fPWzlqSuh9pPkOlJJOiCn1vHwiT33abGX2_OVzsLu_XLDZZgWtfN54DswBvenRC4z5J4NsDG8MPlo3E2sIMcZdfaelDFjrwqUEFYMxy5JDDntu8qBxSrpto7dHtAWN4NmyxPJpzBfletiRqJE-tUbvKwnlg43mjcrymzbDXXkABlyW-_urZyUTwqJVFA.SYNwz-sfkLKEEvlC.VLsdScb-nMMTid31PCNIxo8yvmU5r4Fk8XyKF1Jy_6v_6UX0NdEw273LdG-t7MI8_5Bf38JYTecPGpgJ5J-nxH-yTNcVlhEZ3FCRmmcWNGQQtzTo55Eq4q8RVax05ccUSV1krYMDEuZZs2BxUx0-blkJtv0csM8aguMhv3jGXbodc033UONfE6puBXVCweuOMy2s1TQXSjtNhZ4Bs0zVDqR8m0qbLGRpYhmHiVnZ7AFhSu9ngC6xbuNuEIs8bui7ashgaampjoWgEASsNJTbQcM4HDBSEcu7IoPQuxtCRl3xojS-jpGUC048ML2cQm8_E8HAfO2PNn7gQIpCZHbTpE_slkB_gYMT72GkYRuKbPTxAPgaNB4jxxsq6KxqG1a0gpA5SEhYeVN2aJNK-7n6AQM5UNGhxPBDpSU-eRI9PIYZgoPuPZks9DkYA8B_HhLqm8LbNo1q5tnKv9WK5ZQibE_dg89ZtRK6HS4EbhfsbBty0FGI8JWVmFADui9VRpX2kRlONCWK_hMGNYE4-9_de9eRbkUqyXLbYhztQ90EkpFdvgbXdTD0pz-w0kOwegbty8geBp1KDPxLF8DcWwraLIuEMVwmXoz9RtU5sZiHYTtMDhX2Li4Za8CDYG3ZDlomvJHwCdT-zs4eTguDCyOr_QPFrvMtG-F785Fn2qTlimdIddkdSLMeyYKxkr7etc7n4vyBMJLk6N9z0Tr4sezeyIg2MFVPFjDhS7YLYoSOaW5d6jbS9OF535Uv7U3vAdtkMLvsPGKftU6bkmK1kosavtW68Ok87QPseO2zbWVYTPH34o342HURa_RsKnKOZs7YH4dOtuddEvMnJ7dpn_fMAvvAzmKu56U-Y8d6WCReUcr0zn8Glwf2Z9r_IUw6QWUYUq_Hb9VH0eeSxfeJQ5Dfmn7zpaxVeuRb75difqTI4auk8YDEpdS1ny6hlD026A32ATmuRxW5w-_CgGNdagGUBzj9kVI6VkiDgAO3j_vGxhNyJt37jUjKsGq39tURPdUfB2Np_2KPsGtHbyt6wf_THOLpMtoe-q_iXD4FlahZocHmt8LDT5NgQfmAnNFI_hitctqLoDIt_E61ZxAEL6Y8KOv4tQ1RsI6lnAEZLneumFo5iJVdbMh5tUxnaJZi_LNds0ukZiudDwRN3NUuT56tnEKF51r1IO6x6lEEgIe8XYQn4iIjzgMyaW1imjfjjG-8AAn-_ZrnX9W6yyJTGF8JJ2Tskf0f2jHVzAhEPbgAinlBbevvEEMVAWcSad0Mg9dwQnlZswf-txcWS9B9JTKhRM7H_ukbR0FQzaiel88Kmt3ndw-L3sTTy9_WAnw.L4YljzA_Yvl-Oh3v34aMZg");
     localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.idToken",
       "eyJraWQiOiJEb2VCNHlBa2gyZE1wUkNEMjJuV1h2V2RRZTZON2k1RkJsYnZld1NUVVd3PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYTUyNjQzMi0xY2M2LTRkYjktYTlhNS0wNzUxOTc1ZWQzNzgiLCJhdWQiOiIxdHRuZTE0ajMxMjFsbHQxMDh1OXE5cGNvOSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJldmVudF9pZCI6ImYyNGQ2OWZhLWY4ZmItNGFmYS05MmIwLTI2YTYzNGQ3ZmY1NyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTc0OTIwMjc0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV85eUhFYWhQV3kiLCJjb2duaXRvOnVzZXJuYW1lIjoiYWE1MjY0MzItMWNjNi00ZGI5LWE5YTUtMDc1MTk3NWVkMzc4IiwiZXhwIjoxNTc0OTIzODc2LCJpYXQiOjE1NzQ5MjAyNzYsImVtYWlsIjoidGhhbmgubmd1eWVubmdvY0BybWl0LmVkdS52biJ9.K5uI_VcVRFuG66X__kfaVjdtsu9da8OmO0at1LeUgs5-X0QmHvx5_V_CBpsrtHn8rPXLCV0AyzBmBI6pElxQLdrA2UzqnR4hWQTfJDN1goTi1ogjMwBvUy9O8MyxBCEE1DGdzU75JaFC09Y7ubKsdSdqyG8K3nnF9YktvKPHZCZ5A8Jc0M7wkXt3j2soY16XKe_aISYWJfBk4vdFWjQD-te4arW1wMTtiRj_Icl9jKFolcHkremf8DhdKAtni0_97HFwE2SewUILwbxROdRSznPrQ7uY-u3Se1XO-LDj5ELD55DtKOosVE_UvMWCV143e31dD7LZNQtjN-RGGzJpOQ");
@@ -93,14 +103,7 @@ export default class Facebook extends Component {
     //  {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
 
      localStorage.setItem("amplify-signin-with-hostedUI", "false");
-     this.fetchMember()
-    
-  };
-
-  //test 
-  handleSubmitNoSignUp() {
-    this.setState({ isLoading: true });
-    try {
+      console.log('nosignup')
       this.props.userHasAuthenticated(true);
       this.props.history.push('/');
     } catch (e) {
@@ -156,9 +159,24 @@ export default class Facebook extends Component {
      if (!this.checkRegistrationForm()) {
 			return;
 		  } else {
+        localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.refreshToken",
+     "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiUlNBLU9BRVAifQ.VAoHCpHEkyZNMQfQjw_OgaLcJEDlnMQg3epPRd459PupY70MPE1EJOaZDBbicf1qKRieutVBElCKZg8pdo4NG1jaAGKY47UdiyhEQGiOAyke0RFMMyqXHUUIG479_qSTCsN_SgzaVKFzoe3OQyQdpSaRy1fPWzlqSuh9pPkOlJJOiCn1vHwiT33abGX2_OVzsLu_XLDZZgWtfN54DswBvenRC4z5J4NsDG8MPlo3E2sIMcZdfaelDFjrwqUEFYMxy5JDDntu8qBxSrpto7dHtAWN4NmyxPJpzBfletiRqJE-tUbvKwnlg43mjcrymzbDXXkABlyW-_urZyUTwqJVFA.SYNwz-sfkLKEEvlC.VLsdScb-nMMTid31PCNIxo8yvmU5r4Fk8XyKF1Jy_6v_6UX0NdEw273LdG-t7MI8_5Bf38JYTecPGpgJ5J-nxH-yTNcVlhEZ3FCRmmcWNGQQtzTo55Eq4q8RVax05ccUSV1krYMDEuZZs2BxUx0-blkJtv0csM8aguMhv3jGXbodc033UONfE6puBXVCweuOMy2s1TQXSjtNhZ4Bs0zVDqR8m0qbLGRpYhmHiVnZ7AFhSu9ngC6xbuNuEIs8bui7ashgaampjoWgEASsNJTbQcM4HDBSEcu7IoPQuxtCRl3xojS-jpGUC048ML2cQm8_E8HAfO2PNn7gQIpCZHbTpE_slkB_gYMT72GkYRuKbPTxAPgaNB4jxxsq6KxqG1a0gpA5SEhYeVN2aJNK-7n6AQM5UNGhxPBDpSU-eRI9PIYZgoPuPZks9DkYA8B_HhLqm8LbNo1q5tnKv9WK5ZQibE_dg89ZtRK6HS4EbhfsbBty0FGI8JWVmFADui9VRpX2kRlONCWK_hMGNYE4-9_de9eRbkUqyXLbYhztQ90EkpFdvgbXdTD0pz-w0kOwegbty8geBp1KDPxLF8DcWwraLIuEMVwmXoz9RtU5sZiHYTtMDhX2Li4Za8CDYG3ZDlomvJHwCdT-zs4eTguDCyOr_QPFrvMtG-F785Fn2qTlimdIddkdSLMeyYKxkr7etc7n4vyBMJLk6N9z0Tr4sezeyIg2MFVPFjDhS7YLYoSOaW5d6jbS9OF535Uv7U3vAdtkMLvsPGKftU6bkmK1kosavtW68Ok87QPseO2zbWVYTPH34o342HURa_RsKnKOZs7YH4dOtuddEvMnJ7dpn_fMAvvAzmKu56U-Y8d6WCReUcr0zn8Glwf2Z9r_IUw6QWUYUq_Hb9VH0eeSxfeJQ5Dfmn7zpaxVeuRb75difqTI4auk8YDEpdS1ny6hlD026A32ATmuRxW5w-_CgGNdagGUBzj9kVI6VkiDgAO3j_vGxhNyJt37jUjKsGq39tURPdUfB2Np_2KPsGtHbyt6wf_THOLpMtoe-q_iXD4FlahZocHmt8LDT5NgQfmAnNFI_hitctqLoDIt_E61ZxAEL6Y8KOv4tQ1RsI6lnAEZLneumFo5iJVdbMh5tUxnaJZi_LNds0ukZiudDwRN3NUuT56tnEKF51r1IO6x6lEEgIe8XYQn4iIjzgMyaW1imjfjjG-8AAn-_ZrnX9W6yyJTGF8JJ2Tskf0f2jHVzAhEPbgAinlBbevvEEMVAWcSad0Mg9dwQnlZswf-txcWS9B9JTKhRM7H_ukbR0FQzaiel88Kmt3ndw-L3sTTy9_WAnw.L4YljzA_Yvl-Oh3v34aMZg");
+    localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.idToken",
+      "eyJraWQiOiJEb2VCNHlBa2gyZE1wUkNEMjJuV1h2V2RRZTZON2k1RkJsYnZld1NUVVd3PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYTUyNjQzMi0xY2M2LTRkYjktYTlhNS0wNzUxOTc1ZWQzNzgiLCJhdWQiOiIxdHRuZTE0ajMxMjFsbHQxMDh1OXE5cGNvOSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJldmVudF9pZCI6ImYyNGQ2OWZhLWY4ZmItNGFmYS05MmIwLTI2YTYzNGQ3ZmY1NyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTc0OTIwMjc0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV85eUhFYWhQV3kiLCJjb2duaXRvOnVzZXJuYW1lIjoiYWE1MjY0MzItMWNjNi00ZGI5LWE5YTUtMDc1MTk3NWVkMzc4IiwiZXhwIjoxNTc0OTIzODc2LCJpYXQiOjE1NzQ5MjAyNzYsImVtYWlsIjoidGhhbmgubmd1eWVubmdvY0BybWl0LmVkdS52biJ9.K5uI_VcVRFuG66X__kfaVjdtsu9da8OmO0at1LeUgs5-X0QmHvx5_V_CBpsrtHn8rPXLCV0AyzBmBI6pElxQLdrA2UzqnR4hWQTfJDN1goTi1ogjMwBvUy9O8MyxBCEE1DGdzU75JaFC09Y7ubKsdSdqyG8K3nnF9YktvKPHZCZ5A8Jc0M7wkXt3j2soY16XKe_aISYWJfBk4vdFWjQD-te4arW1wMTtiRj_Icl9jKFolcHkremf8DhdKAtni0_97HFwE2SewUILwbxROdRSznPrQ7uY-u3Se1XO-LDj5ELD55DtKOosVE_UvMWCV143e31dD7LZNQtjN-RGGzJpOQ");
+    localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.accessToken",
+     "eyJraWQiOiJiVlUxTkdqcGtzdUpDSURmdGQ4OVFZQWo2Ymk5eEZwb1pmajRONjVvbzY0PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhYTUyNjQzMi0xY2M2LTRkYjktYTlhNS0wNzUxOTc1ZWQzNzgiLCJldmVudF9pZCI6ImYyNGQ2OWZhLWY4ZmItNGFmYS05MmIwLTI2YTYzNGQ3ZmY1NyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1NzQ5MjAyNzQsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xXzl5SEVhaFBXeSIsImV4cCI6MTU3NDkyMzg3NiwiaWF0IjoxNTc0OTIwMjc2LCJqdGkiOiJlMmNhYTFmZi0xYjA2LTRlMWYtODg3Zi04NjI1NmQ3NWVkNDYiLCJjbGllbnRfaWQiOiIxdHRuZTE0ajMxMjFsbHQxMDh1OXE5cGNvOSIsInVzZXJuYW1lIjoiYWE1MjY0MzItMWNjNi00ZGI5LWE5YTUtMDc1MTk3NWVkMzc4In0.R7fpC8m13dLNkIIBLLxgkK-C_5Rwe4gdYojqAiLzZoXGihJhAJM5W1emvJJ0DQ115ledQyK5S9duXlA5LEan84oFMM6d-h_u6IIUa3SWiWFdPIsmICLNux9MdzT2zZYtsbYhTCOZXDaBbwSIIwrLYGQ2f6yAwu7Ir9wz1vLRyfVvEoLs2vpFvcbZ9D6yQ4f30lpTw29tIQIxyGeyq9lMXLE6dBJeras8AUJyey_A--aB9DH3-h91UAKz_tI4OvnXRLFQlhivHGoRGbOCKf6HLUIhFhODOxAOP8IuHCPLn-V6GeYdg24bayuRPhjnugck0VCG0B-UoIBy7PSrdEujgg");
+     localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.clockDrift",
+      "-2");
+     localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.LastAuthUser", "aa526432-1cc6-4db9-a9a5-0751975ed378");
+
+    //  localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.userData", 
+    //  {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
+
+     localStorage.setItem("amplify-signin-with-hostedUI", "false");
+        console.log('why did it pass?')
     this.signUp();
     try {
-      this.props.userHasAuthenticated(true);
+      // this.props.userHasAuthenticated(true);
       this.props.history.push('/');
     } catch (e) {
       alert(e.message);
@@ -207,6 +225,28 @@ export default class Facebook extends Component {
         })
 }
 
+onChangeAge = (e) => {
+  const val = e.target.value;
+  // If the current value passes the validity test then apply that to state
+  if (e.target.validity.valid) this.setState({age: e.target.value});
+  // If the current val is just the negation sign, or it's been provided an empty string,
+  // then apply that value to state - we still have to validate this input before processing
+  // it to some other component or data structure, but it frees up our input the way a user
+  // would expect to interact with this component
+  else if (val === '' || val === '-') this.setState({age: val});
+  }
+
+  onChangePhoneNumber = (e) => {
+  const val = e.target.value;
+  // If the current value passes the validity test then apply that to state
+  if (e.target.validity.valid) this.setState({phoneNumber: e.target.value});
+  // If the current val is just the negation sign, or it's been provided an empty string,
+  // then apply that value to state - we still have to validate this input before processing
+  // it to some other component or data structure, but it frees up our input the way a user
+  // would expect to interact with this component
+  else if (val === '' || val === '-') this.setState({phoneNumber: val});
+  }
+
 
 
 
@@ -233,7 +273,7 @@ export default class Facebook extends Component {
           <p>You will need to provide additional info on the first sign-in with Facebook.</p>
           <FormGroup controlId="age" bsSize="large">
             <ControlLabel>Age</ControlLabel>
-            <FormControl value={this.state.age} onChange={this.handleChange} type="age" />
+            <FormControl value={this.state.age} onChange={this.onChangeAge} type="age" />
             <div style={{ color:'red'}} className="error" id="error-age" />
           </FormGroup>
           <FormGroup controlId="gender" bsSize="large">
@@ -243,7 +283,7 @@ export default class Facebook extends Component {
           </FormGroup>
           <FormGroup controlId="phoneNumber" bsSize="large">
             <ControlLabel>Phone Number</ControlLabel>
-            <FormControl value={this.state.phoneNumber} onChange={this.handleChange} type="phoneNumber" />
+            <FormControl value={this.state.phoneNumber} onChange={this.onChangePhoneNumber} type="phoneNumber" />
             <div style={{ color:'red'}} className="error" id="error-phoneNumber" />
           </FormGroup>
 

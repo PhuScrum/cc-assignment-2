@@ -86,7 +86,7 @@ export default class Signup extends Component {
 		  valid = false;
 		}
 
-		if (this.state.age == undefined || this.state.age.length < 1 ) {
+		if (this.state.age == undefined || this.state.age == "String" || this.state.age.length < 1 ) {
 			error_age = "Your age is invalid ";
 			valid = false;
 		}
@@ -130,6 +130,7 @@ export default class Signup extends Component {
 			[event.target.id]: event.target.value
 		});
 	};
+	
 
 	handleSubmit = async event => {
 		
@@ -156,6 +157,29 @@ export default class Signup extends Component {
 		this.setState({ isLoading: false });
 	}
 	};
+
+	onChangeAge = (e) => {
+		const val = e.target.value;
+		// If the current value passes the validity test then apply that to state
+		if (e.target.validity.valid) this.setState({age: e.target.value});
+		// If the current val is just the negation sign, or it's been provided an empty string,
+		// then apply that value to state - we still have to validate this input before processing
+		// it to some other component or data structure, but it frees up our input the way a user
+		// would expect to interact with this component
+		else if (val === '' || val === '-') this.setState({age: val});
+	  }
+
+	  onChangePhoneNumber = (e) => {
+		const val = e.target.value;
+		// If the current value passes the validity test then apply that to state
+		if (e.target.validity.valid) this.setState({phoneNumber: e.target.value});
+		// If the current val is just the negation sign, or it's been provided an empty string,
+		// then apply that value to state - we still have to validate this input before processing
+		// it to some other component or data structure, but it frees up our input the way a user
+		// would expect to interact with this component
+		else if (val === '' || val === '-') this.setState({phoneNumber: val});
+	  }
+
 
 	handleConfirmationSubmit = async event => {
 		event.preventDefault();
@@ -215,9 +239,9 @@ export default class Signup extends Component {
 						<div style={{ color:'red'}} className="error" id="error-lname" />
 					</FormGroup>
 					
-					<FormGroup controlId="age" bsSize="large">
+					<FormGroup controlId="age" bsSize="large" >
 						<ControlLabel>Age</ControlLabel>
-						<FormControl value={this.state.age} onChange={this.handleChange} type="age" />
+						<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.age}  onChange={this.onChangeAge} type="age" />
 						<div style={{ color:'red'}} className="error" id="error-age" />
 					</FormGroup>
 					
@@ -229,7 +253,7 @@ export default class Signup extends Component {
 					
 					<FormGroup controlId="phoneNumber" bsSize="large">
 						<ControlLabel>Phone Number</ControlLabel>
-						<FormControl value={this.state.phoneNumber} onChange={this.handleChange} type="phoneNumber" />
+						<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.phoneNumber} onChange={this.onChangePhoneNumber} type="phoneNumber" />
 						<div style={{ color:'red'}} className="error" id="error-phoneNumber" />
 					</FormGroup>
 					
