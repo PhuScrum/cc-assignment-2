@@ -99,9 +99,16 @@ export default class Home extends Component {
 		return (
 			<div>
 				<div className="test">
-					<PageHeader>Welcome to Viet Nam Sach Va Xanh.</PageHeader>
+					<PageHeader>Welcome to Viet Nam Sach Va Xanh.
+
 					
+					</PageHeader>
+					<h4>Vietnam Clean & Green’s mission is to reduce littering in Vietnam and to bring about momentous societal change. We’ll raise public awareness about the negative impacts of littering and highlight the importance of individual responsibility. To accomplish this mission, we seek to cooperate with companies, educational institutions, government agencies, NGOs and anyone else who believes in a cleaner country and world.
+<br/><br/>
+We're passionate about Keeping Vietnam Beautiful!.</h4>
 					
+
+<br/><br/><br/>
 					<Row>
 					
 						<Col sm={8}>
@@ -120,10 +127,29 @@ export default class Home extends Component {
 						</Col>
 					</Row>
 
+					<br/><br/><br/>
+					<Carousel >
+						
+  <Carousel.Item style={{height: 350}}>
+    <img
+      className="d-block w-100"
+      src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
+      alt="First slide"
+    />
+
+  </Carousel.Item>
+  <Carousel.Item style={{height: 400}}>
+    <img
+      className="d-block w-100"
+      src="https://static1.squarespace.com/static/564043dde4b04f0e6f003944/5c90b2dbe2c48363df7dd50d/5c90b32253450a5d43f3d5b6/1552986917078/2000px-RMIT_University_Logo.svg.png?format=2500w"
+      alt="First slide"
+    />
+
+  </Carousel.Item>
+  
+</Carousel>
 					<ListGroup>{!this.state.isLoading}</ListGroup>
-
 				</div>
-
 			</div>
 		);
 	}
