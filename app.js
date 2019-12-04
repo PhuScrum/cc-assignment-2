@@ -6,6 +6,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 
+
 app.use(cors())
 app.use(helmet())
 app.use(express.static(path.join(__dirname, '/build')))
@@ -40,23 +41,55 @@ app.route('/login')
     .post(user_API.login)
 
 
+const redis = require('redis')
+const redisClient = redis.createClient(process.env.PORT || 6379)
 
+// cache location details
+function cacheLocation(req, res, next){
+    redisClient.get("allLocation", function(err, reply) {
+        if(err) console.log(err)
+        else if(reply){
+            // reply is null when the key is missing
+            console.log('Reply: ', reply);
+            console.log('Type of reply: ', typeof(reply));
+            var result = JSON.parse(reply)
+            res.json(result)
+        } else{
+            next()
+        }
+
+
+});
+}
+app.get('/location', cacheLocation, location_API.getAll)
 app.route('/location')
-    .get(location_API.getAll)
     .post(location_API.createLocation)
     .put(location_API.editLocation)
     .delete(location_API.deleteLocation)
 app.route('/location/:locationId')
     .delete(location_API.deleteLocation)
 
+
+
+// cache fetch user by email info.
+function cache(req, res, next){
+    const {userEmail} = req.body
+    // console.log('userEmail of Cache: ',userEmail)
+    redisClient.get(userEmail, (err, data)=>{
+        if(err) throw err;
+        if(data !== null){
+            // console.log('data response of Cache: ', data)
+            res.json(data)
+        } else{
+            next()
+        }
+    } )
+}
+
 // fetching location details
-app.route('/locationDetails')
-    .post(location_API.locationDetails)
+app.post('/locationDetails', location_API.locationDetails)
 
-
-const userModel = require('./backend/model/user')
-app.route('/fetchUserByEmail')
-    .post(user_API.fetchUserByEmail)
+app.post('/fetchUserByEmail', cache,user_API.fetchUserByEmail)
 
 // both join and unjoin can use this function.
 app.route('/joinLocation')

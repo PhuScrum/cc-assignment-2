@@ -1,7 +1,14 @@
 
 const locationModel = require('../../model/location')
+const redis = require('redis')
+const redisClient = redis.createClient(process.env.PORT || 6379)
+
+
 const getAll = (req, res) =>{
     locationModel.find({}, function (err, doc){
+        console.log('type of doc: ', typeof(doc))
+        var docJsonValue = JSON.stringify(doc)
+        redisClient.setex('allLocation', 60, docJsonValue)
         res.json(doc)
     }) 
 }
