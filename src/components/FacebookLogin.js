@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { HelpBlock, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
  
-const urlRegister = 'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/register'
-const fetchUserByEmail_URL =  'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
+const urlRegister = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/register'
+const fetchUserByEmail_URL =  'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
 
 export default class Facebook extends Component {
   constructor(props) {

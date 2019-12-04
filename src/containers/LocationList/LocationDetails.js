@@ -10,9 +10,9 @@ import Marker from 'react-google-maps';
 import BasicInfo from './BasicInfo';
 import InputInformation from './InputInformation'
 
-const locationUrl = 'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/locationDetails'
-const fetchUserByEmail_URL =  'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
-const joinLocationURL = 'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/joinLocation'
+const locationUrl = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/locationDetails'
+const fetchUserByEmail_URL =  'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
+const joinLocationURL = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/joinLocation'
 export default class LocationDetails extends Component {
     constructor(props){
         super(props)

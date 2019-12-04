@@ -6,7 +6,7 @@ import MarkedMap from './markedMap.js';
 import LocationList from './LocationList';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
-const urlLocation = 'https://www.ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
+const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -100,7 +100,7 @@ export default class Home extends Component {
 		return (
 			<div>
 				<div className="test">
-					<PageHeader>Welcome to Viet Nam Sach Va Xanh!
+					<PageHeader>Welcome to Viet Nam Sach Va Xanh.
 
 					
 					</PageHeader>
