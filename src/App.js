@@ -12,8 +12,8 @@ import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
 // import registerServiceWorker from './registerServiceWorker';
-const fetchUserByEmail_URL =  'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
-const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
+const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
+const urlLocation = 'https://vietnamsachvaxanh.com/location'
 
 class App extends Component {
 	constructor(props) {

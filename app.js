@@ -46,22 +46,22 @@ const redis = require('redis')
 
 // cache location details
 function cacheLocation(req, res, next){
-    redisClient.get("allLocation", function(err, reply) {
-        if(err) console.log(err)
-        else if(reply){
-            // reply is null when the key is missing
-            console.log('Reply: ', reply);
-            console.log('Type of reply: ', typeof(reply));
-            var result = JSON.parse(reply)
-            res.json(result)
-        } else{
-            next()
-        }
+//     redisClient.get("allLocation", function(err, reply) {
+//         if(err) console.log(err)
+//         else if(reply){
+//             // reply is null when the key is missing
+//             console.log('Reply: ', reply);
+//             console.log('Type of reply: ', typeof(reply));
+//             var result = JSON.parse(reply)
+//             res.json(result)
+//         } else{
+//             next()
+//         }
 
 
-});
+// });
 }
-app.get('/location', cacheLocation, location_API.getAll)
+app.get('/location', location_API.getAll)
 app.route('/location')
     .post(location_API.createLocation)
     .put(location_API.editLocation)
@@ -89,7 +89,7 @@ function cache(req, res, next){
 // fetching location details
 app.post('/locationDetails', location_API.locationDetails)
 
-app.post('/fetchUserByEmail', cache,user_API.fetchUserByEmail)
+app.post('/fetchUserByEmail',user_API.fetchUserByEmail)
 
 // both join and unjoin can use this function.
 app.route('/joinLocation')

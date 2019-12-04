@@ -8,7 +8,7 @@ const getAll = (req, res) =>{
     locationModel.find({}, function (err, doc){
         console.log('type of doc: ', typeof(doc))
         var docJsonValue = JSON.stringify(doc)
-        redisClient.setex('allLocation', 60, docJsonValue)
+        // redisClient.setex('allLocation', 60, docJsonValue)
         res.json(doc)
     }) 
 }

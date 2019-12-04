@@ -32,7 +32,7 @@ const fetchUserByEmail = (req, res) =>{
     userModel.findOne({email: userEmail}, (err, doc)=>{
         if(!err){
             // set Data to redis
-            redisClient.setex(userEmail, 60, doc)
+            // redisClient.setex(userEmail, 60, doc)
             res.json(doc)
         }
         else

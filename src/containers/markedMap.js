@@ -83,7 +83,7 @@ export default class markedMap extends Component {
   
 
   componentDidMount() {
-    fetch("https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location")
+    fetch("https://vietnamsachvaxanh.com/location")
       .then(r => r.json())
       .then(data => {
         this.setState({ location: data,
