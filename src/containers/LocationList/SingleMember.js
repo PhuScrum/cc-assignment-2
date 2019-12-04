@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { CSVLink, CSVDownload } from "react-csv";
 
-const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
+const fetchUserByEmail_URL = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
 let arr = []
 let copyArr = arr
 export default class SingleMember extends Component {

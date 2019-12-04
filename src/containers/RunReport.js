@@ -3,7 +3,7 @@ import { PageHeader, ListGroup } from 'react-bootstrap';
 import './Home.css';
 
 import InputCard from './LocationList/InputCard'
-const urlLocation = 'http://localhost:8080/location'
+const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
 
 export default class ReportPage extends Component {
 	constructor(props) {

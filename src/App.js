@@ -12,8 +12,8 @@ import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
 // import registerServiceWorker from './registerServiceWorker';
-const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
-const urlLocation = 'http://localhost:8080/location'
+const fetchUserByEmail_URL =  'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/fetchUserByEmail'
+const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
 
 class App extends Component {
 	constructor(props) {
@@ -69,7 +69,7 @@ class App extends Component {
 			kilos:0.0,
 			attended:0.0
 		})
-		this.props.history.push('/CreateLocationForm')
+		this.props.history.push('/CreateLocationPage')
 		
 
 		

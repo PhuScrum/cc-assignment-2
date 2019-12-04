@@ -6,7 +6,7 @@ import MarkedMap from './markedMap.js';
 import LocationList from './LocationList';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
-const urlLocation = 'http://localhost:8080/location'
+const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/location'
 
 export default class Home extends Component {
 	constructor(props) {

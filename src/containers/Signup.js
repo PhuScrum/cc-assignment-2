@@ -6,7 +6,7 @@ import { Auth } from 'aws-amplify';
 
 import './Signup.css';
 
-const urlRegister = 'http://localhost:8080/register'
+const urlRegister = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/register'
 
 export default class Signup extends Component {
 	constructor(props) {
