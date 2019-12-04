@@ -101,6 +101,7 @@ export default class LocationDetails extends Component {
                 this.fetchOwner(locationOwner)
                 localStorage.setItem("lat", this.state.dataLat);
                 localStorage.setItem("lng", this.state.dataLng);
+                // console.log('log', data)
                 this.windowOnload()
 
             })
@@ -175,11 +176,11 @@ export default class LocationDetails extends Component {
         return (
             <div>
                 <Row>
-                    <Col lg={8}>Basic info and map
+                    <Col lg={8}><b>Basic info and map</b>
                     <BasicInfo {...this.props} data={this.state}/>
                     
                     </Col>
-                    <Col lg={4}>Contact Info
+                    <Col lg={4}><b>Contact Info</b>
                     <br/>
                     {fName} {lName} <br/>
                     {locationOwner} <br/>
@@ -212,11 +213,11 @@ export default class LocationDetails extends Component {
             return(
             <div>
             <Row>
-                <Col lg={8}>Basic info and map
+                <Col lg={8}><b>Basic info and map</b>
                 <BasicInfo {...this.props} data={this.state}/>
                 
                 </Col>
-                <Col lg={4}>Contact Info
+                <Col lg={4}><b>Contact Info</b>
                 <br/>
                 {fName} {lName} <br/>
                 {locationOwner} <br/>

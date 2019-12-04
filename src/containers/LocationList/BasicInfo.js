@@ -5,12 +5,10 @@ import Map from './detailsMap';
 export default class BasicInfo extends React.Component{
     render(){
         const {name, address, time, description, dataLat, dataLng} = this.props.data
-
         return( 
+            
             <div>
-                BasicInfo
-
-                details page.
+                
                 <br/>
                 <b>Name:</b> {name}
                 <br/>

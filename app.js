@@ -42,7 +42,7 @@ app.route('/login')
 
 
 const redis = require('redis')
-const redisClient = redis.createClient(process.env.PORT || 6379)
+// const redisClient = redis.createClient(process.env.PORT || 6379)
 
 // cache location details
 function cacheLocation(req, res, next){

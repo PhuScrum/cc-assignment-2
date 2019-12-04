@@ -179,7 +179,7 @@ export default class createLocation extends Component {
 							position={{ lat: (this.state.markerPosition.lat + 0.0018), lng: this.state.markerPosition.lng }}
 						>
 							<div>
-								<span style={{ padding: 0, margin: 0 }}>{this.state.address}</span>
+								<span style={{ padding: 0, margin: 0 }}>{this.state.address}</span> 
 							</div>
 						</InfoWindow>
 						{/*Marker*/}

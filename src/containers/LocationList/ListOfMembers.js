@@ -51,7 +51,7 @@ export default class ListOfMembers extends Component {
     const JSON = require('circular-json');
     const memberListing = this.props.data.members.map(unit => <SingleMember data={unit} />)
     const memberEmail = this.props.data.members
-    console.log('here', this.props.data.name)
+    // console.log('here', this.props.data.name)
     const json = JSON.stringify(this.state.members);
 
     return (

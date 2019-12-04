@@ -39,7 +39,8 @@ export default class createLocation extends Component {
 		console.log(this.props.isAuthenticated)
 		Geocode.fromLatLng(this.state.mapPosition.lat, this.state.mapPosition.lng).then(
 			response => {
-				const address = response.results[0].formatted_address;
+				this.props.appdata.address = response.results[0].formatted_address;
+				const address = this.props.appdata.address
 				this.setState({
 					address: (address) ? address : '',
 				})
@@ -124,7 +125,8 @@ export default class createLocation extends Component {
 
 		Geocode.fromLatLng(newLat, newLng).then(
 			response => {
-				const address = response.results[0].formatted_address,
+				this.props.appdata.address = response.results[0].formatted_address;
+				const address = this.props.appdata.address,
 					addressArray = response.results[0].address_components;
 				this.setState({
 					address: (address) ? address : '',
@@ -152,7 +154,9 @@ export default class createLocation extends Component {
 	 */
 	onPlaceSelected = (place) => {
 		console.log('plc', place);
-		const address = place.formatted_address,
+		this.props.appdata.address = place.formatted_address;
+				const address = this.props.appdata.address,
+
 			addressArray = place.address_components,
 			latValue = place.geometry.location.lat(),
 			lngValue = place.geometry.location.lng();
@@ -208,7 +212,7 @@ export default class createLocation extends Component {
 							position={{ lat: (this.state.markerPosition.lat + 0.0028), lng: this.state.markerPosition.lng }}
 						>
 							<div>
-								<span style={{ padding: 0, margin: 0 }}>{this.state.address}</span>
+								<span style={{ padding: 0, margin: 0 }}>{this.props.appdata.address}</span>
 							</div>
 						</InfoWindow>
 						{/*Marker*/}

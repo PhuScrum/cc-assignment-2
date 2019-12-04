@@ -57,10 +57,11 @@ export default class Home extends Component {
       src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
       alt="First slide"
     />
-    {/* <Carousel.Caption> */}
-      {/* <h3>First slide label</h3> */}
-      {/* <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p> */}
-    {/* </Carousel.Caption> */}
+    <Carousel.Caption>
+      <h3>Welcome to Vietnam Sach va Xanh</h3>
+      <p><b>Please sign-up or log-in to proceed</b></p>
+    </Carousel.Caption>
+
   </Carousel.Item>
   <Carousel.Item style={{height: 500}}>
     <img
@@ -103,8 +104,8 @@ export default class Home extends Component {
 
 					
 					</PageHeader>
-					<h4>Vietnam Clean & Green’s mission is to reduce littering in Vietnam and to bring about momentous societal change. We’ll raise public awareness about the negative impacts of littering and highlight the importance of individual responsibility. To accomplish this mission, we seek to cooperate with companies, educational institutions, government agencies, NGOs and anyone else who believes in a cleaner country and world.
-<br/><br/>
+					<h4><b>Vietnam Clean & Green</b>’s mission is to reduce littering in Vietnam and to bring about momentous societal change. We’ll raise public awareness about the negative impacts of littering and highlight the importance of individual responsibility. To accomplish this mission, we seek to cooperate with companies, educational institutions, government agencies, NGOs and anyone else who believes in a cleaner country and world.
+<br/><br/> 
 We're passionate about Keeping Vietnam Beautiful!.</h4>
 					
 
@@ -112,7 +113,7 @@ We're passionate about Keeping Vietnam Beautiful!.</h4>
 					<Row>
 					
 						<Col sm={8}>
-						<h3>Here are the current registered locations to select from.</h3>
+						<h3><b>Here are the current registered locations to select from.</b></h3>
 							<MarkedMap
 							data={this.state}
 							google={this.props.google}
@@ -122,32 +123,11 @@ We're passionate about Keeping Vietnam Beautiful!.</h4>
 						</MarkedMap>
 						</Col>
 						<Col sm={4}>
-						<h3> Location List</h3>
+						<h3><b> Location List</b></h3>
 							<LocationList {...this.props} data={this.state} />
 						</Col>
 					</Row>
 
-					<br/><br/><br/>
-					<Carousel >
-						
-  <Carousel.Item style={{height: 350}}>
-    <img
-      className="d-block w-100"
-      src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
-      alt="First slide"
-    />
-
-  </Carousel.Item>
-  <Carousel.Item style={{height: 400}}>
-    <img
-      className="d-block w-100"
-      src="https://static1.squarespace.com/static/564043dde4b04f0e6f003944/5c90b2dbe2c48363df7dd50d/5c90b32253450a5d43f3d5b6/1552986917078/2000px-RMIT_University_Logo.svg.png?format=2500w"
-      alt="First slide"
-    />
-
-  </Carousel.Item>
-  
-</Carousel>
 					<ListGroup>{!this.state.isLoading}</ListGroup>
 				</div>
 			</div>

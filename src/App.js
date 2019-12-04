@@ -219,8 +219,8 @@ checkRegistrationForm() {
 			   }
             }
             )
-        })
-            .then(resp => resp.json(this.props.history.push('/')))
+		})
+			.then(resp => resp.json(this.props.history.push('/')))
 
 	}
 
@@ -288,7 +288,7 @@ checkRegistrationForm() {
         })
             .then(resp => resp.json())
             .then(data => {
-                console.log('user info', data)
+                // console.log('user info', data)
                 if(data){
                     const {fName, lName, age, gender, userType} = data
                     // console.log(data.name)
@@ -337,7 +337,7 @@ checkRegistrationForm() {
 				<Navbar fluid collapseOnSelect>
 					<Navbar.Header>
 						<Navbar.Brand>
-							<Link to="/">CleanUp Home</Link>
+							<Link to="/">Vietnam Sach va Xanh </Link>
 						</Navbar.Brand>
 						<Navbar.Toggle />
 					</Navbar.Header>
@@ -411,7 +411,7 @@ checkRegistrationForm() {
 								<Navbar fluid collapseOnSelect>
 									<Navbar.Header>
 										<Navbar.Brand>
-											<Link to="/">CleanUp Home</Link>
+											<Link to="/">Vietnam Sach va Xanh</Link>
 										</Navbar.Brand>
 										<Navbar.Toggle />
 									</Navbar.Header>

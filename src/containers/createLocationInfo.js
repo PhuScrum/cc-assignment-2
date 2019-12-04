@@ -82,7 +82,7 @@ export default class CreateLocationInfo extends Component {
 					<div>
 						<br />
 						<div className="form-group">
-							<label htmlFor="">Id</label>
+							<label htmlFor="">Id</label> 
 							<input type="text" name="address" className="form-control" readOnly="readOnly" value={this.props.appdata.id} />
 						</div>
 						

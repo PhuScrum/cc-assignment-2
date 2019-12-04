@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-const locationUrl = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/locationDetails'
+const locationUrl = 'http://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/locationDetails'
 
 const urlLocation = 'https://ccassignment2-env.np6spcuxdf.ap-southeast-1.elasticbeanstalk.com/Input'
 
