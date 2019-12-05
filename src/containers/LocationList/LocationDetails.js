@@ -176,16 +176,16 @@ export default class LocationDetails extends Component {
         return (
             <div>
                 <Row>
-                    <Col lg={8}><b>Basic info and map</b>
+                    <Col lg={8}><h4><b>Basic Info and Map</b></h4>
                     <BasicInfo {...this.props} data={this.state}/>
                     
                     </Col>
-                    <Col lg={4}><b>Contact Info</b>
+                    <Col lg={4}><h4><b>Contact Info</b></h4>
                     <br/>
-                    {fName} {lName} <br/>
-                    {locationOwner} <br/>
-                    {age} years old <br/>
-                    {gender} <br/><br/>
+                    <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender} <br/><br/>
                    
                     <ListOfMembers data={this.state}/>
 
@@ -213,16 +213,16 @@ export default class LocationDetails extends Component {
             return(
             <div>
             <Row>
-                <Col lg={8}><b>Basic info and map</b>
+                <Col lg={8}><h4><b>Basic Info and Map</b></h4>
                 <BasicInfo {...this.props} data={this.state}/>
                 
                 </Col>
-                <Col lg={4}><b>Contact Info</b>
+                <Col lg={4}><h4><b>Contact Info</b></h4>
                 <br/>
-                {fName} {lName} <br/>
-                {locationOwner} <br/>
-                {age} years old <br/>
-                {gender} <br/><br/>
+                <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender} <br/><br/>
                
                 <ListOfMembers data={this.state}/>
 

@@ -10,11 +10,11 @@ export default class BasicInfo extends React.Component{
             <div>
                 
                 <br/>
-                <b>Name:</b> {name}
+                <b>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {name}
                 <br/>
-                <b>Address:</b> {address}
+                <b>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {address}
                 <br/>
-                <b>Time:</b> {time}
+                <b>Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {time}
                 <br/>
                 <b>Description:</b> {description}
       

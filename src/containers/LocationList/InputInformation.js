@@ -159,7 +159,7 @@ export default class InputInformation extends Component {
 
     return (
       <div>
-        <h5>Input data after cleanup completion</h5>
+        <h4><b>Input data after cleanup completion</b></h4>
         <ListGroup>{!this.state.isLoading}</ListGroup>
         <Paper>
           <Table aria-label="customized table">
