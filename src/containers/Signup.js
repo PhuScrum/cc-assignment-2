@@ -76,23 +76,23 @@ export default class Signup extends Component {
 		var error_gender = "";
 		var error_phoneNumber = "";
 	
-		if (this.state.fname == undefined || this.state.fname.length < 1) {
-		  error_fname = "fname needs at least 1 characters  ";
+		if (this.state.fname == undefined || this.state.fname.length < 2) {
+		  error_fname = "First name needs at least 2 characters  ";
 		  valid = false;
 		}
 	
 		if (this.state.lname == undefined || this.state.lname.length < 4) {
-		  error_lname = "lname must have at least 5 characters" ;
+		  error_lname = "Last name needs at least 4 characters" ;
 		  valid = false;
 		}
 
-		if (this.state.age == undefined || this.state.age == "String" || this.state.age.length < 1 ) {
+		if (this.state.age == undefined || this.state.age == "String" || this.state.age.length < 1 || this.state.age.length > 3 ) {
 			error_age = "Your age is invalid ";
 			valid = false;
 		}
 
 		if (this.state.gender == undefined || this.state.gender.length < 1) {
-			error_gender = "Please select a gender ";
+			error_gender = "Please enter a gender ";
 			valid = false;
 		}
 

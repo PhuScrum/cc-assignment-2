@@ -17,7 +17,7 @@ checkRegistrationForm() {
     var error_feedback = "";
 
     if (this.state.feedback == undefined || this.state.feedback.length < 20) {
-      error_feedback = "feedback needs at least 20 characters  ";
+      error_feedback = "Message needs at least 20 characters  ";
       valid = false;
     }
 

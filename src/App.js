@@ -144,7 +144,7 @@ checkRegistrationForm() {
 	this.state.error_name = "";
 	this.state.error_time = "";
 	this.state.error_description = "";
-	if (this.state.time == undefined || this.state.time.length < 1) {
+	if (this.state.time == undefined || this.state.time.length < 4) {
 		this.state.error_time = "Please enter a valid date ";
 		valid = false;
 	}
@@ -155,7 +155,7 @@ checkRegistrationForm() {
 
 	
 
-	if (this.state.description == undefined || this.state.description.length < 9) {
+	if (this.state.description == undefined || this.state.description.length < 25) {
 		this.state.error_description = "The description must contain more than 25 letters ";
 		valid = false;
 	}

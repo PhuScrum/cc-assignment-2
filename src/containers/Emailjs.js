@@ -17,13 +17,13 @@ export default class Emailjs extends React.Component {
 	var error_feedbackTitle = "";
 
     if (this.state.feedback == undefined || this.state.feedback.length < 10) {
-      error_feedback = "Feedback Title needs at least 10 characters  ";
+      error_feedback = "Feedback needs at least 20 characters  ";
       valid = false;
 	}
 	
 	
-    if (this.state.feedbackTitle == undefined || this.state.feedbackTitle.length < 20) {
-		error_feedbackTitle = "Feedback needs at least 20 characters  ";
+    if (this.state.feedbackTitle == undefined || this.state.feedbackTitle.length < 10) {
+		error_feedbackTitle = "Feedback title needs at least 10 characters  ";
 		valid = false;
 	  }
 
