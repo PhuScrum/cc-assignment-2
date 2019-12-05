@@ -21,7 +21,7 @@ export default class LocationCard extends Component {
                         <br/> 
                         <ButtonToolbar>
                         <Button variant="primary " onClick={this.props.handleEdit.bind(this, name, address, description, _id, time, lat, lng)}>Edit</Button>
-                        <Button variant="danger" onClick={this.props.handleDeleteLocation.bind(this, _id)}> delete </Button>
+                        <Button variant="danger" onClick={this.props.handleDeleteLocation.bind(this, _id)}> Delete </Button>
                         </ButtonToolbar>
                     </div>
                 </div>

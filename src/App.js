@@ -465,6 +465,7 @@ checkRegistrationForm() {
 										<Nav pullRight>
 											{this.state.isAuthenticated ? (
 												<Fragment>
+												<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 												<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
 												</Fragment>
 											) : (

@@ -89,7 +89,7 @@ export default class createLocation extends Component {
 		let state = '';
 		for (let i = 0; i < addressArray.length; i++) {
 			for (let i = 0; i < addressArray.length; i++) {
-				if (addressArray[i].types[0] && 'administrative_area_level_1' === addressArray[i].types[0]) {
+				if (addressArray[i].types[0] && 'administrative_area_level_5' === addressArray[i].types[0]) {
 					state = addressArray[i].long_name;
 					return state;
 				}
@@ -233,7 +233,7 @@ export default class createLocation extends Component {
 								marginBottom: '500px'
 							}}
 							onPlaceSelected={this.onPlaceSelected}
-							types={['(regions)']}
+							types={[this.getState]}
 						/>
 					</GoogleMap>
 				)

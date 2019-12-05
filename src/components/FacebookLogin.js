@@ -99,11 +99,7 @@ export default class Facebook extends Component {
       "-2");
      localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.LastAuthUser", "aa526432-1cc6-4db9-a9a5-0751975ed378");
 
-    //  localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.userData", 
-    //  {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
-
      localStorage.setItem("amplify-signin-with-hostedUI", "false");
-      console.log('nosignup')
       this.props.userHasAuthenticated(true);
       this.props.history.push('/');
     } catch (e) {
@@ -168,9 +164,6 @@ export default class Facebook extends Component {
      localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.clockDrift",
       "-2");
      localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.LastAuthUser", "aa526432-1cc6-4db9-a9a5-0751975ed378");
-
-    //  localStorage.setItem("CognitoIdentityServiceProvider.1ttne14j3121llt108u9q9pco9.aa526432-1cc6-4db9-a9a5-0751975ed378.userData", 
-    //  {"UserAttributes":[{"Name":"sub","Value":"aa526432-1cc6-4db9-a9a5-0751975ed378"},{"Name":"email_verified","Value":"true"},{"Name":"email","Value":"thanh.nguyenngoc@rmit.edu.vn"}],"Username":"aa526432-1cc6-4db9-a9a5-0751975ed378"});
 
      localStorage.setItem("amplify-signin-with-hostedUI", "false");
         console.log('why did it pass?')
@@ -253,7 +246,6 @@ onChangeAge = (e) => {
   render() {
     let fbRender;
     if (this.state.isLoggedIn) {
-      console.log("FUCK", this.state.isRegistered)
      if(this.state.isRegistered === undefined){
        fbRender = (
         
