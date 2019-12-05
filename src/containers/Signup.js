@@ -77,7 +77,7 @@ export default class Signup extends Component {
 		var error_phoneNumber = "";
 	
 		if (this.state.fname == undefined || this.state.fname.length < 1) {
-		  error_fname = "fname with at least 1 characters  ";
+		  error_fname = "fname needs at least 1 characters  ";
 		  valid = false;
 		}
 	
@@ -248,14 +248,8 @@ export default class Signup extends Component {
 					<FormGroup controlId="gender" bsSize="large">
 						<ControlLabel>Gender</ControlLabel>
 						<br/>
-						{/* <FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
-						<div style={{ color:'red'}} className="error" id="error-gender" /> */}
-					<select gender={this.state.gender} onChange={this.handleChange}>
-						<option gender="grapefruit">Male</option>
-						<option gender="lime">Female</option>
-						<option gender="coconut">Other</option>
-						<option gender="mango">Prefer not to say</option>
-					</select>
+						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
+						<div style={{ color:'red'}} className="error" id="error-gender" />
 					</FormGroup>
 					
 					<FormGroup controlId="phoneNumber" bsSize="large">

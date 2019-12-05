@@ -1,5 +1,5 @@
 import React from 'react';
-import emailjs from 'emailjs-com';
+import emailjs from 'emailjs-com'; 
 
 export default class Emailjs extends React.Component {
   constructor(props) {
@@ -9,6 +9,41 @@ export default class Emailjs extends React.Component {
 	this.handleChangeTitle = this.handleChangeTitle.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
 	
+  }
+
+  checkRegistrationForm() {
+    var valid = true;
+	var error_feedback = "";
+	var error_feedbackTitle = "";
+
+    if (this.state.feedback == undefined || this.state.feedback.length < 10) {
+      error_feedback = "Feedback Title needs at least 10 characters  ";
+      valid = false;
+	}
+	
+	
+    if (this.state.feedbackTitle == undefined || this.state.feedbackTitle.length < 20) {
+		error_feedbackTitle = "Feedback needs at least 20 characters  ";
+		valid = false;
+	  }
+
+   
+
+    // if (this.state.pwd == undefined || this.state.pwd.length < 5) {
+    //   error_pwd = "Password must have at least 5 characters";
+    //   valid = false;
+    // }
+
+    // if (this.state.verify_pwd != this.state.pwd && this.state.pwd != "") {
+    //   error_verify = "Retyped password does not match orginal password";
+    //   this.setState({ pwd: "", verify_pwd: "" });
+    //   valid = false;
+    // }
+
+	document.getElementById("error-feedback").innerHTML = error_feedback;
+	document.getElementById("error-feedbackTitle").innerHTML = error_feedbackTitle;
+    
+    return valid;
   }
   
 
@@ -49,6 +84,7 @@ export default class Emailjs extends React.Component {
         	style={{width: '100%', height: '50px', fontSize: 18}}
       	/>
     	<div>
+		<div style={{ color:'red'}} className="error" id="error-feedbackTitle" />
 			<br/>
 		<h3>Please Describe Your Issue</h3>
       	<textarea
@@ -61,6 +97,7 @@ export default class Emailjs extends React.Component {
         	style={{width: '100%', height: '150px', fontSize: 16}}
       	/>
     	</div>
+		<div style={{ color:'red'}} className="error" id="error-feedback" />
     	<input type="button" value="Submit" className="btn btn--submit" onClick={this.handleSubmit} />
 		<br/>
 		  <br/>
@@ -83,11 +120,15 @@ export default class Emailjs extends React.Component {
   }
 
   handleSubmit (event, e) {
+	if (!this.checkRegistrationForm()) {
+        return;
+      } else {
 	const templateId = 'vnclean_green';
 	const user_id = 'user_fUIi3DXmEKTq1SDEYsLg3';
 
 	this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
 	this.routeChange()
   }
+}
 }
  

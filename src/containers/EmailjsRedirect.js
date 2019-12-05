@@ -21,7 +21,7 @@ export default class EmailjsRedirect extends Component {
 		return (
 			<div className="test">
 
-				<PageHeader>Your support request has been sent </PageHeader>
+				<PageHeader>Your Email is being processed! </PageHeader>
                 <label>Please be patience, our team is on the way</label>
                 <br/>
                 <p>Click home to go back to front page</p>

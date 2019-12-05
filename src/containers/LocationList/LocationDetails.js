@@ -9,6 +9,7 @@ import Map from './detailsMap';
 import Marker from 'react-google-maps';
 import BasicInfo from './BasicInfo';
 import InputInformation from './InputInformation'
+import ContactSiteOwner from './ContactSiteOwner'
 
 const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
 const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
@@ -185,7 +186,11 @@ export default class LocationDetails extends Component {
                     <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
                 <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
                 <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
-                <b>Gender:&nbsp;&nbsp;</b>{gender} <br/><br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender}
+                
+                 <br/>
+                 <br/>
+
                    
                     <ListOfMembers data={this.state}/>
 
@@ -222,7 +227,9 @@ export default class LocationDetails extends Component {
                 <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
                 <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
                 <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
-                <b>Gender:&nbsp;&nbsp;</b>{gender} <br/><br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender} <br/>
+                <ContactSiteOwner data={this.state}/>
+                <br/>
                
                 <ListOfMembers data={this.state}/>
 
