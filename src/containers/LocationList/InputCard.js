@@ -70,6 +70,7 @@ export default class LocationCard extends Component {
         <TableHead>
           <TableRow>
             <StyledTableCell align="left">{this.props.data.name}</StyledTableCell>
+            <StyledTableCell align="left"># of Volunteer</StyledTableCell>
             <StyledTableCell align="right">Gathered Amount&nbsp;(Kg)</StyledTableCell>
             <StyledTableCell align="right">Attended Number</StyledTableCell>
             <StyledTableCell align="right">Cost&nbsp;(VND)</StyledTableCell>
@@ -80,6 +81,7 @@ export default class LocationCard extends Component {
             <StyledTableRow>
               <StyledTableCell > Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </StyledTableCell>
+              <StyledTableCell align="right">{this.props.data.members.length}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.attended}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.cost}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.kilos}</StyledTableCell>

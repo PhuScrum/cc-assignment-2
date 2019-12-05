@@ -4,7 +4,7 @@ import Amplify from 'aws-amplify';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import config from './config';
-// import registerServiceWorker from './registerServiceWorker';
+import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 Amplify.configure({
@@ -32,4 +32,4 @@ ReactDOM.render(
 	</Router>,
 	document.getElementById('root')
 );
-// registerServiceWorker();
+registerServiceWorker();
