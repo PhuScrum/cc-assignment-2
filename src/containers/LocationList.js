@@ -20,7 +20,7 @@ export default class LocationList extends Component {
         </div>)
         return (
             <div>
-                <SimpleBar style={{ maxHeight: 400 }}>
+                <SimpleBar style={{ maxHeight: 600 }}>
                     {locationListing}
                 </SimpleBar>
 

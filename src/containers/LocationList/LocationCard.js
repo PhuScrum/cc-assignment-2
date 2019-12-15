@@ -12,11 +12,12 @@ export default class LocationCard extends Component {
         return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4> 
+                        <h4 class="card-title">{name}</h4>   <p><b>(You own this clean up site)</b></p>
+                        
                         <p class="card-text">{description}</p>
                         <p>{time}</p>
                         <p class="card-text">{locationOwner} </p> 
-                        <Link  to={`/location/${_id}` }>Details</Link>
+                        <Link  to={`/location/${_id}` }>See more</Link>
                         <br/>
                         <br/> 
                         <ButtonToolbar>
@@ -36,7 +37,7 @@ export default class LocationCard extends Component {
                     <p>{time}</p>
                     <p class="card-text">{locationOwner} </p>
                     <p></p>
-                    <Link  to={`/location/${_id}` }>Details</Link>
+                    <Link  to={`/location/${_id}` }>See more </Link>
 
                 </div>
             </div>

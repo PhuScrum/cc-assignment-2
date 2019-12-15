@@ -13,7 +13,7 @@ import Geocode from "react-geocode";
 
 const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
   return (
-    <GoogleMap defaultZoom={10} defaultCenter={{lat: e.state.mapPosition.lat, lng: e.state.mapPosition.lng }}>
+    <GoogleMap defaultZoom={11} defaultCenter={{lat: e.state.mapPosition.lat, lng: e.state.mapPosition.lng }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
@@ -27,7 +27,8 @@ const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
                 <div>
                  <h4>{marker.name}</h4>
                  <p>{marker.address}</p>
-                 <p><Link to ={`/location/${marker._id}`}>Details</Link></p>
+                <p>{marker.description}</p>
+                 <p><Link to ={`/location/${marker._id}`}>See more</Link></p>
                 </div>
               </InfoWindow>}
              
@@ -104,7 +105,7 @@ export default class markedMap extends Component {
         onClick={this.handleClick}
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
         loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
+        containerElement={<div style={{ height: `600px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
       />
     )
