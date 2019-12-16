@@ -20,17 +20,17 @@ export default class AboutUs extends Component {
             <div className="test">
 
                 <PageHeader>About Us </PageHeader>
-                <Carousel >
-  <Carousel.Item style={{height: 350}}>
-    <img
+              
+  
+    <img style={{height: 450}}
       className="d-block w-100"
       src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
-      alt="First slide"
-    />
-
-  </Carousel.Item>
+      alt="First slide"/>
   
-</Carousel><br/><br/>
+
+
+  
+<br/><br/>
 
                 <h4>Our goal at <strong>Keep Vietnam Clean & Green (KVCG)</strong> is to raise awareness about the litter & trash problem in Vietnam. While we understand there are many other issues that impact the environment, our focus is on littering, as we believe it to be the most basic of environmental issues and the foundational basis of environmental education. We believe, “How can we educate people about issues like climate change, sustainable building, reusable energies and recycling when we can’t get the general population to stop littering?”
 

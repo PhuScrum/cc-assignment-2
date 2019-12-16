@@ -157,6 +157,11 @@ export default class LocationDetails extends Component {
     }
 
     joinLocation(){
+    var isLoggedIn = localStorage.getItem('email')
+    if(isLoggedIn === null){
+        alert("You need to login to use this function!\nPlease click on the login button to continue." )
+    }
+    else{
         const{members} = this.state
         const userEmail = localStorage.getItem('email')
         const locationId = this.props.match.params.id
@@ -166,6 +171,7 @@ export default class LocationDetails extends Component {
         }else{
             this.userJoinLocation(members, userEmail)
         }
+    }
     }
     
     render() {
@@ -195,6 +201,7 @@ export default class LocationDetails extends Component {
                     <ListOfMembers data={this.state}/>
 
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+
                     <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
                             {/* {members.length}  */}
                             {members.includes(userEmail) ? 'Joined': 'Join'}</Button>

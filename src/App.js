@@ -364,6 +364,7 @@ class App extends Component {
 												<NavItem>Facebook Login</NavItem>
 											</LinkContainer>
 										</Fragment>
+										
 									)}
 							</Nav>
 						</Navbar.Collapse>
@@ -399,6 +400,8 @@ class App extends Component {
 									</Fragment>
 								) : (
 										<Fragment>
+											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
+											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
 
 										</Fragment>
 									)}
@@ -475,7 +478,8 @@ class App extends Component {
 										</Fragment>
 									) : (
 											<Fragment>
-
+											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
+											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
 
 											</Fragment>
 										)}

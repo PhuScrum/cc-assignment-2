@@ -57,9 +57,15 @@ checkRegistrationForm() {
   	.catch(err => console.error('Oh well, you failed. Here some thoughts on the error that occured:', err))
   }
   showModal = () => {
+    var isLoggedIn = localStorage.getItem('email')
+    if(isLoggedIn === null){
+      alert("You need to login to use this function!\nPlease click on the login button to continue." )
+    }
+    else{
     this.setState({
       visible: true,
     });
+  }
   };
 
   handleOk = e => {
@@ -84,6 +90,7 @@ checkRegistrationForm() {
   };
 
   render() {
+    
 	return (
         <div>
         <Button onClick={this.showModal}>

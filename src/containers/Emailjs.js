@@ -120,6 +120,11 @@ export default class Emailjs extends React.Component {
   }
 
   handleSubmit (event, e) {
+	var isLoggedIn = localStorage.getItem('email')
+    if(isLoggedIn === null){
+        alert("You need to login to use this function!\nPlease click on the login button to continue." )
+    }
+    else{
 	if (!this.checkRegistrationForm()) {
         return;
       } else {
@@ -129,6 +134,7 @@ export default class Emailjs extends React.Component {
 	this.sendFeedback(templateId, {message_html: this.state.feedback, from_name: this.state.name, reply_to: this.state.email})
 	this.routeChange()
   }
+}
 }
 }
  

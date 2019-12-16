@@ -66,7 +66,7 @@ export default class Home extends Component {
 						/>
 						<Carousel.Caption>
 							<h3>Welcome to Vietnam Sach va Xanh</h3>
-							<p><b>Please sign-up or log-in to proceed</b></p>
+							<h4>To Create or Join a clean up site, Please Login or Sign Up!</h4>
 						</Carousel.Caption>
 
 					</Carousel.Item>
@@ -77,19 +77,19 @@ export default class Home extends Component {
 							alt="Third slide"
 						/>
 					</Carousel.Item>
-					<Carousel.Item style={{ height: 624 }}>
+					{/* <Carousel.Item style={{ height: 624 }}>
 						<img
 							height={500}
 							className="d-block w-100 h-100"
 							src="https://4.bp.blogspot.com/-oxAP42k9ulA/XbVI5-_vvEI/AAAAAAAAJfw/Y4eTxtWpa2Ev349IE_V4ZnGTr_Zah0hywCLcBGAsYHQ/s1600/trees-mr-beast-n.jpg"
 							alt="Third slide"
 						/>
-
+</Carousel.Item> */}
 						{/* <Carousel.Caption>
       <h3>Second slide label</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
     </Carousel.Caption> */}
-					</Carousel.Item>
+					
 					
 				</Carousel>
 			</Col>
