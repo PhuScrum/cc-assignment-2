@@ -27,7 +27,8 @@ export default class LocationDetails extends Component {
             locationOwner: '',
             dataLat:0,
             dataLng:0,
-            input:{}
+            input:{},
+            imageUrl:'',
             
         }
 
@@ -51,13 +52,14 @@ export default class LocationDetails extends Component {
             .then(data => {
                 // console.log(data)
                 if(data){
-                    const {fName, lName, age, gender} = data
+                    const {fName, lName, age, gender, imageUrl} = data
                     // console.log(data.name)
                     this.setState({
                         fName: fName,
                         lName:lName ,
                         age: age,
                         gender: gender,
+                        imageUrl: imageUrl
                         // phoneNumber: phoneNumber,
                        
                     })    
@@ -177,11 +179,12 @@ export default class LocationDetails extends Component {
     }
     
     render() {
-        const {members, fName, lName, age, gender, locationOwner} = this.state
+        const {members, fName, lName, age, gender, locationOwner, imageUrl} = this.state
         const userEmail = localStorage.getItem('email')
         // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
         localStorage.setItem('locationOwner', locationOwner) 
+        console.log("imagehere", imageUrl)
         if(ownerLogin === locationOwner){
         return (
             <div>
@@ -192,6 +195,8 @@ export default class LocationDetails extends Component {
                     </Col>
                     <Col lg={4}><h4><b>Contact Info</b></h4>
                     <br/>
+                    <img style={{width:100}} src={imageUrl}></img>
+                    <br/>
                     <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
                 <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
                 <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
@@ -199,6 +204,7 @@ export default class LocationDetails extends Component {
                 
                  <br/>
                  <br/>
+                 <hr/>
 
                    
                     <ListOfMembers data={this.state}/>
@@ -211,6 +217,7 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
+                <hr/>
                 
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
                 <br/>
@@ -234,12 +241,16 @@ export default class LocationDetails extends Component {
                 </Col>
                 <Col lg={4}><h4><b>Contact Info</b></h4>
                 <br/>
+                
+                <container style={{color: 'red'}}><img style={{width:100}} src={imageUrl}></img></container>
+                <br/>
                 <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
                 <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
                 <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
                 <b>Gender:&nbsp;&nbsp;</b>{gender} <br/>
                 <ContactSiteOwner data={this.state}/>
                 <br/>
+                <hr/>
                
                 <ListOfMembers data={this.state}/>
 
