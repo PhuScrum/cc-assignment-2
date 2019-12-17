@@ -6,6 +6,8 @@ import ContactSingleMember from './ContactSingleMember'
 const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
 let arr = []
 let copyArr = arr
+let publishMembers = []
+let copyPublishMembers = publishMembers
 export default class SingleMember extends Component {
     constructor(props) {
         super(props)
@@ -63,11 +65,19 @@ export default class SingleMember extends Component {
     collectData(respName, respPhone) {
         // console.log(resp2)
         copyArr.push('Name: ' + respName + ' Phone Number: ' + respPhone + ' Email: ' + this.props.data + "||||||")
+
         this.setState({
             arr: copyArr
         });
         //   console.log(this.state.arr)
         localStorage.setItem('members', this.state.arr)
+
+        copyPublishMembers.push(this.props.data)
+
+        this.setState({
+            PublishMembers: copyPublishMembers
+        });
+        localStorage.setItem('PublishMembers', this.state.PublishMembers)
         // for (var i = 0; i < this.state.arr.length; i++) {
         //     document.write(this.state.arr[i]);
 

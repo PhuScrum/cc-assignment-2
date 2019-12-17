@@ -10,6 +10,8 @@ import Marker from 'react-google-maps';
 import BasicInfo from './BasicInfo';
 import InputInformation from './InputInformation'
 import ContactSiteOwner from './ContactSiteOwner'
+// contact all
+import ContactAllMembers from './ContactAllMembers'
 
 const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
 const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
