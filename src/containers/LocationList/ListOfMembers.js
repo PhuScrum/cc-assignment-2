@@ -75,7 +75,7 @@ export default class ListOfMembers extends Component {
           >
             Download me
           </CSVLink>
-          */}
+          */} 
            <button className="btn"><Link to="/DownloadRedirect" target="_blank">Download Members</Link></button>
           
         </Modal>

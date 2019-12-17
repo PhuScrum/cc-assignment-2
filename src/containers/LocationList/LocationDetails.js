@@ -177,8 +177,9 @@ export default class LocationDetails extends Component {
     render() {
         const {members, fName, lName, age, gender, locationOwner} = this.state
         const userEmail = localStorage.getItem('email')
-        // console.log(this.state.input)
+        // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
+        localStorage.setItem('locationOwner', locationOwner) 
         if(ownerLogin === locationOwner){
         return (
             <div>

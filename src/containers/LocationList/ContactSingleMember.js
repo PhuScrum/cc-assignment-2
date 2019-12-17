@@ -2,10 +2,15 @@ import React from 'react';
 import emailjs from 'emailjs-com';
 import { Modal, Button } from 'antd';
 
-export default class ContactSiteOwner extends React.Component {
+export default class ContactSingleMember extends React.Component {
   constructor(props) {
 	super(props);
-	this.state = { feedback:'', name: localStorage.getItem('email'), email: localStorage.getItem('email') };
+    this.state = { feedback:'',
+    
+     name: localStorage.getItem('email'),
+    email: localStorage.getItem('email')
+ };
+
 	this.handleChange = this.handleChange.bind(this);
 	this.handleChangeTitle = this.handleChangeTitle.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,8 +49,8 @@ checkRegistrationForm() {
 	var templateParams = {
 		// name: 'James',
 		requester_email: this.state.email,
-        feedback: this.state.feedback,
-        locationOwner: this.props.data.locationOwner,
+        feedback: "Owner " + this.state.email +": "+ this.state.feedback,
+        locationOwner: this.props.data.email,
         
 		// notes: 'Check this out!'
 	};
@@ -62,6 +67,7 @@ checkRegistrationForm() {
       alert("You need to login to use this function!\nPlease click on the login button to continue." )
     }
     else{
+        console.log(this.props.data.email)
     this.setState({
       visible: true,
     });
@@ -94,10 +100,10 @@ checkRegistrationForm() {
 	return (
         <div>
         <Button onClick={this.showModal}>
-          Contact site owner 
+          Contact this member
                 </Button>
         <Modal
-          title={<h1>Contact Site Owner </h1>}
+          title={<h1>Contact this member </h1>}
           visible={this.state.visible}
           onOk={this.handleOk}
           onCancel={this.handleCancel}
@@ -105,7 +111,7 @@ checkRegistrationForm() {
           	<form className="test-mailing" >
 		
     	<div>
-		<h3>You are contacting {this.props.data.locationOwner}</h3>
+		<h3>You are contacting {this.props.data.email}</h3>
       	<textarea
         	id="test-mailing"
         	name="test-mailing"
@@ -113,7 +119,7 @@ checkRegistrationForm() {
         	placeholder="Message..."
         	required
         	value={this.state.feedback}
-        	style={{width: '100%', height: '400px', fontSize: 16}}
+        	style={{width: '100%', height: '200px', fontSize: 16}}
       	/>
     	</div>
         <div style={{ color:'red'}} className="error" id="error-feedback" />

@@ -334,12 +334,12 @@ class App extends Component {
 		if (this.state.userType === 'admin') {
 
 			return (
-				<div className="App container" style={{width: 1500}} >
+				<div className="App container" style={{width: 1600}} >
 
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Brand>
-								<Link to="/">Vietnam Sach va Xanh </Link>
+								<Link to="/"><img style={{width: 110}} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"/></Link>
 							</Navbar.Brand>
 							<Navbar.Toggle />
 						</Navbar.Header>

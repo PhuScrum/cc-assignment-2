@@ -9,7 +9,7 @@ export default class LocationCard extends Component {
         const { name, locationOwner, address, description, _id, time, lat, lng } = this.props.data
         var ownerLogin = localStorage.getItem('email')
         if(ownerLogin === locationOwner){
-        return (
+        return ( 
                 <div class="card">
                     <div class="card-body" >
                         <h4 class="card-title">{name}</h4>   <p><b>(You own this clean up site)</b></p>
