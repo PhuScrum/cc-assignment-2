@@ -12,6 +12,8 @@ import InputInformation from './InputInformation'
 import ContactSiteOwner from './ContactSiteOwner'
 // contact all
 import ContactAllMembers from './ContactAllMembers'
+//tools requiremtn
+import ToolsRequirement from './ToolsRequirement'
 
 const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
 const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
@@ -214,6 +216,10 @@ export default class LocationDetails extends Component {
                     <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
                             {/* {members.length}  */}
                             {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
+                            <br/>
+                            <br/>
+                            <br/>
+                    <ToolsRequirement/>
                     
                     </Col>
                 </Row>
