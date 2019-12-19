@@ -142,7 +142,7 @@ checkRegistrationForm() {
           
           <div>
         
-          <h3>Number of Full Set: </h3>
+          <h3>Number of Full Set (T-Shirt + Tool Kit): </h3>
       	<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.fullSet}  onChange={this.handleChangeFullSet}/>
         </div>
         <div style={{ color:'red'}} className="error" id="error-fullSet" />

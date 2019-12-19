@@ -5,6 +5,7 @@ import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
 import {Modal, Button} from "react-bootstrap"
 import CreateLocation from "./createLocation"
+import { TimePicker, DatePicker } from 'antd';
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
 Geocode.enableDebug();
 
@@ -19,13 +20,12 @@ export default class CreateLocationInfo extends Component {
 		
 		// cant transfer to app cause dont know what this is
 		this.state = {
-			
+			value:null
 		}
 		
 	}
 	
 
-	
 
 	///map 
 	componentDidMount() {
@@ -48,6 +48,11 @@ export default class CreateLocationInfo extends Component {
 			show : false
 		})
 	}
+
+	onChange = time => {
+		console.log(time);
+		this.setState({ value: time });
+	  };
 	
 	render() {
         return(
@@ -65,11 +70,19 @@ export default class CreateLocationInfo extends Component {
 						</div>
 						
 					<label>Time: </label>
-					<input type="text"
+					{/* <input type="text"
 						className="form-control"
 						value={this.props.appdata.time}
 						onChange={this.props.onChangeTime.bind(this)}
-					/>
+					/> */}
+					<br/>
+					{/* change time into array to store start and end time  */}
+					Start Date and Time: 
+					<DatePicker/>
+					<TimePicker value={this.props.appdata.time} onChange={this.onChange} />
+					&nbsp;&nbsp;
+					End Time: 
+					<TimePicker value={this.props.appdata.time} onChange={this.onChange} />
 					<div style={{ color:'red'}} className="error" id="error-time" />
 					<br/>
 					<label>Description: </label>
