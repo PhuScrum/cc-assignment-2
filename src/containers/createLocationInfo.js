@@ -20,7 +20,8 @@ export default class CreateLocationInfo extends Component {
 		
 		// cant transfer to app cause dont know what this is
 		this.state = {
-			value:null
+			time:null,
+			
 		}
 		
 	}
@@ -49,11 +50,47 @@ export default class CreateLocationInfo extends Component {
 		})
 	}
 
-	onChange = time => {
+	onChangeStartTime = time => {
 		console.log(time);
 		this.setState({ value: time });
 	  };
+// testing 
+	  onChangeStartDate = (field, value) => {
+		this.setState({
+		  [field]: value,
+		});
+	  };
 	
+	  onStartChange = value => {
+		this.onChangeStartDate('startValue', value);
+	  };
+	
+	  onEndChange = value => {
+		this.onChange('endValue', value);
+	  };
+	  handleStartOpenChange = open => {
+		if (!open) {
+		  this.setState({ endOpen: true });
+		}
+	  };
+	  // testing 
+	  onChangeStartDate = (field, value) => {
+		this.setState({
+		  [field]: value,
+		});
+	  };
+	
+	  onStartChange = value => {
+		this.onChangeStartDate('startValue', value);
+	  };
+	
+	
+	  handleStartOpenChange = open => {
+		if (!open) {
+		  this.setState({ endOpen: true });
+		}
+	  };
+
 	render() {
         return(
 		<div>
@@ -77,13 +114,32 @@ export default class CreateLocationInfo extends Component {
 					/> */}
 					<br/>
 					{/* change time into array to store start and end time  */}
-					Start Date and Time: 
-					<DatePicker/>
-					<TimePicker value={this.props.appdata.time} onChange={this.onChange} />
+					Start Date and Time:
+					<DatePicker 
+					// value={this.props.appdata.startDate} onChange={this.props.onChangeStartDate.bind(this)}
+					showTime
+		  format="YYYY-MM-DD HH:mm:ss"
+		  use12Hours
+					value={this.props.appdata.startDate}
+					placeholder="YYYY-MM-DD"
+					onChange={this.props.onStartChangeDate}
+					onOpenChange={this.props.handleStartOpenChangeDate} 
+					/>
+					{/* <TimePicker use12Hours format="h:mm a" value={this.props.appdata.startTime} onChange={this.props.onChangeStartTime.bind(this)} /> */}
 					&nbsp;&nbsp;
 					End Time: 
-					<TimePicker value={this.props.appdata.time} onChange={this.onChange} />
-					<div style={{ color:'red'}} className="error" id="error-time" />
+					<DatePicker 
+					// value={this.props.appdata.startDate} onChange={this.props.onChangeStartDate.bind(this)}
+					showTime
+		  format="YYYY-MM-DD HH:mm:ss"
+		  use12Hours
+					value={this.props.appdata.endDate}
+					placeholder="YYYY-MM-DD"
+					onChange={this.props.onStartChangeEndDate}
+					onOpenChange={this.props.handleStartOpenChangeEndDate} 
+					/>
+					{/* <TimePicker use12Hours format="h:mm a" value={this.props.appdata.endTime} onChange={this.props.onChangeEndTime.bind(this)} /> */}
+					{/* <div style={{ color:'red'}} className="error" id="error-time" /> */}
 					<br/>
 					<label>Description: </label>
 					<input type="text"

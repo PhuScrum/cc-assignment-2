@@ -1,6 +1,7 @@
 import { LinkContainer } from 'react-router-bootstrap';
 import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import moment from 'moment';
 
 import { Nav, Navbar, NavItem, Row, Col, Carousel } from 'react-bootstrap';
 import Routes from './Routes';
@@ -20,8 +21,19 @@ class App extends Component {
 		super(props);
 
 		this.state = {
+			// assignment 3 required info
+			organiserName: '',
+			organizerLogo:'',
+			startDate:null,
+			endDate:null,
+			startTime:null,
+			endTime:null,
+			value: null,
+			startValue: null,
+			// end of assignment 3 required info
 			name: '',
 			time: '',
+			//  this.startDate + this.startTime + ' to ' + this.endTime,
 			address: '',
 			description: '',
 			lat: 10.8231,
@@ -50,8 +62,63 @@ class App extends Component {
 		this.handleEdit = this.handleEdit.bind(this);
 		//delete location
 		this.handleDeleteLocation = this.handleDeleteLocation.bind(this);
+		this.onChangeStartTime = this.onChangeStartTime.bind(this);
+		this.onChangeEndTime = this.onChangeEndTime.bind(this);
+		this.onChangeStartDate = this.onChangeStartDate.bind(this);
+		this.onStartChangeDate = this.onStartChangeDate.bind(this);
+		this.handleStartOpenChangeDate = this.handleStartOpenChangeDate.bind(this);
+		// end date
+		this.onChangeEndDate = this.onChangeEndDate.bind(this);
+		this.onStartChangeEndDate = this.onStartChangeEndDate.bind(this);
+		this.handleStartOpenChangeEndDate = this.handleStartOpenChangeEndDate.bind(this);
 
 	}
+
+	// assignment 3
+	// Date picker
+	// testing 
+	onChangeStartDate = (field, value) => {
+		this.setState({
+		  [field]: value,
+		});
+	  };
+	
+	  onStartChangeDate = value => {
+		this.onChangeStartDate('startDate', value);
+	  };
+	
+	  handleStartOpenChangeDate = open => {
+		if (!open) {
+		  this.setState({ endOpen: true });
+		}
+	  };
+	  // end date
+	  onChangeEndDate = (field, value) => {
+		this.setState({
+		  [field]: value,
+		});
+	  };
+	
+	  onStartChangeEndDate = value => {
+		this.onChangeEndDate('endDate', value);
+	  };
+	
+	  handleStartOpenChangeEndDate = open => {
+		if (!open) {
+		  this.setState({ endOpen: true });
+		}
+	  };
+	// Time picker
+	
+	onChangeStartTime = time => {
+		console.log('console log time', time);
+		this.setState({startTime: time });
+	  };
+	onChangeEndTime = time => {
+		console.log('console log time', time);
+		this.setState({endTime: time });
+	  };
+	
 	//edit location
 
 	handleEdit(name, e, description, _id, time, lat, lng) {
@@ -142,12 +209,12 @@ class App extends Component {
 		var valid = true;
 
 		this.state.error_name = "";
-		this.state.error_time = "";
+		// this.state.error_time = "";
 		this.state.error_description = "";
-		if (this.state.time == undefined || this.state.time.length < 4) {
-			this.state.error_time = "Please enter a valid date ";
-			valid = false;
-		}
+		// if (this.state.time == undefined || this.state.time.length < 4) {
+		// 	this.state.error_time = "Please enter a valid date ";
+		// 	valid = false;
+		// }
 		if (this.state.name == undefined || this.state.name.length < 10) {
 			this.state.error_name = "Your location name is invalid, please include more than 10 characters ";
 			valid = false;
@@ -160,7 +227,7 @@ class App extends Component {
 			valid = false;
 		}
 
-		document.getElementById("error-time").innerHTML = this.state.error_time;
+		// document.getElementById("error-time").innerHTML = this.state.error_time;
 		document.getElementById("error-name").innerHTML = this.state.error_name;
 		document.getElementById("error-description").innerHTML = this.state.error_description;
 		return valid;
@@ -194,8 +261,13 @@ class App extends Component {
 	}
 
 	registerLocation(lat, lng) {
-		const { name, address, time, description } = this.state
+		const { name, address, time, description, startDate, startTime, endDate } = this.state
 		console.log('lat', lat, 'lng', lng)
+
+		var startDatee = new Date(startDate)
+		// var startTimee = new Date(startTime)
+		var endDatee = new Date(endDate)
+
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -208,7 +280,7 @@ class App extends Component {
 				// add more values
 				"name": this.state.name,
 				"address": this.state.address,
-				"time": this.state.time,
+				"time": 'Starts from ' + startDatee +  ' to ' + endDatee,
 				"description": this.state.description,
 				"lng": lng,
 				"lat": lat,
@@ -329,6 +401,19 @@ class App extends Component {
 			handleEdit: this.handleEdit,
 			//delete location
 			handleDeleteLocation: this.handleDeleteLocation,
+			//assignemnt 3 
+			//start time
+			onChangeStartTime: this.onChangeStartTime,
+			onChangeEndTime: this.onChangeEndTime,
+			onChangeStartDate: this.onChangeStartDate,
+			//start date
+			onChangeStartDate: this.onChangeStartDate,
+			onStartChangeDate: this.onStartChangeDate,
+			handleStartOpenChangeDate: this.handleStartOpenChangeDate,
+			//End date
+			onChangeEndDate: this.onChangeEndDate,
+			onStartChangeEndDate: this.onStartChangeEndDate,
+			handleStartOpenChangeEndDate: this.handleStartOpenChangeEndDate
 		};
 		// var ownerLogin = localStorage.getItem('email')
 		if (this.state.userType === 'admin') {
