@@ -107,7 +107,7 @@ app.route('/hello')
 
 
 // app.get('/*', (req, res) => {
-//         res.sendFile(path.join(__dirname, 'build/index.html'))
+//         ress.sendFile(path.join(__dirname, 'build/index.html'))
 //     })
 
 

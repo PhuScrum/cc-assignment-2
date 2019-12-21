@@ -40,11 +40,11 @@
     "simplebar-react": "^2.0.10"
   },
   "scripts": {
-    "start": "nodemon --legacy-watch app.js",
+    "start": "nodemon app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon --legacy-watch app.js",
+    "server": "nodemon app.js",
     "client": "react-scripts start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
