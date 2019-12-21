@@ -25,7 +25,12 @@ class App extends Component {
 		this.state = {
 			// assignment 3 required info
 			organiserName: '',
-			organizerLogo:'',
+			organiserLogo:'',
+			organiserSlogan:'',
+			organiserDescription:'',
+			organiserEventPhoto:'',
+			locationInternalOrExternal:'',
+			// time and date picker
 			startDate:null,
 			endDate:null,
 			startDatee:null,
@@ -34,10 +39,11 @@ class App extends Component {
 			endTime:null,
 			value: null,
 			startValue: null,
-
 			//epoch
 			epochStartDate:null,
 			epochEndDate:null,
+			// end of time date picker
+
 			// end of assignment 3 required info
 			name: '',
 			time: '',
@@ -62,7 +68,6 @@ class App extends Component {
 		this.testDropping = this.testDropping.bind(this)
 		// createlocation
 		this.onChangeName = this.onChangeName.bind(this);
-		this.onChangeTime = this.onChangeTime.bind(this);
 		this.onChangeDescription = this.onChangeDescription.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
 		// this.registerLocation = this.registerLocation.bind(this);
@@ -70,6 +75,7 @@ class App extends Component {
 		this.handleEdit = this.handleEdit.bind(this);
 		//delete location
 		this.handleDeleteLocation = this.handleDeleteLocation.bind(this);
+		// start date
 		this.onChangeStartTime = this.onChangeStartTime.bind(this);
 		this.onChangeEndTime = this.onChangeEndTime.bind(this);
 		this.onChangeStartDate = this.onChangeStartDate.bind(this);
@@ -79,12 +85,19 @@ class App extends Component {
 		this.onChangeEndDate = this.onChangeEndDate.bind(this);
 		this.onStartChangeEndDate = this.onStartChangeEndDate.bind(this);
 		this.handleStartOpenChangeEndDate = this.handleStartOpenChangeEndDate.bind(this);
+		// organization name and logo
+		this.onChangeOrgName = this.onChangeOrgName.bind(this);
+		this.onChangeOrgLogo = this.onChangeOrgLogo.bind(this);
+		this.onChangeOrgSlogan = this.onChangeOrgSlogan.bind(this);
+		this.onChangeOrgDescription = this.onChangeOrgDescription.bind(this);
+		this.onChangeOrgEventPhoto = this.onChangeOrgEventPhoto.bind(this);
+		this.handleChangeInternalExternal = this.handleChangeInternalExternal.bind(this)
+
 
 	}
 
 	// assignment 3
 	// Date picker
-	// testing 
 	onChangeStartDate = (field, value) => {
 		this.setState({
 		  [field]: value,
@@ -117,7 +130,6 @@ class App extends Component {
 		}
 	  };
 	// Time picker
-	
 	onChangeStartTime = time => {
 		console.log('console log time', time);
 		this.setState({startTime: time });
@@ -128,8 +140,7 @@ class App extends Component {
 	  };
 	
 	//edit location
-
-	handleEdit(name, e, description, _id, time, lat, lng, startDate, endDate) {
+	handleEdit(name, e, description, _id, time, lat, lng, startDate, endDate, organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto, locationInternalOrExternal) {
 		// console.log('name', name, 'time', startDatee, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
 		console.log('load edit', lat, lng)
 		// e.preventDefault();
@@ -142,6 +153,12 @@ class App extends Component {
 			time: time,
 			startDate: moment.utc(epochStartDate).local(),
 			endDate: moment.utc(epochEndDate).local(),
+			organiserName: organiserName,
+			organiserLogo: organiserLogo,
+			organiserSlogan: organiserSlogan,
+			organiserDescription: organiserDescription,
+			organiserEventPhoto: organiserEventPhoto,
+			locationInternalOrExternal: locationInternalOrExternal,
 			description: description,
 			lat: lat,
 			lng: lng,
@@ -170,12 +187,15 @@ class App extends Component {
 
 	editLocation(lat, lng) {
 		console.log('submit edit')
-		const { id, name, address, description, time, startDate, endDate } = this.state
+		const { id, name, address, description, startDate, endDate, 
+			organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto,locationInternalOrExternal 
+		} = this.state
 		// console.log(this.state.id, name, address, description, lat, lng, time)
 		// console.log('outputting lat', lat, 'lng', lng)
 		this.state.startDatee = new Date(startDate)
 		// var startTimee = new Date(startTime)
 		this.state.endDatee = new Date(endDate)
+		
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -189,8 +209,16 @@ class App extends Component {
 				name: name,
 				address: address,
 				time: this.state.startDatee +  "\n to \n" + this.state.endDatee,
-				startDate: this.state.startDate +'',
-				endDate: this.state.endDate+'',
+				startDate: startDate +'',
+				endDate: endDate+'',
+
+				organiserName: organiserName,
+				organiserLogo: organiserLogo,
+				organiserSlogan: organiserSlogan,
+				organiserDescription: organiserDescription,
+				organiserEventPhoto: organiserEventPhoto,
+				locationInternalOrExternal: locationInternalOrExternal,
+
 				description: description,
 				lng: lng,
 				lat: lat,
@@ -206,17 +234,45 @@ class App extends Component {
 		console.log('test dropping')
 	}
 
+	//New createlocation function for assignment 3
+
+	onChangeOrgName(e) {
+		this.setState({
+			organiserName: e.target.value
+		});
+	}
+	onChangeOrgLogo(e) {
+		this.setState({
+			organiserLogo: e.target.value
+		});
+	}
+	onChangeOrgSlogan(e) {
+		this.setState({
+			organiserSlogan: e.target.value
+		});
+	}
+	onChangeOrgDescription(e) {
+		this.setState({
+			organiserDescription: e.target.value
+		});
+	}
+	onChangeOrgEventPhoto(e) {
+		this.setState({
+			organiserEventPhoto: e.target.value
+		});
+	}
+	handleChangeInternalExternal(e) {
+		this.setState({locationInternalOrExternal: e.target.value});
+	  }
+
+
 	//createlocation function
 	onChangeName(e) {
 		this.setState({
 			name: e.target.value
 		});
 	}
-	onChangeTime(e) {
-		this.setState({
-			time: e.target.value
-		})
-	}
+
 	onChangeDescription(e) {
 		this.setState({
 			description: e.target.value
@@ -268,7 +324,11 @@ class App extends Component {
 					time: '',
 					description: '',
 					lat: '',
-					lng: ''
+					lng: '',
+					startDate:null,
+					endDate:null,
+					organiserName:'',
+					organiserLogo:''
 				})
 			}
 		}
@@ -300,6 +360,13 @@ class App extends Component {
 
 				// add more values
 				"name": this.state.name,
+				"organiserName": this.state.organiserName,
+				"organiserLogo": this.state.organiserLogo,
+				"organiserSlogan": this.state.organiserSlogan,
+				"organiserDescription": this.state.organiserDescription,
+				"organiserEventPhoto": this.state.organiserEventPhoto,
+				"locationInternalOrExternal": this.state.locationInternalOrExternal,
+
 				"address": this.state.address,
 				"time": this.state.startDatee + "\n to \n" + this.state.endDatee,
 				"startDate": this.state.startDate +'',
@@ -418,7 +485,6 @@ class App extends Component {
 			userHasAuthenticated: this.userHasAuthenticated,
 			onChangeDescription: this.onChangeDescription,
 			onChangeName: this.onChangeName,
-			onChangeTime: this.onChangeTime,
 			onSubmit: this.onSubmit,
 			//edit location
 			handleEdit: this.handleEdit,
@@ -436,7 +502,15 @@ class App extends Component {
 			//End date
 			onChangeEndDate: this.onChangeEndDate,
 			onStartChangeEndDate: this.onStartChangeEndDate,
-			handleStartOpenChangeEndDate: this.handleStartOpenChangeEndDate
+			handleStartOpenChangeEndDate: this.handleStartOpenChangeEndDate,
+			// organization name and logo
+			onChangeOrgName: this.onChangeOrgName,
+			onChangeOrgLogo: this.onChangeOrgLogo,
+			onChangeOrgSlogan: this.onChangeOrgSlogan,
+			onChangeOrgDescription: this.onChangeOrgDescription,
+			onChangeOrgEventPhoto: this.onChangeOrgEventPhoto,
+			handleChangeInternalExternal: this.handleChangeInternalExternal,
+			
 		};
 		// var ownerLogin = localStorage.getItem('email')
 		if (this.state.userType === 'admin') {

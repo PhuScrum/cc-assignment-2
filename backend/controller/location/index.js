@@ -26,7 +26,9 @@ const createLocation = (req, res) =>{
 
 const editLocation = (req, res)=>{
     console.log('edit location: ', req.body)
-    const {locationId, name, address, description, lat, lng, time} = req.body
+    const {locationId, name, address, description, lat, lng, time, organiserName, 
+        organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto,locationInternalOrExternal
+    } = req.body
     locationModel.updateOne({_id: locationId}, {
         name: name,
         address: address,
@@ -34,6 +36,12 @@ const editLocation = (req, res)=>{
         description: description,
         lat: lat,
         lng: lng,
+        organiserName: organiserName,
+        organiserLogo: organiserLogo,
+        organiserSlogan: organiserSlogan,
+        organiserDescription: organiserDescription,
+        organiserEventPhoto: organiserEventPhoto,
+        locationInternalOrExternal: locationInternalOrExternal,
     }, (err, doc)=>{
         res.json(doc)
     })
