@@ -13,8 +13,10 @@ import './App.css';
 import { id } from 'date-fns/locale';
 import ReportPage from './containers/RunReport'
 // import registerServiceWorker from './registerServiceWorker';
-const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
-const urlLocation = 'https://vietnamsachvaxanh.com/location'
+// const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
+// const urlLocation = 'https://vietnamsachvaxanh.com/location'
+const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
+const urlLocation = 'http://localhost:8080/location'
 
 class App extends Component {
 	constructor(props) {
@@ -26,10 +28,16 @@ class App extends Component {
 			organizerLogo:'',
 			startDate:null,
 			endDate:null,
+			startDatee:null,
+			endDatee:null,
 			startTime:null,
 			endTime:null,
 			value: null,
 			startValue: null,
+
+			//epoch
+			epochStartDate:null,
+			epochEndDate:null,
 			// end of assignment 3 required info
 			name: '',
 			time: '',
@@ -121,14 +129,19 @@ class App extends Component {
 	
 	//edit location
 
-	handleEdit(name, e, description, _id, time, lat, lng) {
-		// console.log('name', name, 'time', time, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
-		console.log('handleEdit', lat, lng)
+	handleEdit(name, e, description, _id, time, lat, lng, startDate, endDate) {
+		// console.log('name', name, 'time', startDatee, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
+		console.log('load edit', lat, lng)
 		// e.preventDefault();
+		var epochStartDate = parseInt(startDate)
+		var epochEndDate = parseInt(endDate)
+		console.log('epochstartdate', epochStartDate)
 		this.setState({
 			id: _id,
 			name: name,
 			time: time,
+			startDate: moment.utc(epochStartDate).local(),
+			endDate: moment.utc(epochEndDate).local(),
 			description: description,
 			lat: lat,
 			lng: lng,
@@ -156,10 +169,13 @@ class App extends Component {
 
 
 	editLocation(lat, lng) {
-		console.log('editLocation function')
-		const { id, name, address, description, time } = this.state
-		console.log(this.state.id, name, address, description, lat, lng, time)
-		console.log('outputting lat', lat, 'lng', lng)
+		console.log('submit edit')
+		const { id, name, address, description, time, startDate, endDate } = this.state
+		// console.log(this.state.id, name, address, description, lat, lng, time)
+		// console.log('outputting lat', lat, 'lng', lng)
+		this.state.startDatee = new Date(startDate)
+		// var startTimee = new Date(startTime)
+		this.state.endDatee = new Date(endDate)
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -172,7 +188,9 @@ class App extends Component {
 				locationId: id,
 				name: name,
 				address: address,
-				time: time,
+				time: this.state.startDatee +  "\n to \n" + this.state.endDatee,
+				startDate: this.state.startDate +'',
+				endDate: this.state.endDate+'',
 				description: description,
 				lng: lng,
 				lat: lat,
@@ -242,8 +260,8 @@ class App extends Component {
 				return;
 			} else {
 				this.registerLocation(lat, lng);
-				console.log(`The values are ${this.state.name}, ${this.state.time},  
-		${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
+		// 		console.log(`The values are ${this.state.name}, ${this.state.time},  
+		// ${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
 				// lat ${this.state.markerPosition.lat}, lng ${this.state.markerPosition.lng}
 				this.setState({
 					name: '',
@@ -261,13 +279,16 @@ class App extends Component {
 	}
 
 	registerLocation(lat, lng) {
-		const { name, address, time, description, startDate, startTime, endDate } = this.state
+		const { name, address, time, description, startDate, endDate } = this.state
 		console.log('lat', lat, 'lng', lng)
 
-		var startDatee = new Date(startDate)
+		this.state.startDatee = new Date(startDate)
 		// var startTimee = new Date(startTime)
-		var endDatee = new Date(endDate)
-
+		this.state.endDatee = new Date(endDate)
+		localStorage.setItem('epochStartDate', this.state.startDate)
+		localStorage.setItem('epochEndDate', this.state.endDate)
+		this.state.epochStartDate = localStorage.getItem('epochStartDate')
+		this.state.epochEndDate = localStorage.getItem('epochEndDate')
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -280,7 +301,9 @@ class App extends Component {
 				// add more values
 				"name": this.state.name,
 				"address": this.state.address,
-				"time": 'Starts from ' + startDatee +  ' to ' + endDatee,
+				"time": this.state.startDatee + "\n to \n" + this.state.endDatee,
+				"startDate": this.state.startDate +'',
+				"endDate": this.state.endDate+'',
 				"description": this.state.description,
 				"lng": lng,
 				"lat": lat,
@@ -337,7 +360,7 @@ class App extends Component {
 
 	// testing admin account
 	windowOnload() {
-		console.log('load')
+		// console.log('load')
 		if (!window.location.hash) {
 			window.location = window.location + '#loaded';
 			window.location.reload();

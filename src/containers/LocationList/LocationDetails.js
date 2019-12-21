@@ -15,9 +15,15 @@ import ContactAllMembers from './ContactAllMembers'
 //tools requiremtn
 import ToolsRequirement from './ToolsRequirement'
 
-const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
-const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
-const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
+// const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
+// const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
+// const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
+
+
+const locationUrl = 'http://localhost:8080/locationDetails'
+const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
+const joinLocationURL = 'http://localhost:8080/joinLocation'
+
 export default class LocationDetails extends Component {
     constructor(props){
         super(props)

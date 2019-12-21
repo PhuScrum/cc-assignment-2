@@ -8,6 +8,8 @@ const locationSchema = new Schema({
     description: {type: String},
     address: {type: String},
     time: {type: String},
+    startDate: {type: String},
+    endDate: {type: String},
     input: {type: Object},
     members: {type: Array},
     locationOwner: {type: String},

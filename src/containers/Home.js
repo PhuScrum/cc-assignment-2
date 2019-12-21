@@ -6,7 +6,8 @@ import MarkedMap from './markedMap.js';
 import LocationList from './LocationList';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
-const urlLocation = 'https://vietnamsachvaxanh.com/location'
+// const urlLocation = 'https://vietnamsachvaxanh.com/location'
+const urlLocation = 'http://localhost:8080/location'
 
 export default class Home extends Component {
 	constructor(props) {
@@ -26,7 +27,8 @@ export default class Home extends Component {
 			.then(response => response.json())
 			.then(data => {
 				this.setState({ location: data })
-				console.log(this.state.location.address)
+				// console.log(this.state.location.address)
+				console.log("check this log", this.state.location)
 			})
 	}
 

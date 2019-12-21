@@ -10,9 +10,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-const locationUrl = 'http://vietnamsachvaxanh.com/locationDetails'
+//not used
+// const locationUrl = 'http://vietnamsachvaxanh.com/locationDetails'
 
-const urlLocation = 'https://vietnamsachvaxanh.com/Input'
+// const urlLocation = 'https://vietnamsachvaxanh.com/Input'
+const urlLocation = 'http://localhost:8080/Input'
 
 const StyledTableCell = withStyles(theme => ({
   head: {

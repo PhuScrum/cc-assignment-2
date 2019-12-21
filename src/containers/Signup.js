@@ -6,7 +6,8 @@ import { Auth } from 'aws-amplify';
 
 import './Signup.css';
 
-const urlRegister = 'https://vietnamsachvaxanh.com/register'
+// const urlRegister = 'https://vietnamsachvaxanh.com/register'
+const urlRegister = 'http://localhost:8080/register'
 
 export default class Signup extends Component {
 	constructor(props) {
