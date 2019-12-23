@@ -37,6 +37,13 @@ export default class LocationDetails extends Component {
             dataLng:0,
             input:{},
             imageUrl:'',
+            // assignment 3
+            organiserName: '',
+			organiserLogo:'',
+			organiserSlogan:'',
+			organiserDescription:'',
+			organiserEventPhoto:'',
+			locationInternalOrExternal:'',
             
         }
 
@@ -95,7 +102,11 @@ export default class LocationDetails extends Component {
         })
             .then(resp => resp.json())
             .then(data => {
-                const {name, address, time, description, lat, lng, locationOwner, members, input} = data
+                const {name, address, time, description, lat, lng, locationOwner, members, input,  organiserName, organiserLogo,
+                    organiserSlogan,
+                    organiserDescription,
+                    organiserEventPhoto,
+                    locationInternalOrExternal} = data
                 // console.log(data)
                 this.setState({
                     name: name,
@@ -106,7 +117,17 @@ export default class LocationDetails extends Component {
                     dataLng: lng,
                     locationOwner: locationOwner,
                     members: members,
-                    input: input
+                    input: input,
+                    organiserName:  organiserName,
+                    organiserEventPhoto: organiserEventPhoto,
+                    organiserLogo:organiserLogo,
+                    organiserSlogan: organiserSlogan,
+                    organiserDescription:  organiserDescription,
+                    locationInternalOrExternal: locationInternalOrExternal,
+
+
+                    
+
                 })        
                 // console.log(locationOwner)
                 // console.log(name)
@@ -187,7 +208,7 @@ export default class LocationDetails extends Component {
     }
     
     render() {
-        const {members, fName, lName, age, gender, locationOwner, imageUrl, input} = this.state
+        const {members, fName, lName, age, gender, locationOwner, imageUrl, input, organiserEventPhoto} = this.state
         const userEmail = localStorage.getItem('email')
         // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
@@ -196,7 +217,7 @@ export default class LocationDetails extends Component {
         console.log('isSubmitted', input.isSubmitted)
 
 
-        if(ownerLogin === locationOwner, input.isSubmitted === false){
+        if(ownerLogin === locationOwner && input.isSubmitted === false){
         return (
             
             <div>
@@ -233,6 +254,12 @@ export default class LocationDetails extends Component {
                     
                     </Col>
                 </Row>
+                <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
                 <hr/>
                 
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
@@ -247,15 +274,15 @@ export default class LocationDetails extends Component {
         )
         //
         }
-        else if(ownerLogin === locationOwner, input.isSubmitted === true){
+        else if(ownerLogin === locationOwner && input.isSubmitted === true){
             return(
             <div>
             <Row>
-                <Col lg={8}><h4><b>Basic Info and Map</b></h4>
+                <Col lg={8}><h3><b>Basic Info and Map</b></h3>
                 <BasicInfo {...this.props} data={this.state}/>
                 
                 </Col>
-                <Col lg={4}><h4><b>Contact Info</b></h4>
+                <Col lg={4}><h3><b>Contact Info</b></h3>
                 <br/>
                 
                 <container style={{color: 'red'}}><img style={{width:100}} src={imageUrl}></img></container>
@@ -269,18 +296,27 @@ export default class LocationDetails extends Component {
                 <hr/>
                
                 <ListOfMembers data={this.state}/>
-
+                
                 {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
                 <b>You have submitted clean up result of this clean up site, thus it is now closed.</b>
                 
                 </Col>
             </Row>
+            <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
 
+            <hr/>
+                
+                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
 
         </div>
         )
         }
-        else if(ownerLogin === locationOwner, input.isSubmitted === false){
+        else if(ownerLogin !== locationOwner && input.isSubmitted === true){
             return(
             <div>
                 <Row>
@@ -302,15 +338,20 @@ export default class LocationDetails extends Component {
                     <hr/>
                    
                     <ListOfMembers data={this.state}/>
-    
-                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
-                    <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
-                            {/* {members.length}  */}
-                            {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
                     
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <b>Th owner of the location has closed down this clean up site.</b>
+                         
                     
                     </Col>
+                    
                 </Row>
+                <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
     
     
             </div>
@@ -339,18 +380,24 @@ export default class LocationDetails extends Component {
 
                    
                     <ListOfMembers data={this.state}/>
-
-                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
-                    <b>The owner has closed this clean up location</b>
                     
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
+                            {/* {members.length}  */}
+                            {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
                             
                             <br/>
                             <br/>
                             <br/>
-                    <ToolsRequirement/>
                     
                     </Col>
                 </Row>
+                <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
                 <hr/>
                 
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>

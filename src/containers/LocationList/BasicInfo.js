@@ -1,22 +1,39 @@
 import React from 'react'
 import Map from './detailsMap';
-
+import {Col, Row} from 'react-bootstrap'
 
 export default class BasicInfo extends React.Component{
     render(){
-        const {name, address, time, description, dataLat, dataLng} = this.props.data
+        const {name, address, time, description,  
+            organiserName,
+        organiserLogo,
+        organiserSlogan,
+        organiserDescription,
+        locationInternalOrExternal} = this.props.data
         return( 
             
             <div>
-                
+                <Row>
+                    <Col sm={3}>
+                        <img style={{width:150}}src={organiserLogo}/>
+                    </Col>
+                    <Col >
+        <p><b>Organization Name:</b> {organiserName}</p>
+
+        <p><b>Slogan:</b> {organiserSlogan}</p>
+        <p><b>About Us:</b> {organiserDescription}</p>
+                    </Col>
+                </Row>
                 <br/>
-                <b>Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {name}
+                <b>Site Name&nbsp;&nbsp;&nbsp;:</b> {name}
                 <br/>
                 <b>Address&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {address}
                 <br/>
                 <b>Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {time}
                 <br/>
-                <b>Description:</b> {description}
+                <b>Agenda&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</b> {description}
+                <br/>
+                <b>External or Internal: </b>{locationInternalOrExternal}
       
                 
                 <Map

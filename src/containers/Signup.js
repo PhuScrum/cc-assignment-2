@@ -77,27 +77,27 @@ export default class Signup extends Component {
 		var error_gender = "";
 		var error_phoneNumber = "";
 	
-		if (this.state.fname == undefined || this.state.fname.length < 2) {
+		if (this.state.fname === undefined || this.state.fname.length < 2) {
 		  error_fname = "First name needs at least 2 characters  ";
 		  valid = false;
 		}
 	
-		if (this.state.lname == undefined || this.state.lname.length < 4) {
+		if (this.state.lname === undefined || this.state.lname.length < 4) {
 		  error_lname = "Last name needs at least 4 characters" ;
 		  valid = false;
 		}
 
-		if (this.state.age == undefined || this.state.age == "String" || this.state.age.length < 1 || this.state.age.length > 3 ) {
+		if (this.state.age === undefined || this.state.age === "String" || this.state.age.length < 1 || this.state.age.length > 3 ) {
 			error_age = "Your age is invalid ";
 			valid = false;
 		}
 
-		if (this.state.gender == undefined || this.state.gender.length < 1) {
+		if (this.state.gender === undefined || this.state.gender.length < 1) {
 			error_gender = "Please enter a gender ";
 			valid = false;
 		}
 
-		if (this.state.phoneNumber == undefined || this.state.phoneNumber.length < 9) {
+		if (this.state.phoneNumber === undefined || this.state.phoneNumber.length < 9) {
 			error_phoneNumber = "Invalid. A phone number must have more than 9 numbers ";
 			valid = false;
 		}
