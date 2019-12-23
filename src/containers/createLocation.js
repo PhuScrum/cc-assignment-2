@@ -283,7 +283,7 @@ export default class createLocation extends Component {
 
 				<div className="form-group">
 
-					<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat, markerPosition.lng)}>Register Location</button>
+					<button type="submit" className="btn btn-primary" onClick={this.props.onSubmit.bind(this, markerPosition.lat, markerPosition.lng)}>Register</button>
 
 				</div>
 
