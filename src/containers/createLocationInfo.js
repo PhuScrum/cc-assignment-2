@@ -100,7 +100,7 @@ export default class CreateLocationInfo extends Component {
 						className="form-control"
 						value={this.props.appdata.organiserName}
 						onChange={this.props.onChangeOrgName.bind(this)} />
-					{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
+					<div style={{ color: 'red' }} className="error" id="error-organiserName" />
 				</div>
 
 				<label>Organization Logo:</label>
@@ -111,7 +111,7 @@ export default class CreateLocationInfo extends Component {
 					placeholder='Please enter the organiser logo url'
 				/>
 
-				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
+				<div style={{ color: 'red' }} className="error" id="error-organiserLogo" />
 
 				<br />
 				<label>Organization Slogan:</label>
@@ -121,7 +121,7 @@ export default class CreateLocationInfo extends Component {
 					onChange={this.props.onChangeOrgSlogan.bind(this)}
 				/>
 
-				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
+				<div style={{ color: 'red' }} className="error" id="error-organiserSlogan" />
 				<br />
 				<label>Organization Description:</label>
 				<input type="text"
@@ -130,7 +130,7 @@ export default class CreateLocationInfo extends Component {
 					onChange={this.props.onChangeOrgDescription.bind(this)}
 				/>
 
-				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
+				<div style={{ color: 'red' }} className="error" id="error-organiserDescription" />
 				<br />
 				<label>Organization Previous Event Photo:</label>
 				<input type="text"
@@ -139,16 +139,14 @@ export default class CreateLocationInfo extends Component {
 					onChange={this.props.onChangeOrgEventPhoto.bind(this)}
 					placeholder='Please enter the previous event photo URL'
 				/>
+				<div style={{ color: 'red' }} className="error" id="error-organiserEventPhoto" />
 
-				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
 				<br />
 
 				<label>Time: </label>
 				<br />
-				{/* change time into array to store start and end time  */}
 				Start Date and Time:
 					<DatePicker
-					// value={this.props.appdata.startDate} onChange={this.props.onChangeStartDate.bind(this)}
 					showTime
 					format="YYYY-MM-DD HH:mm:ss"
 					use12Hours
@@ -161,7 +159,6 @@ export default class CreateLocationInfo extends Component {
 				&nbsp;&nbsp;
 				End Time:
 					<DatePicker
-					// value={this.props.appdata.startDate} onChange={this.props.onChangeStartDate.bind(this)}
 					showTime
 					format="YYYY-MM-DD HH:mm:ss"
 					use12Hours
@@ -171,7 +168,7 @@ export default class CreateLocationInfo extends Component {
 					onOpenChange={this.props.handleStartOpenChangeEndDate}
 				/>
 				{/* <TimePicker use12Hours format="h:mm a" value={this.props.appdata.endTime} onChange={this.props.onChangeEndTime.bind(this)} /> */}
-				{/* <div style={{ color:'red'}} className="error" id="error-time" /> */}
+				<div style={{ color:'red'}} className="error" id="error-time" />
 				<br />
 				<br />
 				<label>Clean Up Agenda: </label>
@@ -193,6 +190,8 @@ export default class CreateLocationInfo extends Component {
 					<option value="Both">Both</option>
 					
 				</select>
+				<div style={{ color: 'red' }} className="error" id="error-locationInternalOrExternal" />
+				
 				<br />
 
 				<div>

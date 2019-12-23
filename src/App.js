@@ -3,15 +3,12 @@ import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 
-import { Nav, Navbar, NavItem, Row, Col, Carousel } from 'react-bootstrap';
+import { Nav, Navbar, NavItem} from 'react-bootstrap';
 import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Button, Modal } from 'antd'
 import './App.css';
-import { id } from 'date-fns/locale';
-import ReportPage from './containers/RunReport'
 // import registerServiceWorker from './registerServiceWorker';
 // const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
@@ -283,27 +280,69 @@ class App extends Component {
 		var valid = true;
 
 		this.state.error_name = "";
-		// this.state.error_time = "";
+		this.state.error_time = "";
 		this.state.error_description = "";
+		this.state.error_organiserName = "";
+		this.state.error_organiserLogo = "";
+		this.state.error_organiserSlogan = "";
+		this.state.error_organiserDescription = "";
+		this.state.error_organiserEventPhoto = "";
+		this.state.error_locationInternalOrExternal = "";
 		// if (this.state.time == undefined || this.state.time.length < 4) {
 		// 	this.state.error_time = "Please enter a valid date ";
 		// 	valid = false;
 		// }
-		if (this.state.name == undefined || this.state.name.length < 10) {
+		if (this.state.name === undefined || this.state.name.length < 10) {
 			this.state.error_name = "Your location name is invalid, please include more than 10 characters ";
 			valid = false;
 		}
-
-
-
-		if (this.state.description == undefined || this.state.description.length < 25) {
-			this.state.error_description = "The description must contain more than 25 letters ";
+		if (this.state.description === undefined || this.state.description.length < 20) {
+			this.state.error_description = "The description must contain more than 20 letters ";
 			valid = false;
 		}
+		if (this.state.startDate === null || this.state.endDate ===null|| this.state.startDate.length < 1 || this.state.endDate.length < 1 || this.state.endDate <= this.state.startDate) {
+			this.state.error_time = "The start to end date is invalid.";
+			valid = false;
+		}
+		// organiserName
+		if (this.state.organiserName === undefined || this.state.organiserName.length < 2) {
+			this.state.error_organiserName = "Organiser name must contain more than 2 letters";
+			valid = false;
+		}
+		if (this.state.organiserLogo === undefined || this.state.organiserLogo.length < 10) {
+			this.state.error_organiserLogo = "Organiser Logo is invalid.";
+			valid = false;
+		}
+		if (this.state.organiserSlogan === undefined || this.state.organiserSlogan.length < 5) {
+			this.state.error_organiserSlogan = "Organiser slogan must can contain more than 5 letters.";
+			valid = false;
+		}
+		if (this.state.organiserDescription === undefined || this.state.organiserDescription.length < 10) {
+			this.state.error_organiserDescription = "Organiser Description must can contain more than 10 letters.";
+			valid = false;
+		}
+		if (this.state.organiserEventPhoto === undefined || this.state.organiserEventPhoto.length < 10) {
+			this.state.error_organiserEventPhoto = "Organiser Event Photo is invalid.";
+			valid = false;
+		}
+		if (this.state.locationInternalOrExternal === "" || this.state.locationInternalOrExternal.length < 0) {
+			this.state.error_locationInternalOrExternal = "Please select the criteria for clean up internal or external.";
+			valid = false;
+		}
+
+
+		
 
 		// document.getElementById("error-time").innerHTML = this.state.error_time;
 		document.getElementById("error-name").innerHTML = this.state.error_name;
 		document.getElementById("error-description").innerHTML = this.state.error_description;
+		document.getElementById("error-time").innerHTML = this.state.error_time;
+		document.getElementById("error-organiserName").innerHTML = this.state.error_organiserName;
+		document.getElementById("error-organiserLogo").innerHTML = this.state.error_organiserLogo;
+		document.getElementById("error-organiserSlogan").innerHTML = this.state.error_organiserSlogan;
+		document.getElementById("error-organiserDescription").innerHTML = this.state.error_organiserDescription;
+		document.getElementById("error-organiserEventPhoto").innerHTML = this.state.error_organiserEventPhoto;
+		document.getElementById("error-locationInternalOrExternal").innerHTML = this.state.error_locationInternalOrExternal;
 		return valid;
 	}
 
