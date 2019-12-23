@@ -57,7 +57,8 @@ export default class InputInformation extends Component {
       isLoading: true,
       kilos: 0.0,
       attended: 0.0,
-      cost: 0.0
+      cost: 0.0,
+      isSubmitted: false,
 
 
     };
@@ -127,7 +128,8 @@ export default class InputInformation extends Component {
         input: {
           kilos: kiloss,
           attended: attendedd,
-          cost: costt
+          cost: costt,
+          isSubmitted: true
         }
       }
       )
@@ -187,7 +189,7 @@ export default class InputInformation extends Component {
         </Paper>
         <br />
         <button type="submit" className="btn btn-primary pull-right"
-          onClick={this.showModal}>Input / Edit</button>
+          onClick={this.showModal}>Input Results</button>
 
         <Modal
           title={<h3>Fill in information after Site CleanUp</h3>}

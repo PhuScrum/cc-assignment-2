@@ -417,7 +417,8 @@ class App extends Component {
 				"input": {
 					attended: 0,
 					cost: 0,
-					kilos: 0
+					kilos: 0,
+					isSubmitted: false
 				}
 			}
 			)

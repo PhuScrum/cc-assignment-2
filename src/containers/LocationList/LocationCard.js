@@ -48,14 +48,28 @@ export default class LocationCard extends Component {
             return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4>
+                        <h4 class="card-title">{name}</h4>   <p><b>(You own this clean up site)</b></p>
+                        <Row >
+                            <Col sm={2}> <img src={organiserLogo} style={{ width: 70 }} /></Col>
+                            <Col sm={8}><p><b>Organiser:</b> {organiserName}</p>
+                                <p><b>Slogan:</b> {organiserSlogan}</p>
+                            </Col>
+                        </Row>
+                        <b>Organization Description:</b>
+                        <p class="card-text">{organiserDescription}</p>
+                        <b>Agenda:</b>
                         <p class="card-text">{description}</p>
                         {/* <p>From {startDate} to {endDate}</p> */}
-                        <p>time {time}</p>
+                        <b>Time:</b>
+                        <p>{time}</p>
+                        <b>Internal or External:</b>
+                        <p class="card-text">{locationInternalOrExternal} </p>
+                        <b>Location Owner:</b>
                         <p class="card-text">{locationOwner} </p>
-                        <p></p>
-                        <Link to={`/location/${_id}`}>See more </Link>
-
+                        <Link to={`/location/${_id}`}>See more</Link>
+                        <br />
+                        <br />
+                       
                     </div>
                 </div>
 

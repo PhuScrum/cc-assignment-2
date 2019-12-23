@@ -37,6 +37,7 @@ const StyledTableCell = withStyles(theme => ({
       minWidth: 700,
     },
   }));
+
 export default class LocationCard extends Component {
     constructor(props) {
 		super(props);
@@ -71,8 +72,8 @@ export default class LocationCard extends Component {
           <TableRow>
             <StyledTableCell align="left">{this.props.data.name}</StyledTableCell>
             <StyledTableCell align="left"># of Volunteer</StyledTableCell>
-            <StyledTableCell align="right">Gathered Amount&nbsp;(Kg)</StyledTableCell>
             <StyledTableCell align="right">Attended Number</StyledTableCell>
+            <StyledTableCell align="right">Gathered Amount&nbsp;(Kg)</StyledTableCell>
             <StyledTableCell align="right">Cost&nbsp;(VND)</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -81,8 +82,8 @@ export default class LocationCard extends Component {
             <StyledTableRow>
               <StyledTableCell > Number &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </StyledTableCell>
-              <StyledTableCell align="right">{this.props.data.members.length}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.attended}</StyledTableCell>
+              <StyledTableCell align="right">{this.props.data.members.length}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.cost}</StyledTableCell>
               <StyledTableCell align="right">{this.props.data.input.kilos}</StyledTableCell>
             </StyledTableRow>

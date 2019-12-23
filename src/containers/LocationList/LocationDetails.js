@@ -187,14 +187,18 @@ export default class LocationDetails extends Component {
     }
     
     render() {
-        const {members, fName, lName, age, gender, locationOwner, imageUrl} = this.state
+        const {members, fName, lName, age, gender, locationOwner, imageUrl, input} = this.state
         const userEmail = localStorage.getItem('email')
         // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
-        localStorage.setItem('locationOwner', locationOwner) 
-        console.log("imagehere", imageUrl)
-        if(ownerLogin === locationOwner){
+        // localStorage.setItem('locationOwner', locationOwner) 
+        // console.log("imagehere", imageUrl)
+        console.log('isSubmitted', input.isSubmitted)
+
+
+        if(ownerLogin === locationOwner, input.isSubmitted === false){
         return (
+            
             <div>
                 <Row>
                     <Col lg={8}><h4><b>Basic Info and Map</b></h4>
@@ -218,7 +222,7 @@ export default class LocationDetails extends Component {
                     <ListOfMembers data={this.state}/>
 
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
-
+                    
                     <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
                             {/* {members.length}  */}
                             {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
@@ -243,7 +247,7 @@ export default class LocationDetails extends Component {
         )
         //
         }
-        else{
+        else if(ownerLogin === locationOwner, input.isSubmitted === true){
             return(
             <div>
             <Row>
@@ -267,9 +271,7 @@ export default class LocationDetails extends Component {
                 <ListOfMembers data={this.state}/>
 
                 {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
-                <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
-                        {/* {members.length}  */}
-                        {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
+                <b>You have submitted clean up result of this clean up site, thus it is now closed.</b>
                 
                 </Col>
             </Row>
@@ -277,6 +279,89 @@ export default class LocationDetails extends Component {
 
         </div>
         )
+        }
+        else if(ownerLogin === locationOwner, input.isSubmitted === false){
+            return(
+            <div>
+                <Row>
+                    <Col lg={8}><h4><b>Basic Info and Map</b></h4>
+                    <BasicInfo {...this.props} data={this.state}/>
+                    
+                    </Col>
+                    <Col lg={4}><h4><b>Contact Info</b></h4>
+                    <br/>
+                    
+                    <container style={{color: 'red'}}><img style={{width:100}} src={imageUrl}></img></container>
+                    <br/>
+                    <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                    <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                    <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                    <b>Gender:&nbsp;&nbsp;</b>{gender} <br/>
+                    <ContactSiteOwner data={this.state}/>
+                    <br/>
+                    <hr/>
+                   
+                    <ListOfMembers data={this.state}/>
+    
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
+                            {/* {members.length}  */}
+                            {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
+                    
+                    
+                    </Col>
+                </Row>
+    
+    
+            </div>
+
+            )
+        }else{
+            return(
+                <div>
+                <Row>
+                    <Col lg={8}><h4><b>Basic Info and Map</b></h4>
+                    <BasicInfo {...this.props} data={this.state}/>
+                    
+                    </Col>
+                    <Col lg={4}><h4><b>Contact Info</b></h4>
+                    <br/>
+                    <img style={{width:100}} src={imageUrl}></img>
+                    <br/>
+                    <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender}
+                
+                 <br/>
+                 <br/>
+                 <hr/>
+
+                   
+                    <ListOfMembers data={this.state}/>
+
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <b>The owner has closed this clean up location</b>
+                    
+                            
+                            <br/>
+                            <br/>
+                            <br/>
+                    <ToolsRequirement/>
+                    
+                    </Col>
+                </Row>
+                <hr/>
+                
+                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
+                <br/>
+                <br/>
+                <br/>
+            
+
+
+            </div>
+            )
         }
     }
 }
