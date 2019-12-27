@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import moment from 'moment';
 
-import { Nav, Navbar, NavItem} from 'react-bootstrap';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import Routes from './Routes';
 import { Auth } from 'aws-amplify';
 import 'antd/dist/antd.css';
@@ -22,23 +22,23 @@ class App extends Component {
 		this.state = {
 			// assignment 3 required info
 			organiserName: '',
-			organiserLogo:'',
-			organiserSlogan:'',
-			organiserDescription:'',
-			organiserEventPhoto:'',
-			locationInternalOrExternal:'',
+			organiserLogo: '',
+			organiserSlogan: '',
+			organiserDescription: '',
+			organiserEventPhoto: '',
+			locationInternalOrExternal: '',
 			// time and date picker
-			startDate:null,
-			endDate:null,
-			startDatee:null,
-			endDatee:null,
-			startTime:null,
-			endTime:null,
+			startDate: null,
+			endDate: null,
+			startDatee: null,
+			endDatee: null,
+			startTime: null,
+			endTime: null,
 			value: null,
 			startValue: null,
 			//epoch
-			epochStartDate:null,
-			epochEndDate:null,
+			epochStartDate: null,
+			epochEndDate: null,
 			// end of time date picker
 
 			// end of assignment 3 required info
@@ -97,45 +97,45 @@ class App extends Component {
 	// Date picker
 	onChangeStartDate = (field, value) => {
 		this.setState({
-		  [field]: value,
+			[field]: value,
 		});
-	  };
-	
-	  onStartChangeDate = value => {
+	};
+
+	onStartChangeDate = value => {
 		this.onChangeStartDate('startDate', value);
-	  };
-	
-	  handleStartOpenChangeDate = open => {
+	};
+
+	handleStartOpenChangeDate = open => {
 		if (!open) {
-		  this.setState({ endOpen: true });
+			this.setState({ endOpen: true });
 		}
-	  };
-	  // end date
-	  onChangeEndDate = (field, value) => {
+	};
+	// end date
+	onChangeEndDate = (field, value) => {
 		this.setState({
-		  [field]: value,
+			[field]: value,
 		});
-	  };
-	
-	  onStartChangeEndDate = value => {
+	};
+
+	onStartChangeEndDate = value => {
 		this.onChangeEndDate('endDate', value);
-	  };
-	
-	  handleStartOpenChangeEndDate = open => {
+	};
+
+	handleStartOpenChangeEndDate = open => {
 		if (!open) {
-		  this.setState({ endOpen: true });
+			this.setState({ endOpen: true });
 		}
-	  };
+	};
 	// Time picker
 	onChangeStartTime = time => {
 		console.log('console log time', time);
-		this.setState({startTime: time });
-	  };
+		this.setState({ startTime: time });
+	};
 	onChangeEndTime = time => {
 		console.log('console log time', time);
-		this.setState({endTime: time });
-	  };
-	
+		this.setState({ endTime: time });
+	};
+
 	//edit location
 	handleEdit(name, e, description, _id, time, lat, lng, startDate, endDate, organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto, locationInternalOrExternal) {
 		// console.log('name', name, 'time', startDatee, 'id', _id, 'description',  description,  'lat', lat, 'lng', lng )
@@ -161,7 +161,14 @@ class App extends Component {
 			lng: lng,
 			cost: 0.0,
 			kilos: 0.0,
-			attended: 0.0
+			//assignment 3 requirement
+			attended: 0.0,
+
+			trashNumber: 0.0,
+			organic: 0.0,
+			recycable: 0.0,
+			nonRecycable: 0.0,
+			afterEventPhoto: ''
 		})
 		this.props.history.push('/CreateLocationPage')
 
@@ -184,15 +191,15 @@ class App extends Component {
 
 	editLocation(lat, lng) {
 		console.log('submit edit')
-		const { id, name, address, description, startDate, endDate, 
-			organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto,locationInternalOrExternal 
+		const { id, name, address, description, startDate, endDate,
+			organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto, locationInternalOrExternal
 		} = this.state
 		// console.log(this.state.id, name, address, description, lat, lng, time)
 		// console.log('outputting lat', lat, 'lng', lng)
 		this.state.startDatee = new Date(startDate)
 		// var startTimee = new Date(startTime)
 		this.state.endDatee = new Date(endDate)
-		
+
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -205,9 +212,9 @@ class App extends Component {
 				locationId: id,
 				name: name,
 				address: address,
-				time: this.state.startDatee +  "\n to \n" + this.state.endDatee,
-				startDate: startDate +'',
-				endDate: endDate+'',
+				time: this.state.startDatee + "\n to \n" + this.state.endDatee,
+				startDate: startDate + '',
+				endDate: endDate + '',
 
 				organiserName: organiserName,
 				organiserLogo: organiserLogo,
@@ -259,8 +266,8 @@ class App extends Component {
 		});
 	}
 	handleChangeInternalExternal(e) {
-		this.setState({locationInternalOrExternal: e.target.value});
-	  }
+		this.setState({ locationInternalOrExternal: e.target.value });
+	}
 
 
 	//createlocation function
@@ -300,7 +307,7 @@ class App extends Component {
 			this.state.error_description = "The description must contain more than 20 letters ";
 			valid = false;
 		}
-		if (this.state.startDate === null || this.state.endDate ===null|| this.state.startDate.length < 1 || this.state.endDate.length < 1 || this.state.endDate <= this.state.startDate) {
+		if (this.state.startDate === null || this.state.endDate === null || this.state.startDate.length < 1 || this.state.endDate.length < 1 || this.state.endDate <= this.state.startDate) {
 			this.state.error_time = "The start to end date is invalid.";
 			valid = false;
 		}
@@ -331,7 +338,7 @@ class App extends Component {
 		}
 
 
-		
+
 
 		// document.getElementById("error-time").innerHTML = this.state.error_time;
 		document.getElementById("error-name").innerHTML = this.state.error_name;
@@ -355,8 +362,8 @@ class App extends Component {
 				return;
 			} else {
 				this.registerLocation(lat, lng);
-		// 		console.log(`The values are ${this.state.name}, ${this.state.time},  
-		// ${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
+				// 		console.log(`The values are ${this.state.name}, ${this.state.time},  
+				// ${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
 				// lat ${this.state.markerPosition.lat}, lng ${this.state.markerPosition.lng}
 				this.setState({
 					name: '',
@@ -364,10 +371,10 @@ class App extends Component {
 					description: '',
 					lat: '',
 					lng: '',
-					startDate:null,
-					endDate:null,
-					organiserName:'',
-					organiserLogo:''
+					startDate: null,
+					endDate: null,
+					organiserName: '',
+					organiserLogo: ''
 				})
 			}
 		}
@@ -408,8 +415,8 @@ class App extends Component {
 
 				"address": this.state.address,
 				"time": this.state.startDatee + "\n to \n" + this.state.endDatee,
-				"startDate": this.state.startDate +'',
-				"endDate": this.state.endDate+'',
+				"startDate": this.state.startDate + '',
+				"endDate": this.state.endDate + '',
 				"description": this.state.description,
 				"lng": lng,
 				"lat": lat,
@@ -418,7 +425,13 @@ class App extends Component {
 					attended: 0,
 					cost: 0,
 					kilos: 0,
-					isSubmitted: false
+					isSubmitted: false,
+					//assignment 3 requirement
+					trashNumber: 0.0,
+					organic: 0.0,
+					recycable: 0.0,
+					nonRecycable: 0.0,
+					afterEventPhoto: ''
 				}
 			}
 			)
@@ -550,18 +563,18 @@ class App extends Component {
 			onChangeOrgDescription: this.onChangeOrgDescription,
 			onChangeOrgEventPhoto: this.onChangeOrgEventPhoto,
 			handleChangeInternalExternal: this.handleChangeInternalExternal,
-			
+
 		};
 		// var ownerLogin = localStorage.getItem('email')
 		if (this.state.userType === 'admin') {
 
 			return (
-				<div className="App container" style={{width: 1600}} >
+				<div className="App container" style={{ width: 1600 }} >
 
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Brand>
-								<Link to="/"><img style={{width: 110}} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"/></Link>
+								<Link to="/"><img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png" /></Link>
 							</Navbar.Brand>
 							<Navbar.Toggle />
 						</Navbar.Header>
@@ -586,7 +599,7 @@ class App extends Component {
 												<NavItem>Facebook Login</NavItem>
 											</LinkContainer>
 										</Fragment>
-										
+
 									)}
 							</Nav>
 						</Navbar.Collapse>
@@ -635,80 +648,80 @@ class App extends Component {
 		}
 		else {
 			return (
-				
-					<div className="App container" style={{width: 1600}}>
 
-						<Navbar fluid collapseOnSelect>
-							<Navbar.Header>
-								<Navbar.Brand style={{marginBottom: 10}}>
-									<Link to="/"><img style={{width: 110}} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"></img></Link>
-								</Navbar.Brand>
-								<Navbar.Toggle />
-							</Navbar.Header>
-							<Navbar.Collapse>
-								<Nav pullRight>
-									{this.state.isAuthenticated ? (
+				<div className="App container" style={{ width: 1600 }}>
+
+					<Navbar fluid collapseOnSelect>
+						<Navbar.Header>
+							<Navbar.Brand style={{ marginBottom: 10 }}>
+								<Link to="/"><img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"></img></Link>
+							</Navbar.Brand>
+							<Navbar.Toggle />
+						</Navbar.Header>
+						<Navbar.Collapse>
+							<Nav pullRight>
+								{this.state.isAuthenticated ? (
+									<Fragment>
+
+										<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
+										<NavItem onClick={this.handleLogout}>Logout</NavItem>
+									</Fragment>
+								) : (
 										<Fragment>
 
-											<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
-											<NavItem onClick={this.handleLogout}>Logout</NavItem>
+											<LinkContainer to="/signup">
+												<NavItem>Signup</NavItem>
+											</LinkContainer>
+											<LinkContainer to="/login">
+												<NavItem>Login</NavItem>
+											</LinkContainer>
+											<LinkContainer to="/loginWFacebook">
+												<NavItem>Facebook Login</NavItem>
+											</LinkContainer>
 										</Fragment>
-									) : (
-											<Fragment>
+									)}
+							</Nav>
+						</Navbar.Collapse>
+					</Navbar>
 
-												<LinkContainer to="/signup">
-													<NavItem>Signup</NavItem>
-												</LinkContainer>
-												<LinkContainer to="/login">
-													<NavItem>Login</NavItem>
-												</LinkContainer>
-												<LinkContainer to="/loginWFacebook">
-													<NavItem>Facebook Login</NavItem>
-												</LinkContainer>
-											</Fragment>
-										)}
-								</Nav>
-							</Navbar.Collapse>
-						</Navbar>
+					<Routes childProps={childProps}
+					/>
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
+					<br />
 
-						<Routes childProps={childProps}
-						/>
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-						<br />
-
-						<Navbar fluid collapseOnSelect fixed="bottom">
-							<Navbar.Header>
-								<Navbar.Brand>
-								</Navbar.Brand>
-								<Navbar.Toggle />
-							</Navbar.Header>
-							<Navbar.Collapse>
-								<Nav pullRight>
-									{this.state.isAuthenticated ? (
+					<Navbar fluid collapseOnSelect fixed="bottom">
+						<Navbar.Header>
+							<Navbar.Brand>
+							</Navbar.Brand>
+							<Navbar.Toggle />
+						</Navbar.Header>
+						<Navbar.Collapse>
+							<Nav pullRight>
+								{this.state.isAuthenticated ? (
+									<Fragment>
+										<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
+										<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+									</Fragment>
+								) : (
 										<Fragment>
 											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
-										</Fragment>
-									) : (
-											<Fragment>
-											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
-											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
 
-											</Fragment>
-										)}
-								</Nav>
-							</Navbar.Collapse>
-						</Navbar>
-					</div>
+										</Fragment>
+									)}
+							</Nav>
+						</Navbar.Collapse>
+					</Navbar>
+				</div>
 			)
 		}
 	}
