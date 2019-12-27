@@ -212,7 +212,7 @@ export default class LocationDetails extends Component {
         const userEmail = localStorage.getItem('email')
         // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
-        // localStorage.setItem('locationOwner', locationOwner) 
+        localStorage.setItem('locationOwner', locationOwner) 
         // console.log("imagehere", imageUrl)
         console.log('isSubmitted', input.isSubmitted)
 

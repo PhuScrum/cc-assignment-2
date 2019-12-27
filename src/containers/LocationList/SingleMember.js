@@ -104,12 +104,15 @@ export default class SingleMember extends Component {
 
     render() {
         // console.log(this.props.data)
+      
         const { fName, lName, age, gender, phoneNumber } = this.state
         const locationOwner = localStorage.getItem('locationOwner')
         const loggedInEmail = localStorage.getItem('email')
-        if(locationOwner === this.props.data | this.props.data === loggedInEmail | locationOwner !== loggedInEmail){
+        // console.log("location owner", locationOwner)
+        if(locationOwner === this.props.data || this.props.data === loggedInEmail || locationOwner !== loggedInEmail){
 
         return (
+            
             <div>
 
                 {fName} {lName} <br />
