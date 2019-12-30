@@ -58,7 +58,10 @@ class App extends Component {
 			adminEmail: '',
 			error_name: '',
 			error_time: '',
-			error_description: ''
+			error_description: '',
+
+			
+			showOnMap:null
 
 		};
 
@@ -88,9 +91,29 @@ class App extends Component {
 		this.onChangeOrgSlogan = this.onChangeOrgSlogan.bind(this);
 		this.onChangeOrgDescription = this.onChangeOrgDescription.bind(this);
 		this.onChangeOrgEventPhoto = this.onChangeOrgEventPhoto.bind(this);
-		this.handleChangeInternalExternal = this.handleChangeInternalExternal.bind(this)
+		this.handleChangeInternalExternal = this.handleChangeInternalExternal.bind(this);
+
+		this.showOnMap = this.showOnMap.bind(this);
 
 
+	}
+
+	showOnMapSet(){
+		localStorage.setItem('showOnMap',this.state.showOnMap)
+	}
+
+	
+
+	showOnMap(name){
+		// localStorage.setItem('showOnMap', this.props.data.name)
+		// var showOnMap = localStorage.getItem('showOnMap')
+		this.setState({
+			showOnMap: name
+		})
+		
+		this.showOnMapSet(name)
+		console.log('aoo', this.state.showOnMap)
+		localStorage.setItem('showOnMap',this.state.showOnMap)
 	}
 
 	// assignment 3
@@ -168,7 +191,8 @@ class App extends Component {
 			organic: 0.0,
 			recycable: 0.0,
 			nonRecycable: 0.0,
-			afterEventPhoto: ''
+			afterEventPhoto: '',
+
 		})
 		this.props.history.push('/CreateLocationPage')
 
@@ -563,6 +587,8 @@ class App extends Component {
 			onChangeOrgDescription: this.onChangeOrgDescription,
 			onChangeOrgEventPhoto: this.onChangeOrgEventPhoto,
 			handleChangeInternalExternal: this.handleChangeInternalExternal,
+
+			showOnMap: this.showOnMap
 
 		};
 		// var ownerLogin = localStorage.getItem('email')

@@ -15,10 +15,23 @@ export default class Home extends Component {
 
 		this.state = {
 			isLoading: true,
-			location: []
+			location: [],
+			showOnMap:''
 
 		};
 	}
+
+	showOnMap(){
+		// localStorage.setItem('showOnMap', this.props.data.name)
+		// var showOnMap = localStorage.getItem('showOnMap')
+		// this.props.data.showOnMap = this.props.data.name
+		// this.setState({
+			
+		// })
+		console.log('show on map location card')
+	}
+
+	
 
 
 	fetchLocation() {
@@ -105,8 +118,8 @@ export default class Home extends Component {
 			<Row>
 			<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
 			<Col sm={8}>
-				<h3><b>Here are the current registered locations to select from.</b></h3>
-				<MarkedMap
+				<h3><b>Here are the current registered locations to select from. {this.state.showOnMap}</b></h3>
+				<MarkedMap 
 					data={this.state}
 					google={this.props.google}
 					center={{ lat: 10.8231, lng: 106.6297 }}
@@ -115,7 +128,7 @@ export default class Home extends Component {
 				</MarkedMap>
 			</Col>
 			<Col sm={4}>
-				<h3><b> Location List</b></h3>
+				<h3><b> Location List </b></h3>
 				<LocationList {...this.props} data={this.state} />
 			</Col>
 		</Row>
@@ -181,9 +194,9 @@ export default class Home extends Component {
 			<Row>
 			<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
 			<Col sm={8}>
-				<h3><b>Here are the current registered locations to select from.</b></h3>
-				<MarkedMap 
-					data={this.state}
+				<h3><b>Here are the current registered locations to select from. {this.state.showOnMap}</b></h3>
+				<MarkedMap
+				 	data={this.state}
 					google={this.props.google}
 					center={{ lat: 10.8231, lng: 106.6297 }}
 					height='400px'
@@ -233,6 +246,7 @@ export default class Home extends Component {
 	}
 
 	render() {
-		return <div className="Home">{this.props.isAuthenticated ? this.renderTest() : this.renderLander()}</div>;
+		
+		return <div className="Home" >{this.props.isAuthenticated ? this.renderTest() : this.renderLander() } </div> ;
 	}
 }

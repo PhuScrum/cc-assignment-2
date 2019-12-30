@@ -22,7 +22,7 @@ export default class LocationList extends Component {
             <div>
                 <SimpleBar style={{ maxHeight: 600 }}>
                     {locationListing}
-                </SimpleBar>
+                </SimpleBar> 
 
 
             </div >

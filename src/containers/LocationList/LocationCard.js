@@ -5,6 +5,8 @@ import { Button, ButtonToolbar, Row, Col } from 'react-bootstrap'
 
 export default class LocationCard extends Component {
 
+
+
     render() {
         const { name, locationOwner, address, description, _id, time, lat, lng, startDate, endDate, organiserName, organiserLogo, organiserSlogan, organiserDescription, organiserEventPhoto, locationInternalOrExternal } = this.props.data
         var ownerLogin = localStorage.getItem('email')
@@ -12,7 +14,7 @@ export default class LocationCard extends Component {
             return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4>   <p><b>(You own this clean up site)</b></p>
+                        <h4 class="card-title">{name}</h4> <Button onClick={ () => this.props.showOnMap(name) }>Show on Map</Button>   <p><b>(You own this clean up site)</b></p>
                         <Row >
                             <Col sm={2}> <img src={organiserLogo} style={{ width: 70 }} /></Col>
                             <Col sm={8}><p><b>Organiser:</b> {organiserName}</p>
@@ -48,7 +50,7 @@ export default class LocationCard extends Component {
             return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4>   <p><b>(You own this clean up site)</b></p>
+                        <h4 class="card-title">{name}</h4> <Button onClick={ () => this.props.showOnMap(name) }>Show on Map</Button>  <p><b>(You own this clean up site)</b></p>
                         <Row >
                             <Col sm={2}> <img src={organiserLogo} style={{ width: 70 }} /></Col>
                             <Col sm={8}><p><b>Organiser:</b> {organiserName}</p>

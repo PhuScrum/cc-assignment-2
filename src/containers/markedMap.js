@@ -12,12 +12,14 @@ import {
 import Geocode from "react-geocode";
 
 const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
+  const showOnMap = localStorage.getItem('showOnMap')
   return (
     <GoogleMap defaultZoom={11} defaultCenter={{lat: e.state.mapPosition.lat, lng: e.state.mapPosition.lng }}>
       {props.markers.map(marker => {
         const onClick = props.onClick.bind(this, marker)
         return (
           <Marker
+            animation={marker ? (marker.name === showOnMap ? '1' : '0') : '0'}
             key={marker.id}
             onClick={onClick}
             position={{ lat: marker.lat, lng: marker.lng }}
@@ -54,7 +56,7 @@ export default class markedMap extends Component {
       mapPosition: {
         lat: 10.8231,
         lng: 106.6297
-      },
+      }
       
     }
   }
@@ -87,13 +89,15 @@ export default class markedMap extends Component {
     fetch("https://vietnamsachvaxanh.com/location")
       .then(r => r.json())
       .then(data => {
-        this.setState({ location: data,
+        this.setState({ 
+          location: data
           })
       })
   }
   handleClick = (marker, event) => {
     // console.log({ marker })
     this.setState({ selectedMarker: marker })
+    // console.log('markedmap', marker.showOnMap)
   }
 
   render() {
