@@ -98,9 +98,9 @@ class App extends Component {
 
 	}
 
-	showOnMapSet(){
-		localStorage.setItem('showOnMap',this.state.showOnMap)
-	}
+	// showOnMapSet(){
+	// 	localStorage.setItem('showOnMap',this.state.showOnMap)
+	// }
 
 	
 
@@ -110,8 +110,8 @@ class App extends Component {
 		this.setState({
 			showOnMap: name
 		})
+		this.state.showOnMap = name
 		
-		this.showOnMapSet(name)
 		console.log('aoo', this.state.showOnMap)
 		localStorage.setItem('showOnMap',this.state.showOnMap)
 	}
