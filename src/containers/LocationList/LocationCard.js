@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, ButtonToolbar, Row, Col } from 'react-bootstrap'
+import { FaMapMarked } from "react-icons/fa";
 
 
 export default class LocationCard extends Component {
@@ -14,7 +15,9 @@ export default class LocationCard extends Component {
             return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4> <Button onClick={ () => this.props.showOnMap(name) }>Show on Map</Button>   <p><b>(You own this clean up site)</b></p>
+                        <h4 class="card-title"><FaMapMarked onClick={ () => this.props.showOnMap(name)}/> &nbsp; {name}  </h4> 
+                        {/* <Button onClick={ () => this.props.showOnMap(name) }>Show on Map</Button>    */}
+                        <p><b>(You own this clean up site)</b></p>
                         <Row >
                             <Col sm={2}> <img src={organiserLogo} style={{ width: 70 }} /></Col>
                             <Col sm={8}><p><b>Organiser:</b> {organiserName}</p>
@@ -50,7 +53,9 @@ export default class LocationCard extends Component {
             return (
                 <div class="card">
                     <div class="card-body" >
-                        <h4 class="card-title">{name}</h4> <Button onClick={ () => this.props.showOnMap(name) }>Show on Map</Button>  <p><b>(You own this clean up site)</b></p>
+                        <h4 class="card-title"><FaMapMarked onClick={ () => this.props.showOnMap(name)}/> &nbsp; {name} </h4> 
+                        {/* <Button onClick={ () => this.props.showOnMap(name) }></Button> */}
+                          <p><b>(You own this clean up site)</b></p>
                         <Row >
                             <Col sm={2}> <img src={organiserLogo} style={{ width: 70 }} /></Col>
                             <Col sm={8}><p><b>Organiser:</b> {organiserName}</p>

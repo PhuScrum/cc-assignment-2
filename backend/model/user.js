@@ -11,7 +11,11 @@ const userSchema = new Schema({
  imageUrl: {type: String},
  type: {type: String},
  isRegistered: {type: Boolean, default: false},
- dateCreated: {type: Date, default: Date.now}
+ toolKit: {type: Number},
+ Tshirt: {type: Number},
+ fullSet: {type: Number},
+ dateCreated: {type: Date, default: Date.now},
+ 
 
 })
 

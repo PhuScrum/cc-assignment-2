@@ -25,7 +25,11 @@ export default class Signup extends Component {
 			imageUrl:'',
 			confirmPassword: '',
 			confirmationCode: '',
-			newUser: null
+			newUser: null,
+
+			toolKit:'',
+			Tshirt:'',
+			fullSet:'',
 		};
 
 		this.signUp = this.signUp.bind(this)
@@ -35,7 +39,7 @@ export default class Signup extends Component {
 
 	signUp(){
 		const {email, fname, lname, age, gender, phoneNumber, imageUrl} = this.state
-		console.log(email, fname, lname, age, gender, phoneNumber, imageUrl)
+		console.log(email, fname, lname, age, gender,  phoneNumber, imageUrl)
 		localStorage.setItem("email", this.state.email);
 		fetch(urlRegister, {
             headers: {
@@ -52,7 +56,12 @@ export default class Signup extends Component {
 			   "age": this.state.age,
 			   "gender": this.state.gender,
 			   "phoneNumber": this.state.phoneNumber,
-			   "imageUrl": this.state.imageUrl
+			   "imageUrl": this.state.imageUrl,
+
+			   "toolKit": this.state.toolKit,
+			   "Tshirt": this.state.Tshirt,
+			   "fullSet": this.state.fullSet,
+
 
             }
             )
@@ -92,7 +101,7 @@ export default class Signup extends Component {
 			valid = false;
 		}
 
-		if (this.state.gender === undefined || this.state.gender.length < 1) {
+		if (this.state.gender === undefined || this.state.gender.length < 2) {
 			error_gender = "Please enter a gender ";
 			valid = false;
 		}
@@ -245,10 +254,10 @@ export default class Signup extends Component {
 						<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.age}  onChange={this.onChangeAge} type="age" />
 						<div style={{ color:'red'}} className="error" id="error-age" />
 					</FormGroup>
+				
 					
 					<FormGroup controlId="gender" bsSize="large">
 						<ControlLabel>Gender</ControlLabel>
-						<br/>
 						<FormControl value={this.state.gender} onChange={this.handleChange} type="gender" />
 						<div style={{ color:'red'}} className="error" id="error-gender" />
 					</FormGroup>
@@ -291,4 +300,4 @@ export default class Signup extends Component {
 			<div className="Signup">{this.state.newUser === null ? this.renderForm() : this.renderConfirmationForm()}</div>
 		);
 	}
-}
+} 

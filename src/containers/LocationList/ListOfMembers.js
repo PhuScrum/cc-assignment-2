@@ -12,7 +12,7 @@ export default class ListOfMembers extends Component {
   constructor(props){
     super(props)
     this.state ={
-      members:localStorage.getItem('members')
+      members:localStorage.getItem('members') 
         
         
     }

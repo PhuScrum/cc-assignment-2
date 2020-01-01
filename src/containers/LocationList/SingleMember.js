@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { CSVLink, CSVDownload } from "react-csv";
 import { Button, Modal } from "react-bootstrap"
 import ContactSingleMember from './ContactSingleMember'
-
+import ToolsRequestUser from './ToolsRequestUser'
 // const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
 const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
 let arr = []
@@ -109,11 +109,12 @@ export default class SingleMember extends Component {
         const locationOwner = localStorage.getItem('locationOwner')
         const loggedInEmail = localStorage.getItem('email')
         // console.log("location owner", locationOwner)
-        if(locationOwner === this.props.data || this.props.data === loggedInEmail || locationOwner !== loggedInEmail){
+        // localStorage.setItem('joined members', this.props.data)
+        if(locationOwner === loggedInEmail ){
 
         return (
             
-            <div>
+            <div> 
 
                 {fName} {lName} <br />
                 {this.props.data} <br />
@@ -122,13 +123,32 @@ export default class SingleMember extends Component {
                 {phoneNumber} <br />
                 {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
                 {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
+                <ContactSingleMember data={this.state}/>
                 <hr />
                 
 
             </div>
 
         )
-    }else{
+    }
+    else if(this.props.data === loggedInEmail)
+    return(
+        <div> 
+
+                {fName} {lName} <br />
+                {this.props.data} <br />
+                {age} <br />
+                {gender} <br />
+                {phoneNumber} <br />
+                {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
+                {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
+                <ToolsRequestUser data={this.state}/>
+                <hr />
+                
+
+            </div>
+    )
+    else{
         return(
             <div>
 
@@ -139,7 +159,7 @@ export default class SingleMember extends Component {
             {phoneNumber} <br />
             {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
             {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
-            <ContactSingleMember data={this.state}/>
+           
             <hr />
             
 

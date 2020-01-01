@@ -15,6 +15,7 @@ import ContactAllMembers from './ContactAllMembers'
 //tools requiremtn
 import ToolsRequirement from './ToolsRequirement'
 
+
 // const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
 // const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
 // const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
@@ -37,6 +38,7 @@ export default class LocationDetails extends Component {
             dataLng:0,
             input:{},
             imageUrl:'',
+            gender:'',
             // assignment 3
             organiserName: '',
 			organiserLogo:'',
@@ -215,6 +217,7 @@ export default class LocationDetails extends Component {
         localStorage.setItem('locationOwner', locationOwner) 
         // console.log("imagehere", imageUrl)
         console.log('isSubmitted', input.isSubmitted)
+        console.log(gender)
 
 
         if(ownerLogin === locationOwner && input.isSubmitted === false){

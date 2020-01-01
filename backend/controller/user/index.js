@@ -40,9 +40,25 @@ const fetchUserByEmail = (req, res) =>{
     })
 }
 
+// const editUser = (req, res)=>{
+//     console.log('edit user: ', req.body)
+//     const {toolKit, Tshirt, fullSet
+//     } = req.body
+//     userModel.updateOne({email: userEmail}, {
+//         toolKit: toolKit,
+//         Tshirt: Tshirt,
+//         fullSet: fullSet
+//     }, (err, doc)=>{
+//         res.json(doc)
+//     })
+// }
+
+
+
 
 module.exports ={
     register: register,
     login: login,
-    fetchUserByEmail: fetchUserByEmail
+    fetchUserByEmail: fetchUserByEmail,
+    // editUser: editUser
 }
