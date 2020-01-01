@@ -102,7 +102,7 @@ app.route('/input')
 
 app.route('/hello')
     .get((req, res) => {
-        res.status(200).send('Hello world AWS Beanstalk deployment ES6')
+        res.status(200).send('Hello world AWS Beanstalk deployment ES7')
     })
 
 
