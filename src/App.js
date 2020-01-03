@@ -14,6 +14,7 @@ import './App.css';
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
 const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
 const urlLocation = 'http://localhost:8080/location'
+const editUser = 'http://localhost:8080/editUser'
 
 class App extends Component {
 	constructor(props) {
@@ -59,6 +60,8 @@ class App extends Component {
 			error_name: '',
 			error_time: '',
 			error_description: '',
+
+			hasCreatedLocation:'',
 
 			
 			showOnMap:null
@@ -202,13 +205,16 @@ class App extends Component {
 	}
 
 	handleDeleteLocation(_id) {
-		console.log('delete this', _id)
+		// console.log('delete this', _id)
+		
 		// e.preventDefault()
 		if (window.confirm('Are you sure?')) {
 			fetch(urlLocation + '/' + _id, {
 				method: 'delete'
 			})
-				.then(res => window.location.reload(), console.log('delete phase2'))
+				.then(res => window.location.reload())
+				this.state.hasCreatedLocation = false
+				this.editCreatedStatus()
 		}
 	}
 
@@ -411,7 +417,7 @@ class App extends Component {
 
 	registerLocation(lat, lng) {
 		const { name, address, time, description, startDate, endDate } = this.state
-		console.log('lat', lat, 'lng', lng)
+		// console.log('lat', lat, 'lng', lng)
 
 		this.state.startDatee = new Date(startDate)
 		// var startTimee = new Date(startTime)
@@ -420,6 +426,7 @@ class App extends Component {
 		localStorage.setItem('epochEndDate', this.state.endDate)
 		this.state.epochStartDate = localStorage.getItem('epochStartDate')
 		this.state.epochEndDate = localStorage.getItem('epochEndDate')
+		
 		fetch(urlLocation, {
 			headers: {
 				'Accept': 'application/json',
@@ -467,11 +474,43 @@ class App extends Component {
 				},
 				payStatus: false,
 			}
+			
 			)
+			
 		})
+			
 			.then(resp => resp.json(this.props.history.push('/')))
+			this.setState({
+				hasCreatedLocation: true
+			})
+			this.state.hasCreatedLocation = true
+			this.editCreatedStatus()
+			
+			
 
 	}
+
+	editCreatedStatus() {
+		// console.log('edit create stat', this.state.hasCreatedLocation)
+		const { hasCreatedLocation
+		} = this.state
+		fetch(editUser, {
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				userEmail: localStorage.getItem("email"),
+				hasCreatedLocation: hasCreatedLocation
+			}
+			)
+		})
+			.then(resp => resp.json())
+
+	}
+
+
  
 	async componentDidMount() {
 		// console.log()
@@ -539,14 +578,15 @@ class App extends Component {
 			.then(data => {
 				// console.log('user info', data)
 				if (data) {
-					const { fName, lName, age, gender, userType } = data
+					const { fName, lName, age, gender, userType, hasCreatedLocation } = data
 					// console.log(data.name)
 					this.setState({
 						fName: fName,
 						lName: lName,
 						age: age,
 						gender: gender,
-						userType: userType
+						userType: userType,
+						hasCreatedLocation: hasCreatedLocation
 						// phoneNumber: phoneNumber,
 
 					})
@@ -618,8 +658,14 @@ class App extends Component {
 							<Nav pullRight>
 								{this.state.isAuthenticated ? (
 									<Fragment>
+										
 										<NavItem ><Link to="/ReportPage">Run Report</Link></NavItem>
-										<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
+
+										<NavItem ghost={this.state.hasCreatedLocation ? true : false} type={this.state.payStatus ? 'primary': 'default'}>
+                           
+                            {this.state.hasCreatedLocation ? 'Location Created': <Link to="/CreateLocationPage">Create Location</Link>}</NavItem>
+
+										{/* <NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem> */}
 										<NavItem onClick={this.handleLogout}>Logout</NavItem>
 									</Fragment>
 								) : (
@@ -699,7 +745,10 @@ class App extends Component {
 								{this.state.isAuthenticated ? (
 									<Fragment>
 										<NavItem>Hello, {currentUser}</NavItem>
-										<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
+										<NavItem ghost={this.state.hasCreatedLocation ? true : false} type={this.state.payStatus ? 'primary': 'default'}>
+                           
+                            {this.state.hasCreatedLocation ? 'Location Created': <Link to="/CreateLocationPage">Create Location</Link>}</NavItem>
+										{/* <NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem> */}
 										<NavItem onClick={this.handleLogout}>Logout</NavItem>
 									</Fragment>
 								) : (

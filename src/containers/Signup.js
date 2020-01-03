@@ -30,6 +30,7 @@ export default class Signup extends Component {
 			toolKit:0,
 			Tshirt:0,
 			fullSet:0,
+			hasCreatedLocation: false
 		};
 
 		this.signUp = this.signUp.bind(this)
@@ -38,7 +39,7 @@ export default class Signup extends Component {
 	
 
 	signUp(){
-		const {email, fname, lname, age, gender, phoneNumber, imageUrl} = this.state
+		const {email, fname, lname, age, gender, phoneNumber, imageUrl, hasCreatedLocation} = this.state
 		console.log(email, fname, lname, age, gender,  phoneNumber, imageUrl)
 		localStorage.setItem("email", this.state.email);
 		fetch(urlRegister, {
@@ -62,7 +63,8 @@ export default class Signup extends Component {
 			   "Tshirt": this.state.Tshirt,
 			   "fullSet": this.state.fullSet,
 			   
-			   "joinStatus": false
+			   "joinStatus": true,
+			   "hasCreatedLocation": hasCreatedLocation
 
 
             }

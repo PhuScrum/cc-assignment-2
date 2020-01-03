@@ -77,8 +77,9 @@ app.route('/location/:locationId')
 app.route('/requestEquipment')
     .put(useCase_API.requestEquipment)
 
-app.post('/editUser', user_API.editUser)
-    .put('/editUser', user_API.editUser)
+app.route('/editUser')
+    .put(user_API.editUser)
+    .post(user_API.editUser)
   
 
 // cache fetch user by email info.

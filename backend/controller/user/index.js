@@ -42,13 +42,10 @@ const fetchUserByEmail = (req, res) =>{
 
 const editUser = (req, res)=>{
     console.log('edit user: ', req.body)
-    const {userEmail, toolKit, Tshirt, fullSet, joinStatus
+    const {userEmail, hasCreatedLocation
     } = req.body
     userModel.updateOne({email: userEmail}, {
-        toolKit: toolKit,
-        Tshirt: Tshirt,
-        fullSet: fullSet,
-        joinStatus: joinStatus
+        hasCreatedLocation: hasCreatedLocation
     }, (err, doc)=>{
         res.json(doc)
     })

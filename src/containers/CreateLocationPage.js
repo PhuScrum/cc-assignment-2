@@ -49,6 +49,7 @@ export default class CreateLocationPage extends Component {
 					height='300px'
 					zoom={this.props.appdata.zoom}
 				/>
+				<p><i>Please note that one account will only be able create one location at a time.*</i></p>
 				
 			</div>
 		);

@@ -16,6 +16,7 @@ const userSchema = new Schema({
  fullSet: {type: Number},
  joinStatus: {type: Boolean, default: false},
  dateCreated: {type: Date, default: Date.now},
+ hasCreatedLocation:{type: Boolean, default: false}
  
 
 })
