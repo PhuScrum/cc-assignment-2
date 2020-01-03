@@ -101,6 +101,7 @@ class App extends Component {
 	// showOnMapSet(){
 	// 	localStorage.setItem('showOnMap',this.state.showOnMap)
 	// }
+	
 
 	
 
@@ -456,14 +457,22 @@ class App extends Component {
 					recycable: 0.0,
 					nonRecycable: 0.0,
 					afterEventPhoto: ''
-				}
+				},
+				"requestedTools": {
+					default: {
+						toolKit: 0,
+						Tshirt: 0,
+						fullSet: 0
+					}
+				},
+				payStatus: false,
 			}
 			)
 		})
 			.then(resp => resp.json(this.props.history.push('/')))
 
 	}
-
+ 
 	async componentDidMount() {
 		// console.log()
 
@@ -591,7 +600,8 @@ class App extends Component {
 			showOnMap: this.showOnMap
 
 		};
-		// var ownerLogin = localStorage.getItem('email')
+		var currentUser = localStorage.getItem('email')
+		// console.log('currentUser', currentUser)
 		if (this.state.userType === 'admin') {
 
 			return (
@@ -688,7 +698,7 @@ class App extends Component {
 							<Nav pullRight>
 								{this.state.isAuthenticated ? (
 									<Fragment>
-
+										<NavItem>Hello, {currentUser}</NavItem>
 										<NavItem ><Link to="/CreateLocationPage">Create Location</Link></NavItem>
 										<NavItem onClick={this.handleLogout}>Logout</NavItem>
 									</Fragment>

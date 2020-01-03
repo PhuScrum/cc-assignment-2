@@ -14,6 +14,7 @@ const userSchema = new Schema({
  toolKit: {type: Number},
  Tshirt: {type: Number},
  fullSet: {type: Number},
+ joinStatus: {type: Boolean, default: false},
  dateCreated: {type: Date, default: Date.now},
  
 

@@ -22,6 +22,9 @@ const locationSchema = new Schema({
     locationInternalOrExternal: {type: String},
 
     eventIsOver: {type: String},
+
+    requestedTools: {type:Object},
+    payStatus:{type:Boolean}
     
    })
 

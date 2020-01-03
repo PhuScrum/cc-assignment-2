@@ -33,6 +33,7 @@ connectDB()
 
 const user_API = require('./backend/controller/user')
 const location_API = require('./backend/controller/location')
+const useCase_API = require('./backend/controller/use_cases')
 
 app.route('/register')
     .post(user_API.register)
@@ -66,10 +67,19 @@ app.route('/location')
     .post(location_API.createLocation)
     .put(location_API.editLocation)
     .delete(location_API.deleteLocation)
+    
+app.route('/payLocation')
+    .put(location_API.payLocation)
+
 app.route('/location/:locationId')
     .delete(location_API.deleteLocation)
 
+app.route('/requestEquipment')
+    .put(useCase_API.requestEquipment)
 
+app.post('/editUser', user_API.editUser)
+    .put('/editUser', user_API.editUser)
+  
 
 // cache fetch user by email info.
 function cache(req, res, next){
@@ -98,7 +108,6 @@ app.route('/joinLocation')
 app.route('/input')
     .post(location_API.addInput)
 
-    
 
 app.route('/hello')
     .get((req, res) => {

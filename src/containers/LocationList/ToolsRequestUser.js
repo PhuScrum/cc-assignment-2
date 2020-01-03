@@ -2,11 +2,14 @@ import React from 'react';
 import emailjs from 'emailjs-com';
 import { Modal, Button} from 'antd';
 import {FormControl, Row, Col} from 'react-bootstrap'
-const editUser = 'http://localhost:8080/editUser'
+// const editUser = 'http://localhost:8080/editUser'
+
+const requestEquipmentUrl = 'http://localhost:8080/requestEquipment'
+
 export default class ToolsRequestUser extends React.Component {
   constructor(props) {
 	super(props);
-    this.state = { 
+    this.state = {  
         toolKit:'',
         Tshirt:'',
         fullSet:'',
@@ -73,7 +76,7 @@ checkRegistrationForm() {
       visible: false,
     });
     this.handleSubmit()
-    setTimeout(function(){ alert('Your message has been sent') }, 500)
+    setTimeout(function(){ alert('Your Request has been added.') }, 500)
 }
   };
 
@@ -88,7 +91,7 @@ checkRegistrationForm() {
     
 	return (
         <div>
-        <Button onClick={this.showModal}>
+        <Button onClick={this.showModal} >
           Request for your Tools
                 </Button>
         <Modal
@@ -118,12 +121,12 @@ checkRegistrationForm() {
           
           <div>
         
-          <h3>Number of Full Set (T-Shirt + Tool Kit): </h3>
+          <h3>Number of Full Set (T-Shirt + Tool Kit): </h3> 
       	<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.fullSet}  onChange={this.handleChangeFullSet}/>
         </div>
         <div style={{ color:'red'}} className="error" id="error-fullSet" />
-
-
+<br/>
+<p><i>The site owner will collect the fees on the clean up day. They have the right to refuse to not give out tools if payments have not been made.*</i></p>
   	</form>
         </Modal>
   
@@ -162,26 +165,31 @@ checkRegistrationForm() {
 
   requestTools(){
       // console.log('register input')
-    
-    fetch(editUser, {
+      var userEmail = localStorage.getItem('email')
+      console.log(userEmail)
+    fetch(requestEquipmentUrl, {
 
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
 
       },
-      method: 'POST',
+      method: 'PUT',
 
       body: JSON.stringify({
-        // add more values
-
-        email: this.state.email,
-        toolKit: this.state.toolKit,
-        Tshirt: this.state.Tshirt,
-        fullSet: this.state.fullSet,
+        'locationId': this.props.location.locationId,
+        'userEmail': userEmail,
+        'toolKit': this.state.toolKit,
+        'Tshirt': this.state.Tshirt,
+        'fullSet': this.state.fullSet,
         
       }
       )
+    //   body: JSON.stringify({
+    //     'userEmail': this.props.data
+    // }
+    // )
+
     })
       .then(resp => resp.json(), setTimeout(function () { window.location.reload(); }, 500))
 

@@ -44,7 +44,17 @@ const editLocation = (req, res)=>{
         locationInternalOrExternal: locationInternalOrExternal,
 
         startDate: startDate +'',
-		endDate: endDate+'',
+        endDate: endDate+''
+    }, (err, doc)=>{
+        res.json(doc)
+    })
+}
+
+const payLocation = (req, res)=>{
+    console.log('edit location: ', req.body)
+    const {locationId, payStatus} = req.body
+    locationModel.updateOne({_id: locationId}, {
+        payStatus: payStatus
     }, (err, doc)=>{
         res.json(doc)
     })
@@ -83,6 +93,8 @@ const addInput = (req, res) =>{
 }
 
 
+
+
 module.exports = {
     getAll: getAll,
     createLocation: createLocation,
@@ -90,5 +102,6 @@ module.exports = {
     deleteLocation: deleteLocation,
     locationDetails: locationDetails,
     joinLocation: joinLocation,
-    addInput: addInput
+    addInput: addInput,
+    payLocation: payLocation
 }

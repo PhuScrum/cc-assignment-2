@@ -27,9 +27,9 @@ export default class Signup extends Component {
 			confirmationCode: '',
 			newUser: null,
 
-			toolKit:'',
-			Tshirt:'',
-			fullSet:'',
+			toolKit:0,
+			Tshirt:0,
+			fullSet:0,
 		};
 
 		this.signUp = this.signUp.bind(this)
@@ -61,6 +61,8 @@ export default class Signup extends Component {
 			   "toolKit": this.state.toolKit,
 			   "Tshirt": this.state.Tshirt,
 			   "fullSet": this.state.fullSet,
+			   
+			   "joinStatus": false
 
 
             }

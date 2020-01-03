@@ -14,6 +14,46 @@ import ContactSiteOwner from './ContactSiteOwner'
 import ContactAllMembers from './ContactAllMembers'
 //tools requiremtn
 import ToolsRequirement from './ToolsRequirement'
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import NoAccParticipant from './NoAccParticipant'
+
+const editUser = 'http://localhost:8080/editUser'
+
+const StyledTableCell = withStyles(theme => ({
+    head: {
+      fontSize: 20,
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
+  
+  const StyledTableRow = withStyles(theme => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.background.default,
+      },
+    },
+  }))(TableRow);
+  
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing(3),
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+  }));
 
 
 // const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
@@ -24,6 +64,7 @@ import ToolsRequirement from './ToolsRequirement'
 const locationUrl = 'http://localhost:8080/locationDetails'
 const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
 const joinLocationURL = 'http://localhost:8080/joinLocation'
+const payLocation = 'http://localhost:8080/payLocation'
 
 export default class LocationDetails extends Component {
     constructor(props){
@@ -39,15 +80,62 @@ export default class LocationDetails extends Component {
             input:{},
             imageUrl:'',
             gender:'',
+            userType:'',
             // assignment 3
             organiserName: '',
 			organiserLogo:'',
 			organiserSlogan:'',
 			organiserDescription:'',
 			organiserEventPhoto:'',
-			locationInternalOrExternal:'',
+            locationInternalOrExternal:'',
+            // tools
+            // toolKit: 0,
+            // Tshirt:0,
+            // fullSet:0,
+            locationId: this.props.match.params.id,
+            requestedTools: {},
+            toolKit: 0,
+            Tshirt:0,
+            fullSet:0,
+            payStatus: null
+
             
         }
+
+    }
+
+   
+    fetchAdmin(locationOwner){
+        var email = localStorage.getItem('email')
+        fetch(fetchUserByEmail_URL, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+ 
+            },
+            method: 'POST',
+            body: JSON.stringify({
+                'userEmail': email
+            }
+            )
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                // console.log(data)
+                if(data){
+                    const {userType} = data
+                    // console.log(data.name)
+                    this.setState({
+                        userType: userType
+                        // phoneNumber: phoneNumber,
+                       
+                    })    
+                }
+                console.log('userType', this.state.userType)
+                    
+              
+
+            })
 
     }
 
@@ -88,7 +176,7 @@ export default class LocationDetails extends Component {
 
     }
 
-    fetchLocation(id){
+    fetchLocation(id){ 
         // console.log(id)
         fetch(locationUrl, {
             headers: {
@@ -100,6 +188,7 @@ export default class LocationDetails extends Component {
             body: JSON.stringify({
                 'locationId': this.props.match.params.id
             }
+            
             )
         })
             .then(resp => resp.json())
@@ -108,8 +197,11 @@ export default class LocationDetails extends Component {
                     organiserSlogan,
                     organiserDescription,
                     organiserEventPhoto,
-                    locationInternalOrExternal} = data
-                // console.log(data)
+                    locationInternalOrExternal,
+                    requestedTools,
+                    payStatus
+                } = data
+                console.log('showmedata',data)
                 this.setState({
                     name: name,
                     address: address,
@@ -126,11 +218,31 @@ export default class LocationDetails extends Component {
                     organiserSlogan: organiserSlogan,
                     organiserDescription:  organiserDescription,
                     locationInternalOrExternal: locationInternalOrExternal,
+                    requestedTools: requestedTools,
+                    payStatus: payStatus
+
 
 
                     
 
-                })        
+                })
+                // console.log('request tool', requestedTools)
+                // for (var userEmail in requestedTools) {
+                //     console.log('toolkit', userEmail.fullSet)
+                //   }
+                for (var key in requestedTools) {
+                    if (requestedTools.hasOwnProperty(key)) {
+                        // console.log(key + " -> " + requestedTools[key].toolKit);
+                        // console.log('testing', requestedTools[key].toolKit )
+                        this.state.toolKit += parseInt(requestedTools[key].toolKit)
+                        this.state.Tshirt += parseInt(requestedTools[key].Tshirt)
+                        this.state.fullSet += parseInt(requestedTools[key].fullSet)
+                        
+                    }
+                }
+
+                var joinedMembers = this.state.members 
+                // console.log('requested tools', this.state.requestedTools)
                 // console.log(locationOwner)
                 // console.log(name)
                 // console.log(input)
@@ -145,6 +257,8 @@ export default class LocationDetails extends Component {
 
 
     }
+
+    
     windowOnload() {
         if(!window.location.hash) {
             window.location = window.location + '#loaded';
@@ -154,7 +268,10 @@ export default class LocationDetails extends Component {
 
     componentDidMount(){
         this.fetchLocation(this.props.match.params.id)
-        
+        this.fetchAdmin()
+        // this.fetchMember()
+        // this.state.joinStatus 
+        console.log('original', this.state.payStatus)
         
     }
 
@@ -162,11 +279,15 @@ export default class LocationDetails extends Component {
         members.splice(members.indexOf(userEmail), 1)
         this.setState({
             members: members
+            
         }) 
+        this.state.joinStatus = false
         this.sendJoin(members)
+        
     }
 
     sendJoin(members){
+        
         fetch(joinLocationURL, {
             headers: {
                 'Accept': 'application/json',
@@ -183,19 +304,45 @@ export default class LocationDetails extends Component {
             .then(resp => this.fetchLocation(this.props.match.params.id))
     }
 
+    
     userJoinLocation(members, userEmail){
+        console.log('join')
        members.push(userEmail)
        this.setState({
            members: members
+
        })
+       this.state.joinStatus = true
        this.sendJoin(members)
+       
     }
 
     joinLocation(){
     var isLoggedIn = localStorage.getItem('email')
-    if(isLoggedIn === null){
-        alert("You need to login to use this function!\nPlease click on the login button to continue." )
+    const{members} = this.state
+    const userEmail = localStorage.getItem('email')
+    // if(isLoggedIn === null){
+    //     alert("You need to login to use this function!\nPlease click on the login button to continue." )
+    // }
+    // else 
+    if(isLoggedIn === this.state.locationOwner)
+    {
+        alert("You are the owner of this site, you will need to show up on the following day to manage this activity regardless." )
     }
+    // else if(this.state.joinStatus === false){
+    //     this.userJoinLocation(members, userEmail)
+    // }
+    // else if(this.state.joinStatus === true && members.includes(userEmail)){
+    //     this.userCancelJoin(members, userEmail)
+    // }
+    // else if(this.state.joinStatus === true){
+    //     alert("You have already joined another clean up location.")
+    // }
+
+    // else if(this.state.joinStatus === false){
+    //     this.userJoinLocation(members, userEmail)
+    // }
+    
     else{
         const{members} = this.state
         const userEmail = localStorage.getItem('email')
@@ -206,18 +353,74 @@ export default class LocationDetails extends Component {
         }else{
             this.userJoinLocation(members, userEmail)
         }
+
+        // this.userJoinLocation(members, userEmail)
     }
+    }
+
+    payLocation(){
+        console.log('paylocation', this.state.payStatus)
+        if (this.state.payStatus === true) {
+            this.userCancelPay()
+
+        } else {
+            this.userPayLocation()
+        }
+    }
+
+    userCancelPay(){
+        this.setState({
+            payStatus: false
+            
+        }) 
+        this.state.payStatus = false
+        console.log('canceled pay', this.state.payStatus)
+        this.sendPay()
+    }
+
+    userPayLocation(){
+        
+       this.setState({
+           payStatus: true
+
+       })
+       this.state.payStatus = true
+       console.log('paid', this.state.payStatus)
+       this.sendPay()
+    }
+
+    sendPay(){
+        fetch(payLocation, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                'locationId': this.props.match.params.id,
+                'payStatus': this.state.payStatus
+            }
+            )
+        })
+            .then(resp => resp.json())
+            .then(resp => this.fetchLocation(this.props.match.params.id))
     }
     
     render() {
+        // console.log('members and requested tools',this.state.requestedTools)
+        // console.log('total toolkit', this.state.toolKit)
+        // console.log('total Tshirt', this.state.Tshirt)
+        // console.log('total fullSet', this.state.fullSet)
+        
+
         const {members, fName, lName, age, gender, locationOwner, imageUrl, input, organiserEventPhoto} = this.state
         const userEmail = localStorage.getItem('email')
         // console.log("details lOwner", this.state.locationOwner)
         var ownerLogin = localStorage.getItem('email')
         localStorage.setItem('locationOwner', locationOwner) 
         // console.log("imagehere", imageUrl)
-        console.log('isSubmitted', input.isSubmitted)
-        console.log(gender)
+        // console.log('isSubmitted', input.isSubmitted)
+        // console.log(gender)
 
 
         if(ownerLogin === locationOwner && input.isSubmitted === false){
@@ -252,7 +455,21 @@ export default class LocationDetails extends Component {
                             {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
                             <br/>
                             <br/>
-                            <br/>
+                            <Paper>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Total tools requested by participants</StyledTableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <StyledTableRow><StyledTableCell >ToolKit: {this.state.toolKit}</StyledTableCell> </StyledTableRow>
+              <StyledTableRow><StyledTableCell >T-Shirt: {this.state.Tshirt}</StyledTableCell> </StyledTableRow>
+              <StyledTableRow><StyledTableCell >fullSet: {this.state.fullSet}</StyledTableCell> </StyledTableRow>
+            </TableBody>
+          </Table>
+        </Paper>
                     <ToolsRequirement/>
                     
                     </Col>
@@ -360,7 +577,102 @@ export default class LocationDetails extends Component {
             </div>
 
             )
-        }else{
+        }else if(userEmail === null)
+        return(
+            <div>
+                <Row>
+                    <Col lg={8}><h4><b>Basic Info and Map</b></h4>
+                    <BasicInfo {...this.props} data={this.state}/>
+                    
+                    </Col>
+                    <Col lg={4}><h4><b>Contact Info</b></h4>
+                    <br/>
+                    
+                    <container style={{color: 'red'}}><img style={{width:100}} src={imageUrl}></img></container>
+                    <br/>
+                    <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                    <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                    <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                    <b>Gender:&nbsp;&nbsp;</b>{gender} <br/>
+                    <ContactSiteOwner data={this.state}/>
+                    <br/>
+                    <hr/>
+                   
+                    <ListOfMembers data={this.state}/>
+                    <NoAccParticipant/>
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    
+                    bich you not logged in
+                    </Col>
+                    
+                </Row>
+                <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
+    
+    
+            </div>
+
+        )
+        else if(this.state.userType === 'admin'){
+            //admin pay no pay
+            return(
+                <div>
+                <Row>
+                    <Col lg={8}><h4><b>Basic Info and Map</b></h4>
+                    <BasicInfo {...this.props} data={this.state}/>
+                    
+                    </Col>
+                    <Col lg={4}><h4><b>Contact Info</b></h4>
+                    <br/>
+                    <img style={{width:100}} src={imageUrl}></img>
+                    <br/>
+                    <b>Name&nbsp;&nbsp;&nbsp;:&nbsp;</b> {fName} {lName} <br/>
+                <b>Email  &nbsp; :&nbsp;&nbsp;</b>{locationOwner} <br/>
+                <b>Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;  </b>{age} years old <br/>
+                <b>Gender:&nbsp;&nbsp;</b>{gender}
+                 <br/>
+                 <br/>
+                 <hr/>
+                    <ListOfMembers data={this.state}/>
+                    
+                    {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
+                    <Button ghost={members.includes(userEmail) ? true : false} type={members.includes(userEmail) ? 'primary': 'default'} onClick={this.joinLocation.bind(this)}>
+                            {/* {members.length}  */}
+                            {members.includes(userEmail) ? 'Joined': 'Join'}</Button>
+                            <hr/>
+                    <p>Please Select the button below to toggle if the location has paid or not paid for the requested tools.</p>
+                    <Button ghost={this.state.payStatus ? true : false} type={this.state.payStatus ? 'primary': 'default'} onClick={this.payLocation.bind(this)}>
+                            {/* {members.length}  */}
+                            {this.state.payStatus ? 'Paid': 'Unpaid'}</Button>
+                            
+                            <br/>
+                            <br/>
+                            <br/>
+                    </Col>
+                </Row>
+                <h3><b>Past activity of this organisation.</b></h3>
+            <br/>
+            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <br/>
+            <br/>
+            <br/>
+                <hr/>
+                
+                {/* <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/> */}
+                <br/>
+                <br/>
+                <br/>
+            
+
+
+            </div>
+            )
+        }
+        else{
             return(
                 <div>
                 <Row>
@@ -392,7 +704,30 @@ export default class LocationDetails extends Component {
                             <br/>
                             <br/>
                             <br/>
-                    
+                            {/* <Paper>
+          <Table aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>CleanUp Data</StyledTableCell>
+                <StyledTableCell align="right">Gathered Amount&nbsp;(Kg)</StyledTableCell>
+                <StyledTableCell align="right">Attended Number</StyledTableCell>
+                <StyledTableCell align="right">Cost&nbsp;(VND)</StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+
+              <StyledTableRow>
+                <StyledTableCell > Number
+              </StyledTableCell>
+                <StyledTableCell align="right">{this.state.toolKit}</StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
+                <StyledTableCell align="right"></StyledTableCell>
+              </StyledTableRow>
+            </TableBody>
+          </Table>
+        </Paper> */}
                     </Col>
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
@@ -403,7 +738,7 @@ export default class LocationDetails extends Component {
             <br/>
                 <hr/>
                 
-                <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
+                {/* <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/> */}
                 <br/>
                 <br/>
                 <br/>

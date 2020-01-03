@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Button, Card } from 'react-bootstrap';
-import LocationCard from './LocationList/LocationCard'
+
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 
+import LocationCard from './LocationList/LocationCard';
+import LocationDetails from './LocationList/LocationDetails'
 export default class LocationList extends Component {
 
-    componentDidMount() {
+    componentDidMount() { 
         console.log(this.props)
     }
 
@@ -16,7 +18,7 @@ export default class LocationList extends Component {
 
             <hr /> 
             <LocationCard {...this.props} data={unit} />
-
+            {/* <LocationDetails {...this.props} data={unit}/> */}
         </div>)
         return (
             <div>

@@ -12,7 +12,8 @@ export default class ListOfMembers extends Component {
   constructor(props){
     super(props)
     this.state ={
-      members:localStorage.getItem('members') 
+      members:localStorage.getItem('members'),
+      locationId: this.props.data.locationId
         
         
     }
@@ -39,7 +40,7 @@ export default class ListOfMembers extends Component {
   handleCancel = e => {
     console.log(e);
     this.setState({
-      visible: false,
+      visible: false, 
     });
   };
   windowOnload() {
@@ -50,7 +51,7 @@ export default class ListOfMembers extends Component {
 }
   render() {
     const JSON = require('circular-json');
-    const memberListing = this.props.data.members.map(unit => <SingleMember data={unit} />)
+    const memberListing = this.props.data.members.map(unit => <SingleMember data={unit} location={this.state} />)
     const memberEmail = this.props.data.members
     // console.log('here', this.props.data.name)
     const json = JSON.stringify(this.state.members);
@@ -63,7 +64,7 @@ export default class ListOfMembers extends Component {
       <div>
         
         <a onClick={this.showModal}>
-          List Of Members
+          List Of Members 
                 </a>
         <Modal
           title={this.props.data.members.length + ' ' + 'members'}

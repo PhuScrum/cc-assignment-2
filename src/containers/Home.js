@@ -17,7 +17,7 @@ export default class Home extends Component {
 			isLoading: true,
 			location: [],
 			showOnMap:''
-
+ 
 		};
 	}
 
@@ -92,18 +92,7 @@ export default class Home extends Component {
 							alt="Third slide"
 						/>
 					</Carousel.Item>
-					{/* <Carousel.Item style={{ height: 624 }}>
-						<img
-							height={500}
-							className="d-block w-100 h-100"
-							src="https://4.bp.blogspot.com/-oxAP42k9ulA/XbVI5-_vvEI/AAAAAAAAJfw/Y4eTxtWpa2Ev349IE_V4ZnGTr_Zah0hywCLcBGAsYHQ/s1600/trees-mr-beast-n.jpg"
-							alt="Third slide"
-						/>
-</Carousel.Item> */}
-						{/* <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption> */}
+				
 					
 					
 				</Carousel>
@@ -168,18 +157,7 @@ export default class Home extends Component {
 							alt="Third slide"
 						/>
 					</Carousel.Item>
-					{/* <Carousel.Item style={{ height: 624 }}>
-						<img
-							height={500}
-							className="d-block w-100 h-100"
-							src="https://4.bp.blogspot.com/-oxAP42k9ulA/XbVI5-_vvEI/AAAAAAAAJfw/Y4eTxtWpa2Ev349IE_V4ZnGTr_Zah0hywCLcBGAsYHQ/s1600/trees-mr-beast-n.jpg"
-							alt="Third slide"
-						/>
-</Carousel.Item> */}
-						{/* <Carousel.Caption>
-      <h3>Second slide label</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-    </Carousel.Caption> */}
+					
 					
 					
 				</Carousel>
@@ -209,39 +187,7 @@ export default class Home extends Component {
 			</Col>
 		</Row>
 		</div>
-// 			<div>
-// 				<div className="test">
-// 					<PageHeader>Welcome to Viet Nam Sach Va Xanh.
 
-
-// 					</PageHeader>
-// 					<h4><b>Vietnam Clean & Green</b>’s mission is to reduce littering in Vietnam and to bring about momentous societal change. We’ll raise public awareness about the negative impacts of littering and highlight the importance of individual responsibility. To accomplish this mission, we seek to cooperate with companies, educational institutions, government agencies, NGOs and anyone else who believes in a cleaner country and world.
-// <br /><br />
-// 						We're passionate about Keeping Vietnam Beautiful!.</h4>
-
-
-// 					<br /><br /><br />
-// 					<Row>
-
-// 						<Col sm={8}>
-// 							<h3><b>Here are the current registered locations to select from.</b></h3>
-// 							<MarkedMap
-// 								data={this.state}
-// 								google={this.props.google}
-// 								center={{ lat: 10.8231, lng: 106.6297 }}
-// 								height='400px'
-// 								zoom={8}>
-// 							</MarkedMap>
-// 						</Col>
-// 						<Col sm={4}>
-// 							<h3><b> Location List</b></h3>
-// 							<LocationList {...this.props} data={this.state} />
-// 						</Col>
-// 					</Row>
-
-// 					<ListGroup>{!this.state.isLoading}</ListGroup>
-// 				</div>
-// 			</div>
 		);
 	}
 

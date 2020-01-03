@@ -136,6 +136,7 @@ export default class InputInformation extends Component {
     var organicc = parseFloat(organic)
     var recycablee = parseFloat(recycable)
     var nonRecycablee = parseFloat(nonRecycable)
+    
     fetch(urlLocation, {
 
       headers: {
