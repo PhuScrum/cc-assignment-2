@@ -5,6 +5,7 @@ import { CSVLink, CSVDownload } from "react-csv";
 
 import { Link, withRouter } from 'react-router-dom';
 
+import NoAccPtcpListing from './NoAccPtcpListing'
 import SingleMember from './SingleMember'
 import ContactAllMembers from './ContactAllMembers'
 
@@ -36,7 +37,7 @@ export default class ListOfMembers extends Component {
       visible: false,
     });
   };
-
+ 
   handleCancel = e => {
     console.log(e);
     this.setState({
@@ -51,7 +52,9 @@ export default class ListOfMembers extends Component {
 }
   render() {
     const JSON = require('circular-json');
-    const memberListing = this.props.data.members.map(unit => <SingleMember data={unit} location={this.state} />)
+  const memberListing = this.props.data.members.map(unit => {if(typeof(unit) ==='string'){return <SingleMember data={unit} location={this.state} />}else{
+    return <NoAccPtcpListing data={unit}/>
+  }})
     const memberEmail = this.props.data.members
     // console.log('here', this.props.data.name)
     const json = JSON.stringify(this.state.members);
@@ -72,7 +75,7 @@ export default class ListOfMembers extends Component {
           onOk={this.handleOk}
           onCancel={this.handleCancel}
         >
-          {memberListing}
+          {memberListing} 
           {/* <CSVLink
             data={json}
             filename={"my-file.csv"}

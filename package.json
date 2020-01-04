@@ -22,7 +22,7 @@
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
     "react": "^16.11.0",
-    "react-bootstrap": "^0.32.1",
+    "react-bootstrap": "^0.32.4",
     "react-csv": "^1.1.2",
     "react-csv-downloader": "^1.4.0",
     "react-delay": "^0.1.0",

@@ -84,17 +84,13 @@ export default class SingleMember extends Component {
         //   console.log(this.state.arr)
         localStorage.setItem('members', this.state.arr)
 
-        copyPublishMembers.push(this.props.data)
+        copyPublishMembers.push(this.props.data) 
 
         this.setState({
             PublishMembers: copyPublishMembers
         });
         localStorage.setItem('PublishMembers', this.state.PublishMembers)
-        // for (var i = 0; i < this.state.arr.length; i++) {
-        //     document.write(this.state.arr[i]);
-
-        //   }
-
+      
     }
  
     componentDidMount() {
@@ -119,7 +115,7 @@ export default class SingleMember extends Component {
         const { fName, lName, age, gender, phoneNumber, toolKit, Tshirt, fullSet, imageUrl } = this.state
         const locationOwner = localStorage.getItem('locationOwner')
         const loggedInEmail = localStorage.getItem('email')
-        // console.log("location owner", locationOwner)
+        // console.log("single member", this.props.data)
         // localStorage.setItem('joined members', this.props.data)
         if(locationOwner === loggedInEmail ){
 
@@ -135,8 +131,10 @@ export default class SingleMember extends Component {
                 {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
                 {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
                 </Col>
-                <Col><img style={{width: 100}} src={imageUrl}></img></Col>
-</Row>
+                    <Col>
+                    <img style={{ width: 100 }} src={imageUrl}></img>
+                    </Col>
+                </Row>
       <br/>          
                 <p>This member requested for {toolKit} tool kit, {Tshirt} T-Shirt, {fullSet} fullset.</p>
                 <ContactSingleMember data={this.state}/>
@@ -151,13 +149,19 @@ export default class SingleMember extends Component {
     return(
         <div> 
 
-                {fName} {lName} <br />
-                {this.props.data} <br />
-                {age} <br />
-                {gender} <br />
-                {phoneNumber} <br />
-                {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
-                {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
+            <Row>
+                <Col sm='7'>{fName} {lName} <br />
+                    {this.props.data} <br />
+                    {age} <br />
+                    {gender} <br />
+                    {phoneNumber} <br />
+                    {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
+                    {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
+                </Col>
+                <Col>
+                    <img style={{ width: 100 }} src={imageUrl}></img>
+                </Col>
+            </Row>
                 <ToolsRequestUser data={this.state} location={this.state}/>
                 <hr />
                 
@@ -168,14 +172,19 @@ export default class SingleMember extends Component {
         return(
             <div>
             
-            {fName} {lName} <br />
-            {this.props.data} <br />
-            {age} <br />
-            {gender} <br />
-            {phoneNumber} <br />
-            {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
-            {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
-           
+            <Row>
+                <Col sm='7'>{fName} {lName} <br />
+                    {this.props.data} <br />
+                    {age} <br />
+                    {gender} <br />
+                    {phoneNumber} <br /> 
+                    {/* <Button onClick={this.contactSingleMember()}>Contact This Member</Button> */}
+                    {/* <Button data-dismiss="modal" onClick={() => { this.contactSingleMember() }}>Contact This Member</Button> */}
+                </Col>
+                <Col>
+                    <img style={{ width: 100 }} src={imageUrl}></img>
+                </Col>
+            </Row>
             <hr />
             
 

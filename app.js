@@ -110,6 +110,8 @@ app.route('/input')
     .post(location_API.addInput)
 
 
+
+
 app.route('/hello')
     .get((req, res) => {
         res.status(200).send('Hello world AWS Beanstalk deployment ES6')

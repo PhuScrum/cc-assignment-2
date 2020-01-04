@@ -321,27 +321,12 @@ export default class LocationDetails extends Component {
     var isLoggedIn = localStorage.getItem('email')
     const{members} = this.state
     const userEmail = localStorage.getItem('email')
-    // if(isLoggedIn === null){
-    //     alert("You need to login to use this function!\nPlease click on the login button to continue." )
-    // }
-    // else 
+
     if(isLoggedIn === this.state.locationOwner)
     {
         alert("You are the owner of this site, you will need to show up on the following day to manage this activity regardless." )
     }
-    // else if(this.state.joinStatus === false){
-    //     this.userJoinLocation(members, userEmail)
-    // }
-    // else if(this.state.joinStatus === true && members.includes(userEmail)){
-    //     this.userCancelJoin(members, userEmail)
-    // }
-    // else if(this.state.joinStatus === true){
-    //     alert("You have already joined another clean up location.")
-    // }
-
-    // else if(this.state.joinStatus === false){
-    //     this.userJoinLocation(members, userEmail)
-    // }
+  
     
     else{
         const{members} = this.state
@@ -599,7 +584,7 @@ export default class LocationDetails extends Component {
                     <hr/>
                    
                     <ListOfMembers data={this.state}/>
-                    <NoAccParticipant/>
+                    <NoAccParticipant data={this.state}/>
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
                     
                     bich you not logged in

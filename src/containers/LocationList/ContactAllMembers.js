@@ -9,7 +9,10 @@ export default class ContactAllMembers extends React.Component {
     
      name: localStorage.getItem('email'),
     email: localStorage.getItem('email'),
-    publishMembers: localStorage.getItem('PublishMembers')
+    publishMembers: localStorage.getItem('PublishMembers'),
+    publishMembersNoAccount: localStorage.getItem('PublishMembersNoAccount'),
+    allMembers: localStorage.getItem('PublishMembers') + ','+ localStorage.getItem('PublishMembersNoAccount')
+
  };
 
 	this.handleChange = this.handleChange.bind(this);
@@ -51,7 +54,7 @@ checkRegistrationForm() {
 		// name: 'James',
 		requester_email: this.state.email,
         feedback: "This is a notice to all members from Owner " + this.state.email +": "+ this.state.feedback,
-        locationOwner: this.state.publishMembers,
+        locationOwner: this.state.allMembers,
         
 		// notes: 'Check this out!'
 	};
@@ -97,6 +100,7 @@ checkRegistrationForm() {
   };
 
   render() {
+    console.log('all members', this.state.allMembers)
     
 	return (
         <div>

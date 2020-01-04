@@ -15,7 +15,7 @@ import {Link} from "react-router-dom";
 // const locationUrl = 'http://vietnamsachvaxanh.com/locationDetails'
 
 // const urlLocation = 'https://vietnamsachvaxanh.com/Input'
-const urlLocation = 'http://localhost:8080/Input'
+const urlJoinLocation = 'http://localhost:8080/joinLocation'
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -88,9 +88,11 @@ export default class NoAccParticipant extends Component {
 
   handleOk = e => {
     // console.log(e);
+    
     this.setState({
       visible: false,
     });
+    
   };
 
   handleCancel = e => {
@@ -106,27 +108,33 @@ export default class NoAccParticipant extends Component {
   }
 
   onSubmit() {
-    const { kilos, attended, cost, trashNumber, organic, recycable, nonRecycable, afterEventPhoto } = this.state
-    var input = { kilos, attended, cost, trashNumber, organic, recycable, nonRecycable, afterEventPhoto }
-
+    this.noAccountJoin()
     // console.log("datatype", typeof(kiloss))
-
     // this.registerInput();
     this.setState({
-      name: 0.0,
-      phoneNumber: 0.0,
-      email: 0.0
-
+      name: '',
+      phoneNumber: '',
+      email: '',
+      visible: false
     })
 
   }
 
-  registerInput() {
-    // console.log('register input')
+  noAccountJoin() {
+    console.log('no Account join')
     const { name, email, phoneNumber } = this.state
-    
-    fetch(urlLocation, {
+    const {members, locationId} = this.props.data
 
+    var newNoAccPtcp = {
+      name: name,
+      email: email,
+      phoneNumber: phoneNumber
+    }
+
+    members.push(newNoAccPtcp)
+    console.log(members)
+    
+    fetch(urlJoinLocation, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -137,10 +145,8 @@ export default class NoAccParticipant extends Component {
       body: JSON.stringify({
         // add more values
 
-        locationId: this.props.locationId,
-        name: name,
-        email: email,
-        phoneNumber: phoneNumber,
+        locationId: locationId,
+        members: members
       }
       )
     })

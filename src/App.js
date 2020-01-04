@@ -391,7 +391,10 @@ class App extends Component {
 			e.preventDefault();
 			if (!this.checkRegistrationForm()) {
 				return;
-			} else {
+			} else if(this.state.hasCreatedLocation === true){
+				alert('Error! You have already created a location!')
+			}
+			else {
 				this.registerLocation(lat, lng);
 				// 		console.log(`The values are ${this.state.name}, ${this.state.time},  
 				// ${this.state.description}, ${this.state.address}, and  lat ${lat}, lng ${lng}`)
