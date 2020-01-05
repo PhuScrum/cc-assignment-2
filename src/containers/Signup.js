@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { HelpBlock, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton';
 import { Auth } from 'aws-amplify';
+import FileUpload from './FileUpload'
 
 
 import './Signup.css';
 
 // const urlRegister = 'https://vietnamsachvaxanh.com/register'
-const urlRegister = 'http://localhost:8080/register'
+const urlRegister = 'https://7tk4lgbon4.execute-api.ap-southeast-1.amazonaws.com/dev/register'
 
 export default class Signup extends Component {
 	constructor(props) {
@@ -31,7 +32,9 @@ export default class Signup extends Component {
 		this.signUp = this.signUp.bind(this)
 	}
 
-	
+	uploadImage = (imageUrl) => {
+		this.setState({imageUrl: imageUrl})
+  	}
 
 	signUp(){
 		const {email, fname, lname, age, gender, phoneNumber, imageUrl} = this.state
@@ -259,10 +262,8 @@ export default class Signup extends Component {
 						<div style={{ color:'red'}} className="error" id="error-phoneNumber" />
 					</FormGroup>
 					
-					<FormGroup controlId="imageUrl" bsSize="large">
-						<ControlLabel>Photo URL</ControlLabel>
-						<FormControl value={this.state.imageUrl} onChange={this.handleChange} placeholder={'Optional'} type="imageUrl" />
-					</FormGroup>
+					<FileUpload uploadCallback = {this.uploadImage} />
+					
 			
 					<FormGroup controlId="password" bsSize="large">
 					<ControlLabel>Password</ControlLabel>

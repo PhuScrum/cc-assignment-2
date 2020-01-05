@@ -6,6 +6,11 @@ const cors = require('cors')
 const helmet = require('helmet')
 const mongoose = require('mongoose')
 
+const fs = require('fs');
+const fileType = require('file-type');
+const bluebird = require('bluebird');
+const multiparty = require('multiparty');
+
 
 app.use(cors())
 app.use(helmet())
@@ -33,6 +38,7 @@ connectDB()
 
 const user_API = require('./backend/controller/user')
 const location_API = require('./backend/controller/location')
+const uploads3 = require('./backend/controller/user/uploads3')
 
 app.route('/register')
     .post(user_API.register)
@@ -68,6 +74,29 @@ app.route('/location')
     .delete(location_API.deleteLocation)
 app.route('/location/:locationId')
     .delete(location_API.deleteLocation)
+
+    // Define POST route
+app.post('/upload', (request, response) => {
+    const form = new multiparty.Form();
+      form.parse(request, async (error, fields, files) => {
+        if (error) {
+            console.lpg('error message upload');
+            throw new Error(error);
+        } 
+        try {
+          const path = files.file[0].path;
+          const buffer = fs.readFileSync(path);
+          const type = fileType(buffer);
+          const timestamp = Date.now().toString();
+          const fileName = `${timestamp}-lg`;
+          const data = await uploads3.uploadFile(buffer, fileName, type);
+          console.log(data);
+          return response.status(200).send(data);
+        } catch (error) {
+          return response.status(400).send(error);
+        }
+      });
+  });
 
 
 
@@ -111,6 +140,6 @@ app.route('/hello')
 //     })
 
 
-var port = process.env.PORT || 8080
+var port = process.env.PORT || 8081
 app.listen(port)
 console.log("server starting at port" + port)

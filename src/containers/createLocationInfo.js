@@ -6,10 +6,9 @@ import Popup from "reactjs-popup";
 import { Modal, Button } from "react-bootstrap"
 import CreateLocation from "./createLocation"
 import { TimePicker, DatePicker } from 'antd';
+import FileUpload from './FileUpload';
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
 Geocode.enableDebug();
-
-
 
 
 
@@ -24,7 +23,7 @@ export default class CreateLocationInfo extends Component {
 			checkbox: false,
 			checkbox2: false,
 			inOut: '',
-
+			imageUrl: ''
 		}
 
 	}
@@ -52,6 +51,11 @@ export default class CreateLocationInfo extends Component {
 			show: false
 		})
 	}
+
+
+	uploadImage = (imageUrl) => {
+		this.setState({imageUrl: imageUrl})
+  	}
 
 	onChangeStartTime = time => {
 		console.log(time);
@@ -109,7 +113,11 @@ export default class CreateLocationInfo extends Component {
 					value={this.props.appdata.organiserLogo}
 					onChange={this.props.onChangeOrgLogo.bind(this)}
 					placeholder='Please enter the organiser logo url'
+					
 				/>
+
+				
+				<FileUpload uploadCallback = {this.uploadImage}/>
 
 				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
 
@@ -139,6 +147,8 @@ export default class CreateLocationInfo extends Component {
 					onChange={this.props.onChangeOrgEventPhoto.bind(this)}
 					placeholder='Please enter the previous event photo URL'
 				/>
+
+				<FileUpload uploadCallback = {this.uploadImage}/>
 
 				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
 				<br />

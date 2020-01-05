@@ -38,12 +38,12 @@ export default ({ childProps }) => (
 		{/* test */}
 		<AppliedRoute path="/Emailjs" exact component={Emailjs} props={childProps} />
 		<AppliedRoute path="/EmailjsRedirect" exact component={EmailjsRedirect} props={childProps} />
-		{/* running report */}
+		{/* running reportx */}
 		<AppliedRoute path="/ReportPage" exact component={ReportPage} props={childProps} />
 		<AppliedRoute path="/AboutUs" exact component={AboutUs} props={childProps} />
 		
 		<AppliedRoute path="/DownloadRedirect" exact component={DownloadRedirect} props={childProps} />
 		{/* Finally, catch all unmatched routes */}
-		<Route component={NotFound} />
+		{/* <Route component={NotFound} /> */}
 	</Switch>
 );
