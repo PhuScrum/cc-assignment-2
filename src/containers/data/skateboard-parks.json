@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" }
+  },
+  "features": [
+    {
+      "properties": {
+        "NAME": "K-Mart PMH",
+        "DESCRIPTION": "Abandoned store needs clearance",
+        "coordinates": [10.729691, 106.709039]
+      }
+      
+    },
+    {
+      "properties": {
+        "NAME": "RMIT",
+        "DESCRIPTION": "Parking Lot Clearance",
+        "coordinates": [10.7296, 106.6938 ]
+      }
+    }
+    
+    
+  ]
+}

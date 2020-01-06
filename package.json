@@ -1,0 +1,71 @@
+{
+  "name": "cc-assignment-2",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.7.0",
+    "antd": "^3.25.3",
+    "aws-amplify": "^1.2.4",
+    "aws-sdk": "^2.597.0",
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "circular-json": "^0.5.9",
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "emailjs-com": "^2.4.1",
+    "express": "^4.17.1",
+    "file-type": "^12.4.2",
+    "fs": "0.0.1-security",
+    "google-maps-react": "^2.0.2",
+    "helmet": "^3.21.2",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.9",
+    "multiparty": "^4.2.1",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^1.19.4",
+    "path": "^0.12.7",
+    "react": "^16.11.0",
+    "react-bootstrap": "^0.32.1",
+    "react-csv": "^1.1.2",
+    "react-csv-downloader": "^1.4.0",
+    "react-delay": "^0.1.0",
+    "react-dom": "^16.11.0",
+    "react-facebook-login": "^4.1.1",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.1.2",
+    "react-google-maps": "^9.4.5",
+    "react-icons": "^3.8.0",
+    "react-router-bootstrap": "^0.24.4",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^3.3.0",
+    "react-tabs": "^3.1.0",
+    "reactjs-popup": "^1.5.0",
+    "reactstrap": "^8.1.1",
+    "redis": "^2.8.0",
+    "simplebar-react": "^2.0.10"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "nodemon app.js",
+    "client": "react-scripts start",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
