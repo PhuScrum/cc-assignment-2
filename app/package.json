@@ -7,7 +7,6 @@
     "antd": "^3.25.3",
     "aws-amplify": "^1.2.4",
     "aws-sdk": "^2.568.0",
-    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
     "circular-json": "^0.5.9",
     "concurrently": "^5.0.0",
@@ -22,7 +21,7 @@
     "nodemon": "^1.19.4",
     "path": "^0.12.7",
     "react": "^16.11.0",
-    "react-bootstrap": "^0.32.4",
+    "react-bootstrap": "^0.32.1",
     "react-csv": "^1.1.2",
     "react-csv-downloader": "^1.4.0",
     "react-delay": "^0.1.0",
@@ -41,11 +40,11 @@
     "simplebar-react": "^2.0.10"
   },
   "scripts": {
-    "start": "nodemon --legacy-watch app.js",
+    "start": "nodemon app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon --legacy-watch app.js",
+    "server": "nodemon app.js",
     "client": "react-scripts start",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
