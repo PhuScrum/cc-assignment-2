@@ -5,8 +5,10 @@ import './Home.css';
 import MarkedMap from './markedMap.js';
 import LocationList from './LocationList';
 // import selectItem from './selectItem';
-import cityData from './data/district.json';
-import districtData from './data/city.json';
+import cityData from './data/city.json';
+import districtData from './data/district.json';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
@@ -47,14 +49,14 @@ export default class Home extends Component {
 	}
 
 	filterLocation = (locationAddress) => {
-		if(!locationAddress) {
+		if (!locationAddress) {
 			this.setState({ location: this.state.locationAll });
 			return false;
 		}
 		var locationFilter = this.state.locationAll.filter((item, key) => {
-			return (item.address && item.address.includes(locationAddress + ',')) 
-			&& (item.name && item.name.includes(this.state.locationName))
-			&& (!this.state.dateTime || item.dateCreated.substring(0, 10) === this.state.dateTime);
+			return (item.address && item.address.includes(locationAddress + ','))
+				&& (item.name && item.name.includes(this.state.locationName))
+				&& (!this.state.dateTime || item.dateCreated.substring(0, 10) === this.state.dateTime);
 		})
 		this.setState({ location: locationFilter });
 	}
@@ -68,32 +70,32 @@ export default class Home extends Component {
 		for (var key in cityData) {
 			cityArray.push({ id: key, name: cityData[key]["name"] });
 		}
-		this.setState({cityList:cityArray});
+		this.setState({ cityList: cityArray });
 	}
 
 	fetchDistrict() {
 		let districtArray = [];
 		for (var key in districtData) {
-			if(districtData[key]["parent_code"] === this.state.cityId) {
+			if (districtData[key]["parent_code"] === this.state.cityId) {
 				districtArray.push({ id: key, name: districtData[key]["name"] });
 			}
 		}
-		this.setState({districtList:districtArray});
+		this.setState({ districtList: districtArray });
 	}
 
 	changeCity = (event) => {
-		this.setState({cityId:event.target.value});
+		this.setState({ cityId: event.target.value });
 		let districtArray = [];
 		for (var key in districtData) {
-			if(districtData[key]["parent_code"] == event.target.value) {
+			if (districtData[key]["parent_code"] == event.target.value) {
 				districtArray.push({ id: key, name: districtData[key]["name"] });
 			}
 		}
-		this.setState({districtList:districtArray});
+		this.setState({ districtList: districtArray });
 	}
 
 	changeDistrict = (event) => {
-		this.setState({districtName: event.target.options[event.target.selectedIndex].text});
+		this.setState({ districtName: event.target.options[event.target.selectedIndex].text });
 	}
 
 	async componentDidMount() {
@@ -107,17 +109,17 @@ export default class Home extends Component {
 		this.setState({ isLoading: false });
 	}
 
-	handlerChange = (e)=>{
-        this.setState({
+	handlerChange = (e) => {
+		this.setState({
 			locationName: e.target.value
 		});
 	}
-	
-	handlerChangeDate = (e)=>{
-        this.setState({
+
+	handlerChangeDate = (e) => {
+		this.setState({
 			dateTime: e.target.value
 		});
-    }
+	}
 
 	renderLander() {
 		return (
@@ -172,48 +174,73 @@ export default class Home extends Component {
 							alt="Smiley face" />
 					</Col>
 				</Row>
+
 				<Row>
 					<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
+					<Tabs>
+						<TabList>
+							<Tab>Map Location</Tab>
+							<Tab>List location</Tab>
+						</TabList>
 
-					<Row>
+						<TabPanel>
+							<h3><b>Here are the current registered locations to select from.</b></h3>
+							<div className="tab-map">
+								<MarkedMap
+									data={this.state}
+									google={this.props.google}
+									center={{ lat: 10.8231, lng: 106.6297 }}
+									height='400px'
+									zoom={2}>
+								</MarkedMap>
+							</div>
 
-						<div>
-							<Row className="filter-style">
-								<Col md={3} className="form-group margin-top: 100px">
+						</TabPanel>
+						<TabPanel>
+							<Row>
 
-									<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
-										{this.state.cityList.map((item, key) =>
-											<option value={item.id}>{item.name}</option>
-										)}
-									</select>
+								<div>
+									<Row className="filter-style">
+										<Col md={3} className="form-group margin-top: 100px">
 
-								</Col>
+											<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
+												{this.state.cityList.map((item, key) =>
+													<option value={item.id}>{item.name}</option>
+												)}
+											</select>
 
-								<Col md={3}>
+										</Col>
 
-								<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
-										{this.state.districtList.map((item, key) =>
-											<option value={item.id}>{item.name}</option>
-										)}
-									</select>
-								</Col>
+										<Col md={3}>
 
-								<Col md={2}>
+											<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
+												{this.state.districtList.map((item, key) =>
+													<option value={item.id}>{item.name}</option>
+												)}
+											</select>
+										</Col>
 
-									<input type="text" class="form-control" placeholder="name" value={this.state.locationName}  onChange={this.handlerChange} />
-								</Col>
+										<Col md={2}>
 
-								<Col md={2}>
-									<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date"  value={this.state.dateTime}  onChange={this.handlerChangeDate}/>
-								</Col>
+											<input type="text" class="form-control" placeholder="name" value={this.state.locationName} onChange={this.handlerChange} />
+										</Col>
 
-								<Col md={2}>
-									<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
-								</Col>
+										<Col md={2}>
+											<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date" value={this.state.dateTime} onChange={this.handlerChangeDate} />
+										</Col>
 
+										<Col md={2}>
+											<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
+										</Col>
+
+									</Row>
+								</div>
 							</Row>
-						</div>
-					</Row>
+							<h3><b> Location List</b></h3>
+							<LocationList {...this.props} data={this.state} />
+						</TabPanel>
+					</Tabs>
+
 
 					<Col sm={8}>
 						<h3><b>Here are the current registered locations to select from.</b></h3>
@@ -292,58 +319,75 @@ export default class Home extends Component {
 				</Row>
 
 
-				<Row className="filter-header">
+				<Row>
 					<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
+					<Tabs>
+						<TabList>
+							<Tab>Map Location</Tab>
+							<Tab>List location</Tab>
+						</TabList>
 
-					<Row>
+						<TabPanel>
+							<h3><b>Here are the current registered locations to select from.</b></h3>
+							<div className="tab-map">
+								<MarkedMap
+									data={this.state}
+									google={this.props.google}
+									center={{ lat: 10.8231, lng: 106.6297 }}
+									height='400px'
+									zoom={2}>
+								</MarkedMap>
+							</div>
 
-					<div>
-							<Row className="filter-style">
-								<Col md={3} className="form-group margin-top: 100px">
+						</TabPanel>
+						<TabPanel>
+							<Row>
 
-									<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
-										{this.state.cityList.map((item, key) =>
-											<option value={item.id}>{item.name}</option>
-										)}
-									</select>
+								<div>
+									<Row className="filter-style">
+										<Col md={3} className="form-group margin-top: 100px">
 
-								</Col>
+											<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
+												{this.state.cityList.map((item, key) =>
+													<option value={item.id}>{item.name}</option>
+												)}
+											</select>
 
-								<Col md={3}>
+										</Col>
 
-								<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
-										{this.state.districtList.map((item, key) =>
-											<option value={item.id}>{item.name}</option>
-										)}
-									</select>
-								</Col>
+										<Col md={3}>
 
-								<Col md={2}>
+											<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
+												{this.state.districtList.map((item, key) =>
+													<option value={item.id}>{item.name}</option>
+												)}
+											</select>
+										</Col>
 
-									<input type="text" class="form-control" placeholder="name" value={this.state.locationName}  onChange={this.handlerChange} />
-								</Col>
+										<Col md={2}>
 
-								<Col md={2}>
-									<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date"  value={this.state.dateTime}  onChange={this.handlerChangeDate}/>
-								</Col>
+											<input type="text" class="form-control" placeholder="name" value={this.state.locationName} onChange={this.handlerChange} />
+										</Col>
 
-								<Col md={2}>
-									<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
-								</Col>
+										<Col md={2}>
+											<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date" value={this.state.dateTime} onChange={this.handlerChangeDate} />
+										</Col>
 
+										<Col md={2}>
+											<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
+										</Col>
+
+									</Row>
+								</div>
 							</Row>
-						</div>
-					</Row>
-
+							<h3><b> Location List</b></h3>
+							<LocationList {...this.props} data={this.state} />
+						</TabPanel>
+					</Tabs>
 
 
 					<Col sm={8}>
 						<h3><b>Here are the current registered locations to select from.</b></h3>
-
-						<hr />
-
-
-
 						<MarkedMap
 							data={this.state}
 							google={this.props.google}
@@ -355,6 +399,7 @@ export default class Home extends Component {
 					<Col sm={4}>
 						<h3><b> Location List</b></h3>
 						<LocationList {...this.props} data={this.state} />
+						<selectItem />
 					</Col>
 				</Row>
 			</div>
