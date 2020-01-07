@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import LoaderButton from '../components/LoaderButton';
 import { Auth } from 'aws-amplify';
+
+import { Link} from 'react-router-dom';
 // import LoginWFacebook from './LoginWFacebook'
 import './Login.css';
 
@@ -70,6 +72,10 @@ export default class Login extends Component {
 						text="Login"
 						loadingText="Logging in…"
 					/>
+					<br/>
+					<p>Dont have an account? Click <Link to="/Signup">here</Link> to Sign Up now</p>
+					<br/>
+					<p>or log in with <Link to="/loginWFacebook"> Facebook</Link></p>
 
 					{/* <LoginWFacebook {...this.props} /> */}
 

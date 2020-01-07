@@ -9,6 +9,7 @@ import {
   Marker,
   InfoWindow
 } from "react-google-maps"
+import {Col, Row} from "react-bootstrap"
 import Geocode from "react-geocode";
 
 const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
@@ -27,10 +28,15 @@ const MarkedMap = compose(withScriptjs, withGoogleMap)(props => {
             {props.selectedMarker === marker &&
               <InfoWindow>
                 <div>
-                 <h4>{marker.name}</h4>
-                 <p>{marker.address}</p>
-                <p>{marker.description}</p>
-                 <p><Link to ={`/location/${marker._id}`}>See more</Link></p>
+                <h4>{marker.name}</h4>
+                  <Row>
+                    <Col sm='2' ><img src={marker.organiserLogo} style={{width: 75}}/></Col>
+                    <Col sm='8'> 
+                      <p>{marker.address}</p>
+                      <p>{marker.description}</p>
+                </Col>
+                  </Row>
+                      <p className="pull-right"><Link to ={`/location/${marker._id}`}>See more</Link></p>
                 </div>
               </InfoWindow>}
              

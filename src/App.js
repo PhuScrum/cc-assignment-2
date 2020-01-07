@@ -674,15 +674,15 @@ class App extends Component {
 								) : (
 										<Fragment>
 
-											<LinkContainer to="/signup">
+											{/* <LinkContainer to="/signup">
 												<NavItem>Signup</NavItem>
-											</LinkContainer>
+											</LinkContainer> */}
 											<LinkContainer to="/login">
 												<NavItem>Login</NavItem>
 											</LinkContainer>
-											<LinkContainer to="/loginWFacebook">
+											{/* <LinkContainer to="/loginWFacebook">
 												<NavItem>Facebook Login</NavItem>
-											</LinkContainer>
+											</LinkContainer> */}
 										</Fragment>
 
 									)}
@@ -757,15 +757,15 @@ class App extends Component {
 								) : (
 										<Fragment>
 
-											<LinkContainer to="/signup">
+											{/* <LinkContainer to="/signup">
 												<NavItem>Signup</NavItem>
-											</LinkContainer>
+											</LinkContainer> */}
 											<LinkContainer to="/login">
 												<NavItem>Login</NavItem>
 											</LinkContainer>
-											<LinkContainer to="/loginWFacebook">
+											{/* <LinkContainer to="/loginWFacebook">
 												<NavItem>Facebook Login</NavItem>
-											</LinkContainer>
+											</LinkContainer> */}
 										</Fragment>
 									)}
 							</Nav>
