@@ -95,7 +95,7 @@ class App extends Component {
 		this.onChangeOrgDescription = this.onChangeOrgDescription.bind(this);
 		this.onChangeOrgEventPhoto = this.onChangeOrgEventPhoto.bind(this);
 		this.handleChangeInternalExternal = this.handleChangeInternalExternal.bind(this);
-
+		this.setLocationImage = this.setLocationImage.bind(this)
 		this.showOnMap = this.showOnMap.bind(this);
 
 
@@ -321,10 +321,10 @@ class App extends Component {
 		this.state.error_time = "";
 		this.state.error_description = "";
 		this.state.error_organiserName = "";
-		this.state.error_organiserLogo = "";
+		// this.state.error_organiserLogo = "";
 		this.state.error_organiserSlogan = "";
 		this.state.error_organiserDescription = "";
-		this.state.error_organiserEventPhoto = "";
+		// this.state.error_organiserEventPhoto = "";
 		this.state.error_locationInternalOrExternal = "";
 		// if (this.state.time == undefined || this.state.time.length < 4) {
 		// 	this.state.error_time = "Please enter a valid date ";
@@ -347,10 +347,10 @@ class App extends Component {
 			this.state.error_organiserName = "Organiser name must contain more than 2 letters";
 			valid = false;
 		}
-		if (this.state.organiserLogo === undefined || this.state.organiserLogo.length < 10) {
-			this.state.error_organiserLogo = "Organiser Logo is invalid.";
-			valid = false;
-		}
+		// if (this.state.organiserLogo === undefined || this.state.organiserLogo.length < 10) {
+		// 	this.state.error_organiserLogo = "Organiser Logo is invalid.";
+		// 	valid = false;
+		// }
 		if (this.state.organiserSlogan === undefined || this.state.organiserSlogan.length < 5) {
 			this.state.error_organiserSlogan = "Organiser slogan must can contain more than 5 letters.";
 			valid = false;
@@ -359,10 +359,10 @@ class App extends Component {
 			this.state.error_organiserDescription = "Organiser Description must can contain more than 10 letters.";
 			valid = false;
 		}
-		if (this.state.organiserEventPhoto === undefined || this.state.organiserEventPhoto.length < 10) {
-			this.state.error_organiserEventPhoto = "Organiser Event Photo is invalid.";
-			valid = false;
-		}
+		// if (this.state.organiserEventPhoto === undefined || this.state.organiserEventPhoto.length < 10) {
+		// 	this.state.error_organiserEventPhoto = "Organiser Event Photo is invalid.";
+		// 	valid = false;
+		// }
 		if (this.state.locationInternalOrExternal === "" || this.state.locationInternalOrExternal.length < 0) {
 			this.state.error_locationInternalOrExternal = "Please select the criteria for clean up internal or external.";
 			valid = false;
@@ -376,10 +376,10 @@ class App extends Component {
 		document.getElementById("error-description").innerHTML = this.state.error_description;
 		document.getElementById("error-time").innerHTML = this.state.error_time;
 		document.getElementById("error-organiserName").innerHTML = this.state.error_organiserName;
-		document.getElementById("error-organiserLogo").innerHTML = this.state.error_organiserLogo;
+		// document.getElementById("error-organiserLogo").innerHTML = this.state.error_organiserLogo;
 		document.getElementById("error-organiserSlogan").innerHTML = this.state.error_organiserSlogan;
 		document.getElementById("error-organiserDescription").innerHTML = this.state.error_organiserDescription;
-		document.getElementById("error-organiserEventPhoto").innerHTML = this.state.error_organiserEventPhoto;
+		// document.getElementById("error-organiserEventPhoto").innerHTML = this.state.error_organiserEventPhoto;
 		document.getElementById("error-locationInternalOrExternal").innerHTML = this.state.error_locationInternalOrExternal;
 		return valid;
 	}
@@ -417,6 +417,22 @@ class App extends Component {
 			this.editLocation(lat, lng)
 		}
 	}
+	setLocationImage(type, imageUrl){
+		console.log(imageUrl)
+		this.setState({
+			
+		})
+		if(type ==='orgLogo'){
+			this.setState({
+				organiserLogo: imageUrl
+			})
+		}else{
+			this.setState({
+				organiserEventPhoto: imageUrl
+			})
+		}
+		
+	}
 
 	registerLocation(lat, lng) {
 		const { name, address, time, description, startDate, endDate } = this.state
@@ -438,7 +454,6 @@ class App extends Component {
 			},
 			method: 'POST',
 			body: JSON.stringify({
-
 				// add more values
 				"name": this.state.name,
 				"organiserName": this.state.organiserName,
@@ -640,7 +655,8 @@ class App extends Component {
 			onChangeOrgEventPhoto: this.onChangeOrgEventPhoto,
 			handleChangeInternalExternal: this.handleChangeInternalExternal,
 
-			showOnMap: this.showOnMap
+			showOnMap: this.showOnMap,
+			setLocationImage: this.setLocationImage
 
 		};
 		var currentUser = localStorage.getItem('email')

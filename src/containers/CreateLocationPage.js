@@ -5,6 +5,8 @@ import './Home.css';
 import Popup from "reactjs-popup";
 import CreateLocation from './createLocation.js';
 
+
+
 export default class CreateLocationPage extends Component {
 	constructor(props) {
 		super(props);
@@ -41,6 +43,8 @@ export default class CreateLocationPage extends Component {
 				<PageHeader>Create a CleanUp Site! </PageHeader>
 				<ListGroup>{!this.state.isLoading}</ListGroup>
 				
+				
+
 				<CreateLocation 
 				// spread attributes
 					{...this.props} 
@@ -59,3 +63,8 @@ export default class CreateLocationPage extends Component {
 		return <div className="Home">{!this.props.isAuthenticated ? this.renderTest() : this.renderTest()}</div>;
 	}
 }
+
+
+
+
+

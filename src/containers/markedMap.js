@@ -111,7 +111,7 @@ export default class markedMap extends Component {
     return (
       <MarkedMap 
         selectedMarker={this.state.selectedMarker}
-        markers={this.state.location}
+        markers={this.props.data.locationFilter}
         onClick={this.handleClick}
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw&libraries=places"
         loadingElement={<div style={{ height: `100%` }} />}

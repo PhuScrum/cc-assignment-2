@@ -14,7 +14,7 @@ export default class LocationList extends Component {
 
     render() {
 
-        var locationListing = this.props.data.location.map(unit => <div>
+        var locationListing = this.props.data.locationFilter.map(unit => <div>
 
             <hr /> 
             <LocationCard {...this.props} data={unit} />

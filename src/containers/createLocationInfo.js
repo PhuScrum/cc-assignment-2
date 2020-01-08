@@ -6,10 +6,9 @@ import Popup from "reactjs-popup";
 import { Modal, Button } from "react-bootstrap"
 import CreateLocation from "./createLocation"
 import { TimePicker, DatePicker } from 'antd';
+import FileUpload from './FileUpload';
 Geocode.setApiKey("AIzaSyA4UwK6X9-Oa5SdAapdiNPE8nAPJ6INRxw");
 Geocode.enableDebug();
-
-
 
 
 
@@ -24,7 +23,7 @@ export default class CreateLocationInfo extends Component {
 			checkbox: false,
 			checkbox2: false,
 			inOut: '',
-
+			imageUrl: ''
 		}
 
 	}
@@ -52,6 +51,11 @@ export default class CreateLocationInfo extends Component {
 			show: false
 		})
 	}
+
+
+	uploadImage = (imageUrl) => {
+		this.setState({imageUrl: imageUrl})
+  	}
 
 	onChangeStartTime = time => {
 		console.log(time);
@@ -103,15 +107,19 @@ export default class CreateLocationInfo extends Component {
 					<div style={{ color: 'red' }} className="error" id="error-organiserName" />
 				</div>
 
-				<label>Organization Logo:</label>
+				{/* <label>Organization Logo:</label>
 				<input type="text"
 					className="form-control"
 					value={this.props.appdata.organiserLogo}
 					onChange={this.props.onChangeOrgLogo.bind(this)}
 					placeholder='Please enter the organiser logo url'
-				/>
+					
+				/> */}
 
-				<div style={{ color: 'red' }} className="error" id="error-organiserLogo" />
+				
+				<FileUpload type='orgLogo' uploadCallback = {this.uploadImage} {...this.props}/>
+
+				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
 
 				<br />
 				<label>Organization Slogan:</label>
@@ -132,15 +140,18 @@ export default class CreateLocationInfo extends Component {
 
 				<div style={{ color: 'red' }} className="error" id="error-organiserDescription" />
 				<br />
-				<label>Organization Previous Event Photo:</label>
+				{/* <label>Organization Previous Event Photo:</label>
 				<input type="text"
 					className="form-control"
 					value={this.props.appdata.organiserEventPhoto}
 					onChange={this.props.onChangeOrgEventPhoto.bind(this)}
 					placeholder='Please enter the previous event photo URL'
 				/>
-				<div style={{ color: 'red' }} className="error" id="error-organiserEventPhoto" />
+				<div style={{ color: 'red' }} className="error" id="error-organiserEventPhoto" /> */}
 
+				<FileUpload type='evPhoto' uploadCallback = {this.uploadImage} {...this.props}/>
+
+				{/* <div style={{ color: 'red' }} className="error" id="error-name" /> */}
 				<br />
 
 				<label>Time: </label>

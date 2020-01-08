@@ -11,3 +11,13 @@
 .Home .lander p {
 	color: #999;
 }
+.tab-location {
+	margin-left: 50px;
+}
+.tab-map {
+	width: 90%;
+}
+
+.filter-header {
+	margin-left: 100px;
+}
