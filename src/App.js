@@ -657,11 +657,13 @@ class App extends Component {
 										<Fragment>
 											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+											<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 										</Fragment>
 									) : (
 											<Fragment>
 											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+											<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 
 											</Fragment>
 										)}

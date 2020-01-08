@@ -5,8 +5,8 @@ import './Home.css';
 import MarkedMap from './markedMap.js';
 import LocationList from './LocationList';
 // import selectItem from './selectItem';
-import cityData from './data/district.json';
-import districtData from './data/city.json';
+import cityData from './data/city.json';
+import districtData from './data/district.json';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
@@ -126,7 +126,7 @@ export default class Home extends Component {
 					<Col sm={1}>
 						<img style={{ height: 1000 }, { width: 125 }}
 							src="https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.15752-9/79119719_2642182805871806_7621702921708634112_n.jpg?_nc_cat=109&_nc_ohc=YslXpw5mjd0AQmYNgAeQvUteUpHr7Dk5txlWG_C8H2UNELp2_66BhoENQ&_nc_ht=scontent.fsgn8-1.fna&oh=607571e7745f5c413e1dc5e347340639&oe=5E77578D"
-							alt="Smiley face" />
+							alt="Smiley face"/>
 					</Col>
 					<Col sm={10} >
 						<Carousel style={{ marginLeft: 20 }}>
