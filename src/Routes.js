@@ -22,6 +22,8 @@ import EmailjsRedirect from './containers/EmailjsRedirect'
 import ReportPage from './containers/RunReport'
 // About us - to demonstrate local caching
 import AboutUs from './containers/AboutUs'
+// Resource - to demonstrate local caching
+import Resource from './containers/Resource'
 
 
 export default ({ childProps }) => (
@@ -41,6 +43,7 @@ export default ({ childProps }) => (
 		{/* running reportx */}
 		<AppliedRoute path="/ReportPage" exact component={ReportPage} props={childProps} />
 		<AppliedRoute path="/AboutUs" exact component={AboutUs} props={childProps} />
+		<AppliedRoute path="/Resource" exact component={Resource} props={childProps} />
 		
 		<AppliedRoute path="/DownloadRedirect" exact component={DownloadRedirect} props={childProps} />
 		{/* Finally, catch all unmatched routes */}

@@ -419,9 +419,6 @@ class App extends Component {
 	}
 	setLocationImage(type, imageUrl){
 		console.log(imageUrl)
-		this.setState({
-			
-		})
 		if(type ==='orgLogo'){
 			this.setState({
 				organiserLogo: imageUrl
@@ -732,12 +729,14 @@ class App extends Component {
 									<Fragment>
 										<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 										<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+										<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 
 									</Fragment>
 								) : (
 										<Fragment>
 											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+											<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 
 										</Fragment>
 									)}
@@ -814,12 +813,13 @@ class App extends Component {
 									<Fragment>
 										<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 										<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
+										<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 									</Fragment>
 								) : (
 										<Fragment>
 											<NavItem ><Link to="/AboutUs">About Us</Link></NavItem>
 											<NavItem ><Link to="/Emailjs">Contact Support</Link></NavItem>
-
+											<NavItem ><Link to="/Resource">Resource</Link></NavItem>
 										</Fragment>
 									)}
 							</Nav>
