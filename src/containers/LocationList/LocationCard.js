@@ -51,7 +51,7 @@ export default class LocationCard extends Component {
 			})
 
 	}
-
+ 
 componentDidMount(){
     this.fetchOwner()
 

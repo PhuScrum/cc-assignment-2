@@ -26,7 +26,7 @@ export default class CreateLocationInfo extends Component {
 			imageUrl: ''
 		}
 
-	}
+	} 
 
 
 
