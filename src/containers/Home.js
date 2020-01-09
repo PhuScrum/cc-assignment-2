@@ -8,7 +8,9 @@ import LocationList from './LocationList';
 import cityData from './data/city.json';
 import districtData from './data/district.json';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { TimePicker, DatePicker } from 'antd';
 import 'react-tabs/style/react-tabs.css';
+import {Button } from 'antd';
 // import { Marker } from 'google-maps-react';
 // import { FaListUl } from 'react-icons/fa';
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
@@ -26,8 +28,8 @@ export default class Home extends Component {
 		this.state = {
 			isLoading: true,
 			location: [],
-			showOnMap:'',
- 
+			showOnMap: '',
+
 			cityId: "79",
 			districtName: "1",
 			locationName: "",
@@ -39,17 +41,17 @@ export default class Home extends Component {
 		};
 	}
 
-	showOnMap(){
+	showOnMap() {
 		// localStorage.setItem('showOnMap', this.props.data.name)
 		// var showOnMap = localStorage.getItem('showOnMap')
 		// this.props.data.showOnMap = this.props.data.name
 		// this.setState({
-			
+
 		// })
 		console.log('show on map location card')
 	}
 
-	
+
 
 
 	fetchLocation() {
@@ -58,7 +60,7 @@ export default class Home extends Component {
 			.then(response => response.json())
 			.then(data => {
 				console.log(data)
-				this.setState({locationAll: data, location: data})
+				this.setState({ locationAll: data, location: data })
 				this.filterLocation();
 				console.log("check this log", this.state.location)
 			})
@@ -73,7 +75,8 @@ export default class Home extends Component {
 		var locationFilter = this.state.locationAll.filter((item, key) => {
 			return (item.address && item.address.includes(locationAddress + ','))
 				&& (item.name && item.name.includes(this.state.locationName))
-				&& (!this.state.dateTime || item.dateCreated.substring(0, 10) === this.state.dateTime);
+				// && (!this.state.dateTime || item.dateCreated.substring(0, 10) === this.state.dateTime);
+				&& (item.time && item.time.includes(this.state.dateTime));
 		})
 		console.log('locationFilter: ', locationFilter)
 		this.setState({ locationFilter: locationFilter });
@@ -82,6 +85,17 @@ export default class Home extends Component {
 	searchClick = (event) => {
 		console.log('searchClick')
 		this.filterLocation(this.state.districtName);
+	}
+	clearSearch = (event) => {
+		this.setState({
+			cityId: '',
+			locationName: '',
+			dateTime: '',
+		})
+		this.filterLocation();
+		this.setState({
+			cityId: '79'
+		})
 	}
 
 	fetchCity() {
@@ -139,7 +153,22 @@ export default class Home extends Component {
 			dateTime: e.target.value
 		});
 	}
+	// test
+	onChangeStartDate = (field, value) => {
+		this.setState({
+			[field]: value,
+		});
+	};
 
+	onStartChangeDate = value => {
+		this.onChangeStartDate('dateTime', value);
+	};
+
+	handleStartOpenChangeDate = open => {
+		if (!open) {
+			this.setState({ endOpen: true });
+		}
+	};
 	renderLander() {
 		return (
 			<div>
@@ -158,7 +187,7 @@ export default class Home extends Component {
 									alt="First slide"
 								/>
 								<Carousel.Caption>
-									<h3>Welcome to Vietnam Sach va Xanh</h3>
+									<h3>Welcome to Vietnam Sach va Xanh not logged in</h3>
 									<h4>To Create or Join a clean up site, Please Login or Sign Up!</h4>
 								</Carousel.Caption>
 
@@ -196,86 +225,95 @@ export default class Home extends Component {
 
 				<Row>
 					<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
+
 					<Tabs>
 						<TabList>
-							<Tab>Map Location</Tab>
-							<Tab>List location</Tab>
+							<Tab>Map and Details</Tab>
+							<Tab>Map Only</Tab>
 						</TabList>
+						<div>
+							<br />
+							<Row className="filter-style">
+								<Col md={3} className="form-group margin-top: 100px">
+
+									<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
+										{this.state.cityList.map((item, key) =>
+											<option value={item.id}>{item.name}</option>
+										)}
+									</select>
+
+								</Col>
+
+								<Col md={3}>
+
+									<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
+										{this.state.districtList.map((item, key) =>
+											<option value={item.id}>{item.name}</option>
+										)}
+									</select>
+								</Col>
+
+								<Col md={2}>
+
+									<input type="text" class="form-control" placeholder="Name" value={this.state.locationName} onChange={this.handlerChange} />
+								</Col>
+
+								<Col md={2}>
+									{/* <input type="text" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="Date" value={this.state.dateTime} onChange={this.handlerChangeDate} /> */}
+									<DatePicker
+										showTime
+										format="YYYY-MM-DD"
+										use12Hours
+										value={this.state.dateTime}
+										placeholder="Select Time"
+										onChange={this.onStartChangeDate}
+										onOpenChange={this.handleStartOpenChangeDate}
+									/>
+								</Col>
+
+								<Col md={1}>
+									<Button type="primary" onClick={this.searchClick} class="btn btn-primary">Search</Button>
+								</Col>
+
+								<Col >
+									<Button  onClick={this.clearSearch} class="btn btn-primary">Clear Search</Button>
+								</Col>
+
+							</Row>
+						</div>
+						<br />
 
 						<TabPanel>
-							<h3><b>Here are the current registered locations to select from.</b></h3>
-							<div className="tab-map">
+							<Col sm={8}>
+								<h3><b>Here are the current registered locations to select from.</b></h3>
 								<MarkedMap
 									data={this.state}
 									google={this.props.google}
 									center={{ lat: 10.8231, lng: 106.6297 }}
 									height='400px'
-									zoom={2}>
+									zoom={8}>
 								</MarkedMap>
-							</div>
+							</Col>
+							<Col sm={4}>
+								<h3><b> Location List</b></h3>
+								<LocationList {...this.props} data={this.state} />
+								<selectItem />
+							</Col>
 
 						</TabPanel>
 						<TabPanel>
-							<Row>
-
-								<div>
-									<Row className="filter-style">
-										<Col md={3} className="form-group margin-top: 100px">
-
-											<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
-												{this.state.cityList.map((item, key) =>
-													<option value={item.id}>{item.name}</option>
-												)}
-											</select>
-
-										</Col>
-
-										<Col md={3}>
-
-											<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
-												{this.state.districtList.map((item, key) =>
-													<option value={item.id}>{item.name}</option>
-												)}
-											</select>
-										</Col>
-
-										<Col md={2}>
-
-											<input type="text" class="form-control" placeholder="name" value={this.state.locationName} onChange={this.handlerChange} />
-										</Col>
-
-										<Col md={2}>
-											<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date" value={this.state.dateTime} onChange={this.handlerChangeDate} />
-										</Col>
-
-										<Col md={2}>
-											<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
-										</Col>
-
-									</Row>
-								</div>
-							</Row>
-							<h3><b> Location List</b></h3>
-							<LocationList {...this.props} data={this.state} />
+							<MarkedMap
+								data={this.state}
+								google={this.props.google}
+								center={{ lat: 10.8231, lng: 106.6297 }}
+								height='600px'
+								zoom={8}>
+							</MarkedMap>
 						</TabPanel>
 					</Tabs>
 
 
-					<Col sm={8}>
-						<h3><b>Here are the current registered locations to select from.</b></h3>
-						<MarkedMap
-							data={this.state}
-							google={this.props.google}
-							center={{ lat: 10.8231, lng: 106.6297 }}
-							height='400px'
-							zoom={8}>
-						</MarkedMap>
-					</Col>
-					<Col sm={4}>
-						<h3><b> Location List</b></h3>
-						<LocationList {...this.props} data={this.state} />
-						<selectItem />
-					</Col>
+
 				</Row>
 			</div>
 		);
@@ -302,7 +340,7 @@ export default class Home extends Component {
 								/>
 								<Carousel.Caption>
 									<h3>Welcome to Vietnam Sach va Xanh</h3>
-									<h4>To Create or Join a clean up site, Please Login or Sign Up!</h4>
+									<h4>You can start creating a location or join one!</h4>
 								</Carousel.Caption>
 
 							</Carousel.Item>
@@ -340,87 +378,95 @@ export default class Home extends Component {
 
 				<Row>
 					<PageHeader> &nbsp; Join the battle to save our planet!</PageHeader>
+
 					<Tabs>
 						<TabList>
-							<Tab>Map Location</Tab>
-							<Tab>List location</Tab>
+							<Tab>Map and Details</Tab>
+							<Tab>Map Only</Tab>
 						</TabList>
+						<div>
+							<br />
+							<Row className="filter-style">
+								<Col md={3} className="form-group margin-top: 100px">
+
+									<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
+										{this.state.cityList.map((item, key) =>
+											<option value={item.id}>{item.name}</option>
+										)}
+									</select>
+
+								</Col>
+								<Col md={3}>
+									
+
+									<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
+										{this.state.districtList.map((item, key) =>
+											<option value={item.id}>{item.name}</option>
+										)}
+									</select>
+								</Col>
+
+								<Col md={2}>
+
+									<input type="text" class="form-control" placeholder="Name" value={this.state.locationName} onChange={this.handlerChange} />
+								</Col>
+
+								<Col md={2}>
+									{/* <input type="text" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="Date" value={this.state.dateTime} onChange={this.handlerChangeDate} /> */}
+									<DatePicker
+										showTime
+										format="YYYY-MM-DD"
+										use12Hours
+										value={this.state.dateTime}
+										placeholder="Select Time"
+										onChange={this.onStartChangeDate}
+										onOpenChange={this.handleStartOpenChangeDate}
+									/>
+								</Col>
+
+								<Col md={1}>
+									<Button type="primary" onClick={this.searchClick} class="btn btn-primary">Search</Button>
+								</Col>
+
+								<Col >
+									<Button  onClick={this.clearSearch} class="btn btn-primary">Clear Search</Button>
+								</Col>
+
+							</Row>
+						</div>
+						<br />
 
 						<TabPanel>
-							<h3><b>Here are the current registered locations to select from.</b></h3>
-							<div className="tab-map">
+							<Col sm={8}>
+								<h3><b>Here are the current registered locations to select from.</b></h3>
 								<MarkedMap
 									data={this.state}
 									google={this.props.google}
 									center={{ lat: 10.8231, lng: 106.6297 }}
 									height='400px'
-									zoom={2}>
+									zoom={8}>
 								</MarkedMap>
-							</div>
+							</Col>
+							<Col sm={4}>
+								<h3><b> Location List</b></h3>
+								<LocationList {...this.props} data={this.state} />
+								<selectItem />
+							</Col>
 
 						</TabPanel>
 						<TabPanel>
-							<Row>
-
-								<div>
-									<Row className="filter-style">
-										<Col md={3} className="form-group margin-top: 100px">
-
-											<select className="form-control" onChange={(event) => this.changeCity(event)} value={this.state.cityId}>
-												{this.state.cityList.map((item, key) =>
-													<option value={item.id}>{item.name}</option>
-												)}
-											</select>
-
-										</Col>
-
-										<Col md={3}>
-
-											<select className="form-control" onChange={(event) => this.changeDistrict(event)}>
-												{this.state.districtList.map((item, key) =>
-													<option value={item.id}>{item.name}</option>
-												)}
-											</select>
-										</Col>
-
-										<Col md={2}>
-
-											<input type="text" class="form-control" placeholder="name" value={this.state.locationName} onChange={this.handlerChange} />
-										</Col>
-
-										<Col md={2}>
-											<input type="date" class="form-control" pattern="\d{4}-\d{2}-\d{2}" placeholder="date" value={this.state.dateTime} onChange={this.handlerChangeDate} />
-										</Col>
-
-										<Col md={2}>
-											<button type="button" onClick={this.searchClick} class="btn btn-primary">Search</button>
-										</Col>
-
-									</Row>
-								</div>
-							</Row>
-							<h3><b> Location List</b></h3>
-							
-							<LocationList {...this.props} data={this.state} />
+							<MarkedMap
+								data={this.state}
+								google={this.props.google}
+								center={{ lat: 10.8231, lng: 106.6297 }}
+								height='600px'
+								zoom={8}>
+							</MarkedMap>
 						</TabPanel>
 					</Tabs>
 
 
-					<Col sm={8}>
-						<h3><b>Here are the current registered locations to select from.</b></h3>
-						<MarkedMap
-							data={this.state}
-							google={this.props.google}
-							center={{ lat: 10.8231, lng: 106.6297 }}
-							height='400px'
-							zoom={8}>
-						</MarkedMap>
-					</Col>
-					<Col sm={4}>
-						<h3><b> Location List</b></h3>
-						<LocationList {...this.props} data={this.state} />
-						<selectItem />
-					</Col>
+
 				</Row>
 			</div>
 			// 			<div>
@@ -460,7 +506,7 @@ export default class Home extends Component {
 	}
 
 	render() {
-		
-		return <div className="Home" >{this.props.isAuthenticated ? this.renderTest() : this.renderLander() } </div> ;
+
+		return <div className="Home" >{this.props.isAuthenticated ? this.renderTest() : this.renderLander()} </div>;
 	}
 }

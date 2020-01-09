@@ -4,7 +4,7 @@ import { Modal, Button} from 'antd';
 import {FormControl, Row, Col} from 'react-bootstrap'
 // const editUser = 'http://localhost:8080/editUser'
 
-const requestEquipmentUrl = 'http://localhost:8080/requestEquipment'
+const requestEquipmentUrl = 'https://vietnamsachvaxanh.com/requestEquipment'
 
 export default class ToolsRequestUser extends React.Component {
   constructor(props) {

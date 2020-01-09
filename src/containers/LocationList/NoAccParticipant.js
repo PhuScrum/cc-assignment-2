@@ -15,7 +15,7 @@ import {Link} from "react-router-dom";
 // const locationUrl = 'http://vietnamsachvaxanh.com/locationDetails'
 
 // const urlLocation = 'https://vietnamsachvaxanh.com/Input'
-const urlJoinLocation = 'http://localhost:8080/joinLocation'
+const urlJoinLocation = 'https://vietnamsachvaxanh.com/joinLocation'
 
 const StyledTableCell = withStyles(theme => ({
   head: {
