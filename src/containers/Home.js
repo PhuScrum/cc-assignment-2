@@ -180,7 +180,7 @@ export default class Home extends Component {
 					</Col>
 					<Col sm={10} >
 						<Carousel style={{ marginLeft: 20 }}>
-							<Carousel.Item style={{ height: 624 }}>
+							{/* <Carousel.Item style={{ height: 624 }}>
 								<img
 									className="d-block w-100"
 									src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
@@ -191,7 +191,7 @@ export default class Home extends Component {
 									<h4>To Create or Join a clean up site, Please Login or Sign Up!</h4>
 								</Carousel.Caption>
 
-							</Carousel.Item>
+							</Carousel.Item> */}
 							<Carousel.Item style={{ height: 624 }}>
 								<img
 									className="d-block w-100"
@@ -332,7 +332,7 @@ export default class Home extends Component {
 						{/* <h1>Test web app</h1>
 				<p>A simple react test app</p> */}
 						<Carousel style={{ marginLeft: 20 }}>
-							<Carousel.Item style={{ height: 624 }}>
+							{/* <Carousel.Item style={{ height: 624 }}>
 								<img
 									className="d-block w-100"
 									src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"
@@ -343,7 +343,7 @@ export default class Home extends Component {
 									<h4>You can start creating a location or join one!</h4>
 								</Carousel.Caption>
 
-							</Carousel.Item>
+							</Carousel.Item> */}
 							<Carousel.Item style={{ height: 624 }}>
 								<img
 									className="d-block w-100"

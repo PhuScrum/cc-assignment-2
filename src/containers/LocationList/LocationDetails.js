@@ -56,12 +56,9 @@ const StyledTableCell = withStyles(theme => ({
   }));
 
 
-// const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
-// const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
-// const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
 
 
-const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
+const locationUrl = 'https://7tk4lgbon4.execute-api.ap-southeast-1.amazonaws.com/dev/locationDetails'
 const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
 const joinLocationURL = 'https://7tk4lgbon4.execute-api.ap-southeast-1.amazonaws.com/dev/joinLocation'
 const payLocation = 'https://vietnamsachvaxanh.com/payLocation'
