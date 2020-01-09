@@ -12,9 +12,9 @@ import './App.css';
 // import registerServiceWorker from './registerServiceWorker';
 // const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
 // const urlLocation = 'https://vietnamsachvaxanh.com/location'
-const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
-const urlLocation = 'http://localhost:8080/location'
-const editUser = 'http://localhost:8080/editUser'
+const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
+const urlLocation = 'https://vietnamsachvaxanh.com/location'
+const editUser = 'https://vietnamsachvaxanh.com/editUser'
 
 class App extends Component {
 	constructor(props) {
@@ -666,7 +666,10 @@ class App extends Component {
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Brand>
-								<Link to="/"><img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png" /></Link>
+								<Link to="/">
+									Home
+									{/* <img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png" /> */}
+								</Link>
 							</Navbar.Brand>
 							<Navbar.Toggle />
 						</Navbar.Header>

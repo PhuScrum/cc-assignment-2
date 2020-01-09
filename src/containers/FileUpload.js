@@ -13,7 +13,7 @@ class FileUpload extends Component {
   }
 
   submitFile = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const formData = new FormData();
     // for (var i = 0; i < this.state.file.length; i++) {
       formData.append('file', this.state.file[0]);
@@ -35,14 +35,15 @@ class FileUpload extends Component {
   handleFileUpload = (event) => {
     this.setState({file: event.target.files});
     // this.setState({ files: [...this.state.files, ...event.target.files] })
+    setTimeout(this.submitFile, 500)
   }
 
   render() {
     return (
       <form >
         <input label='upload file' type='file' onChange={this.handleFileUpload} />
-        <button type='button' onClick={this.submitFile.bind(this)}>Send</button>
-        <img src={this.imageUrl} className="image_signup" />
+        {/* <button type='button' onClick={this.submitFile.bind(this)}>Send</button> */}
+        {/* <img src={this.imageUrl} className="image_signup" /> */}
 
       </form>
     );

@@ -54,6 +54,7 @@ export default class CreateLocationInfo extends Component {
 
 
 	uploadImage = (imageUrl) => {
+		console.log('location info', imageUrl)
 		this.setState({imageUrl: imageUrl})
   	}
 
@@ -107,8 +108,8 @@ export default class CreateLocationInfo extends Component {
 					<div style={{ color: 'red' }} className="error" id="error-organiserName" />
 				</div>
 
-				{/* <label>Organization Logo:</label>
-				<input type="text"
+				<label>Organization Logo:</label>
+				{/* <input type="text"
 					className="form-control"
 					value={this.props.appdata.organiserLogo}
 					onChange={this.props.onChangeOrgLogo.bind(this)}
@@ -140,14 +141,14 @@ export default class CreateLocationInfo extends Component {
 
 				<div style={{ color: 'red' }} className="error" id="error-organiserDescription" />
 				<br />
-				{/* <label>Organization Previous Event Photo:</label>
-				<input type="text"
+				<label>Organization Previous Event Photo:</label>
+				{/* <input type="text"
 					className="form-control"
 					value={this.props.appdata.organiserEventPhoto}
 					onChange={this.props.onChangeOrgEventPhoto.bind(this)}
 					placeholder='Please enter the previous event photo URL'
-				/>
-				<div style={{ color: 'red' }} className="error" id="error-organiserEventPhoto" /> */}
+				/> */}
+				<div style={{ color: 'red' }} className="error" id="error-organiserEventPhoto" />
 
 				<FileUpload type='evPhoto' uploadCallback = {this.uploadImage} {...this.props}/>
 

@@ -23,7 +23,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import NoAccParticipant from './NoAccParticipant'
 
-const editUser = 'http://localhost:8080/editUser'
+
 
 const StyledTableCell = withStyles(theme => ({
     head: {
@@ -61,10 +61,11 @@ const StyledTableCell = withStyles(theme => ({
 // const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
 
 
-const locationUrl = 'http://localhost:8080/locationDetails'
-const fetchUserByEmail_URL =  'http://localhost:8080/fetchUserByEmail'
-const joinLocationURL = 'http://localhost:8080/joinLocation'
-const payLocation = 'http://localhost:8080/payLocation'
+const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
+const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
+const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
+const payLocation = 'https://vietnamsachvaxanh.com/payLocation'
+const editUser = 'https://vietnamsachvaxanh.com/editUser'
 
 export default class LocationDetails extends Component {
     constructor(props){
@@ -461,13 +462,14 @@ export default class LocationDetails extends Component {
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
             <br/>
             <br/>
                 <hr/>
                 
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
+                <img style={{width: 1550}, {height:600}} src={input.afterEventPhoto}/>
                 <br/>
                 <br/>
                 <br/>
@@ -509,7 +511,7 @@ export default class LocationDetails extends Component {
             </Row>
             <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
             <br/>
             <br/>
@@ -517,6 +519,11 @@ export default class LocationDetails extends Component {
             <hr/>
                 
                 <InputInformation  locationId={this.props.match.params.id} input={this.state.input}/>
+                <br/>
+                <h3><b>Thank you for participating, here is a photo of this event:</b></h3>
+                <br/>
+                <img style={{width: 1550}, {height:600}} src={input.afterEventPhoto}/>
+                
 
         </div>
         )
@@ -553,8 +560,10 @@ export default class LocationDetails extends Component {
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
+            <h3><b>Photo of this event</b></h3>
+            <img style={{width: 1550}, {height:600}} src={input.afterEventPhoto}/>
             <br/>
             <br/>
     
@@ -587,13 +596,13 @@ export default class LocationDetails extends Component {
                     <NoAccParticipant data={this.state}/>
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
                     
-                    bich you not logged in
+                 
                     </Col>
                     
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
             <br/>
             <br/>
@@ -641,7 +650,7 @@ export default class LocationDetails extends Component {
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
             <br/>
             <br/>
@@ -717,7 +726,7 @@ export default class LocationDetails extends Component {
                 </Row>
                 <h3><b>Past activity of this organisation.</b></h3>
             <br/>
-            <img style={{width: 1550}} src={organiserEventPhoto}/>
+            <img style={{width: 1550}, {height:600}} src={organiserEventPhoto}/>
             <br/>
             <br/>
             <br/>

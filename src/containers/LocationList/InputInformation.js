@@ -10,11 +10,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import FileUpload from '../FileUpload';
 //not used
 // const locationUrl = 'http://vietnamsachvaxanh.com/locationDetails'
 
 // const urlLocation = 'https://vietnamsachvaxanh.com/Input'
-const urlLocation = 'http://localhost:8080/Input'
+const urlLocation = 'https://vietnamsachvaxanh.com/Input'
 
 const StyledTableCell = withStyles(theme => ({
   head: {
@@ -70,7 +71,8 @@ export default class InputInformation extends Component {
       organic: Number,
       recycable: Number,
       nonRecycable: Number,
-      afterEventPhoto: ''
+      afterEventPhoto: '',
+      // imageUrl: ''
 
 
 
@@ -225,6 +227,10 @@ export default class InputInformation extends Component {
 
     })
   }
+  uploadImage = (imageUrl) => {
+		console.log('location info', imageUrl)
+		this.setState({afterEventPhoto: imageUrl})
+  	}
 
   render() {
     var totalPieces = parseFloat(this.state.organic) + parseFloat(this.state.recycable) + parseFloat(this.state.nonRecycable)
@@ -319,11 +325,12 @@ export default class InputInformation extends Component {
             </div>
             <div className="form-group">
               <label>Photo of event:</label>
-              <input
+              {/* <input
                 className="form-control"
                 value={this.state.afterEventPhoto}
                 onChange={this.onChangeAfterEventPhoto}
-              />
+              /> */}
+              <FileUpload uploadCallback = {this.uploadImage} {...this.props}/>
             </div>
             
             <p>Once you submit the results, the clean up site will be closed, and members will not be able to join*</p>

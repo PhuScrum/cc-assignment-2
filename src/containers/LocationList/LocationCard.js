@@ -4,7 +4,7 @@ import { Button, ButtonToolbar, Row, Col } from 'react-bootstrap'
 import { FaMapMarked } from "react-icons/fa";
 
 const axios = require('axios').default
-const fetchUserByEmail_URL = 'http://localhost:8080/fetchUserByEmail'
+const fetchUserByEmail_URL = 'https://vietnamsachvaxanh.com/fetchUserByEmail'
 export default class LocationCard extends Component {
     constructor(props){
         super(props)
