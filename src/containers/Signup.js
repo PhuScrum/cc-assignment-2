@@ -274,8 +274,9 @@ export default class Signup extends Component {
 						<FormControl type='tel' pattern="^-?[0-9]\d*\.?\d*$" value={this.state.phoneNumber} onChange={this.onChangePhoneNumber} type="phoneNumber" />
 						<div style={{ color:'red'}} className="error" id="error-phoneNumber" />
 					</FormGroup>
-					
+					<ControlLabel>Profile Picture</ControlLabel>
 					<FileUpload uploadCallback = {this.uploadImage} />
+					<br/>
 					
 			
 					<FormGroup controlId="password" bsSize="large">
