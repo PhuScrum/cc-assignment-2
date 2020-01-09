@@ -63,7 +63,7 @@ const StyledTableCell = withStyles(theme => ({
 
 const locationUrl = 'https://vietnamsachvaxanh.com/locationDetails'
 const fetchUserByEmail_URL =  'https://vietnamsachvaxanh.com/fetchUserByEmail'
-const joinLocationURL = 'https://vietnamsachvaxanh.com/joinLocation'
+const joinLocationURL = 'https://7tk4lgbon4.execute-api.ap-southeast-1.amazonaws.com/dev/joinLocation'
 const payLocation = 'https://vietnamsachvaxanh.com/payLocation'
 const editUser = 'https://vietnamsachvaxanh.com/editUser'
 
@@ -552,7 +552,7 @@ export default class LocationDetails extends Component {
                     <ListOfMembers data={this.state}/>
                     
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
-                    <b>Th owner of the location has closed down this clean up site.</b>
+                    <b>The owner of the location has closed down this clean up site.</b>
                          
                     
                     </Col>

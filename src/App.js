@@ -757,7 +757,11 @@ class App extends Component {
 					<Navbar fluid collapseOnSelect>
 						<Navbar.Header>
 							<Navbar.Brand style={{ marginBottom: 10 }}>
-								<Link to="/"><img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"></img></Link>
+							<Link to="/">
+									Home
+									{/* <img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png" /> */}
+								</Link>
+								{/* <Link to="/"><img style={{ width: 110 }} src="http://build-projects.org/wp-content/uploads/2018/10/svx-logo.png"></img></Link> */}
 							</Navbar.Brand>
 							<Navbar.Toggle />
 						</Navbar.Header>

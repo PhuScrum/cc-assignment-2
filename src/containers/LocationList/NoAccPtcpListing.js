@@ -65,6 +65,7 @@ export default class NoAccPtcp extends React.Component{
                 
             </Row>
             <br/>
+            <hr/>
             </div>
             )
         }
