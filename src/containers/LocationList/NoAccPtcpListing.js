@@ -25,7 +25,7 @@ export default class NoAccPtcp extends React.Component{
         // });
         
         localStorage.setItem('PublishMembersNoAccount', copyPublishMembers)
-      
+       
     }
     componentDidMount(){
         this.collectData()

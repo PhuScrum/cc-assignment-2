@@ -547,7 +547,7 @@ export default class LocationDetails extends Component {
                     <hr/>
                    
                     <ListOfMembers data={this.state}/>
-                    
+                     
                     {/* <Button type="primary" onClick={this.joinLocation}>Join</Button> */}
                     <b>The owner of the location has closed down this clean up site.</b>
                          

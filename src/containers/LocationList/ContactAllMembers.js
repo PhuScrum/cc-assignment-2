@@ -11,7 +11,7 @@ export default class ContactAllMembers extends React.Component {
     email: localStorage.getItem('email'),
     publishMembers: localStorage.getItem('PublishMembers'),
     publishMembersNoAccount: localStorage.getItem('PublishMembersNoAccount'),
-    allMembers: localStorage.getItem('PublishMembers') + ','+ localStorage.getItem('PublishMembersNoAccount')
+    allMembers: ''
 
  };
 
@@ -19,7 +19,15 @@ export default class ContactAllMembers extends React.Component {
 	this.handleChangeTitle = this.handleChangeTitle.bind(this);
 	this.handleSubmit = this.handleSubmit.bind(this);
   }
+componentDidMount(){
+  setTimeout(()=>{
+    this.setState({
+      allMembers:localStorage.getItem('PublishMembersNoAccount') + ',' + localStorage.getItem('PublishMembers')
+    })  
+  }, 500)
   
+}
+
 // validate
 checkRegistrationForm() { 
     var valid = true;
@@ -49,6 +57,7 @@ checkRegistrationForm() {
   }
 
   sendFeedback (templateId, variables, user_id) {
+    this.state.allMembers= localStorage.getItem('PublishMembers') + ','+ localStorage.getItem('PublishMembersNoAccount')
 	// emailjs.send('gmail', templateId, variables, user_id
 	var templateParams = {
 		// name: 'James',
