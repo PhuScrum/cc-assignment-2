@@ -15,7 +15,7 @@
     "cors": "^2.8.5",
     "emailjs-com": "^2.4.1",
     "express": "^4.17.1",
-    "file-type": "^12.4.2",
+    "file-type": "^16.5.4",
     "fs": "0.0.1-security",
     "google-maps-react": "^2.0.2",
     "helmet": "^3.21.2",
